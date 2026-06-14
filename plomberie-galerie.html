@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<script>document.documentElement.className += ' js';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Galerie · Atlantique Plomberie · Le Havre</title>
+<meta name="description" content="Découvrez les réalisations d'Atlantique Plomberie : salles de bain rénovées, installations de chauffe-eau, chantiers de rénovation à Le Havre." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --navy:#0d1b3e; --navy2:#152449; --gold:#c8960c; --gold2:#e8b020;
+  --red:#b91c1c; --white:#ffffff; --off:#f4f6fb; --text:#111827; --muted:#6b7280;
+  --border:rgba(255,255,255,0.12);
+  --disp:"Barlow Condensed",sans-serif; --sans:"Barlow",sans-serif;
+  --gut:clamp(20px,5vw,64px); --maxw:1200px; --ease:cubic-bezier(0.22,1,0.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--white);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+
+.emergency-bar{position:fixed;top:0;left:0;right:0;z-index:110;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;gap:2rem;padding:0 var(--gut);height:44px;font-family:var(--sans);font-size:0.87rem;font-weight:600;transition:transform 0.4s var(--ease);flex-wrap:wrap;overflow:hidden}
+.emergency-bar.hidden{transform:translateY(-100%)}
+.em-cta{display:inline-flex;align-items:center;gap:0.5em;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);padding:0.3em 0.9em;border-radius:100px;font-weight:700;white-space:nowrap}
+header{position:fixed;top:44px;left:0;right:0;z-index:100;background:var(--navy);transition:top 0.4s var(--ease),box-shadow 0.3s var(--ease)}
+header.stuck{top:0;box-shadow:0 4px 24px rgba(0,0,0,0.35)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:78px}
+.nav-logo{font-family:var(--disp);font-size:1.45rem;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:0.01em;display:flex;align-items:center;gap:0.55em}
+.logo-icon{width:34px;height:34px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:0.86rem;font-weight:600;color:rgba(255,255,255,0.72);text-transform:uppercase;letter-spacing:0.08em;position:relative;transition:color 0.25s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--gold);transition:width 0.3s var(--ease)}
+.nav-links a:hover{color:#fff}.nav-links a:hover::after,.nav-links a.active::after{width:100%}.nav-links a.active{color:#fff}
+.nav-cta{display:inline-flex;align-items:center;gap:0.5em;background:var(--gold);color:var(--navy);font-family:var(--sans);font-weight:700;font-size:0.88rem;padding:0.7em 1.4em;border-radius:8px;transition:background 0.25s,transform 0.25s;white-space:nowrap}
+.nav-cta:hover{background:var(--gold2);transform:translateY(-1px)}
+.burger{display:none;flex-direction:column;gap:5px;width:28px;background:none;border:none;cursor:pointer;padding:2px 0}
+.burger span{display:block;height:2px;width:100%;background:#fff;transition:transform 0.35s var(--ease),opacity 0.25s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger.open span:nth-child(2){opacity:0}.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;background:var(--navy);z-index:95;display:flex;flex-direction:column;justify-content:center;padding:var(--gut);transform:translateY(-100%);transition:transform 0.5s var(--ease)}
+.mobile-menu.open{transform:translateY(0)}.mobile-menu ul{list-style:none}
+.mobile-menu a{display:block;font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2.5rem,10vw,4rem);color:#fff;padding:0.15em 0;border-bottom:1px solid var(--border);transition:color 0.25s}
+.mobile-menu a:hover{color:var(--gold)}.mm-phone{margin-top:2.2rem}.mm-phone a{font-family:var(--sans)!important;font-size:1.2rem!important;color:var(--gold)!important;border:none!important}
+
+.back-pill-wrap{position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%);z-index:200;pointer-events:none}
+.back-pill{pointer-events:auto;display:inline-flex;align-items:center;gap:0.5em;background:rgba(13,27,62,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.22);color:#fff;font-family:var(--sans);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:0.65em 1.4em;border-radius:100px;white-space:nowrap;transition:background 0.3s,color 0.3s,transform 0.3s}
+.back-pill:hover{background:var(--gold);color:var(--navy);transform:translateY(-2px)}
+
+main{padding-top:122px}
+
+/* PAGE HERO */
+.page-hero{background:linear-gradient(135deg,#060f28 0%,#0d1b3e 55%,#152449 100%);padding:clamp(80px,12vh,140px) 0;position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.04) 1px,transparent 1px);background-size:32px 32px}
+.page-hero::after{content:"";position:absolute;left:-100px;bottom:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(200,150,12,0.12),transparent 65%);pointer-events:none}
+.page-hero-in{position:relative;z-index:1}
+.page-eyebrow{display:inline-flex;align-items:center;gap:0.7em;font-size:0.78rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.page-hero h1{font-family:var(--disp);font-size:clamp(2.8rem,8vw,6rem);font-weight:800;color:#fff;text-transform:uppercase;line-height:0.96;letter-spacing:-0.01em}
+.page-hero h1 .acc{color:var(--gold)}
+.page-hero-sub{font-size:clamp(1rem,1.6vw,1.2rem);color:rgba(255,255,255,0.68);max-width:52ch;margin-top:1.4rem;line-height:1.7}
+
+/* SECTION */
+section{padding:clamp(80px,12vh,140px) 0}
+.sec-eyebrow{font-family:var(--sans);font-size:0.78rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:0.8em;margin-bottom:0.9rem}
+.sec-eyebrow::before{content:"";width:28px;height:2px;background:var(--gold)}
+.sec-h2{font-family:var(--disp);font-size:clamp(2.4rem,6vw,4.4rem);font-weight:800;text-transform:uppercase;line-height:0.97;color:var(--navy);margin-bottom:1rem}
+.sec-p{font-size:1.05rem;color:var(--muted)}
+
+/* FILTERS */
+.filter-bar{display:flex;gap:0.6rem;flex-wrap:wrap;margin:clamp(32px,5vh,54px) 0 clamp(28px,4vh,44px)}
+.filter-btn{font-family:var(--sans);font-size:0.84rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.6em 1.3em;border-radius:100px;border:2px solid rgba(0,0,0,0.12);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.25s var(--ease)}
+.filter-btn:hover{border-color:var(--navy);color:var(--navy)}
+.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.filter-btn.active-gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+
+/* GALLERY GRID */
+.gallery-grid{columns:3;column-gap:14px;transition:opacity 0.4s}
+.gallery-grid.filtering{opacity:0.4;pointer-events:none}
+.gal-card{break-inside:avoid;margin-bottom:14px;border-radius:14px;overflow:hidden;position:relative;cursor:pointer;display:block}
+.gal-card.hidden{display:none}
+.gal-ph{width:100%;position:relative;overflow:hidden}
+/* varying heights via pseudo-element approach */
+.gal-ph::before{content:"";display:block}
+.gal-card:nth-child(3n+1) .gal-ph::before{padding-bottom:120%}
+.gal-card:nth-child(3n+2) .gal-ph::before{padding-bottom:75%}
+.gal-card:nth-child(3n+3) .gal-ph::before{padding-bottom:100%}
+.gal-bg{position:absolute;inset:0;display:flex;align-items:flex-end;padding:16px;transition:transform 0.6s var(--ease)}
+.gal-card:hover .gal-bg{transform:scale(1.04)}
+.gal-bg::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 55%);z-index:1;transition:opacity 0.4s}
+.gal-card:hover .gal-bg::before{opacity:1.3}
+.gal-info{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;width:100%}
+.gal-label{font-family:var(--disp);font-size:0.95rem;font-weight:700;text-transform:uppercase;color:#fff;line-height:1.2}
+.gal-cat{font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;background:var(--gold);color:var(--navy);padding:0.25em 0.7em;border-radius:100px;white-space:nowrap}
+/* gradient backgrounds for each card */
+.g1{background:url(img/plomberie/p12.png) center/cover}
+.g2{background:url(img/plomberie/p04.png) center/cover}
+.g3{background:url(img/plomberie/p09.png) center/cover}
+.g4{background:url(img/plomberie/p13.png) center/cover}
+.g5{background:url(img/plomberie/p14.png) center/cover}
+.g6{background:url(img/plomberie/p15.png) center/cover}
+.g7{background:url(img/plomberie/p16.png) center/cover}
+.g8{background:url(img/plomberie/p17.png) center/cover}
+.g9{background:url(img/plomberie/p18.png) center/cover}
+.g10{background:url(img/plomberie/p19.png) center/cover}
+.g11{background:url(img/plomberie/p20.png) center/cover}
+.g12{background:url(img/plomberie/p21.png) center/cover}
+.ph-text{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:0.62rem;letter-spacing:0.1em;color:rgba(255,255,255,0.2);border:1px dashed rgba(255,255,255,0.14);padding:0.6em 1em;text-transform:uppercase;white-space:nowrap}
+
+/* HOVER OVERLAY */
+.gal-overlay{position:absolute;inset:0;background:rgba(200,150,12,0);transition:background 0.4s var(--ease);z-index:1;display:flex;align-items:center;justify-content:center}
+.gal-card:hover .gal-overlay{background:rgba(200,150,12,0.15)}
+.gal-zoom{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.7);transition:opacity 0.35s var(--ease),transform 0.35s var(--ease);z-index:2}
+.gal-card:hover .gal-zoom{opacity:1;transform:scale(1)}
+
+/* BTN */
+.btn{display:inline-flex;align-items:center;gap:0.5em;font-family:var(--sans);font-weight:700;font-size:0.95rem;padding:0.88em 1.8em;border-radius:10px;cursor:pointer;border:none;transition:transform 0.3s var(--ease),box-shadow 0.3s var(--ease),background 0.25s,color 0.25s}
+.btn-gold{background:var(--gold);color:var(--navy)}.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(200,150,12,0.55)}
+.btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.38)}.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,0.1)}
+
+/* CTA BAND */
+.cta-band{background:var(--navy);position:relative;overflow:hidden;text-align:center}
+.cta-band::before{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(200,150,12,0.14),transparent 65%);pointer-events:none}
+.cta-band h2{font-family:var(--disp);font-size:clamp(2.5rem,7vw,5rem);font-weight:800;color:#fff;text-transform:uppercase;line-height:0.96;position:relative}
+.cta-band h2 .gold{color:var(--gold)}
+.cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.4rem;position:relative}
+
+/* FOOTER */
+footer{background:#060e22;color:rgba(255,255,255,0.62)}
+.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;padding:clamp(56px,9vh,86px) 0 clamp(36px,5vh,54px);border-bottom:1px solid rgba(255,255,255,0.07)}
+.foot-brand{font-family:var(--disp);font-size:1.4rem;font-weight:800;color:#fff;text-transform:uppercase;display:flex;align-items:center;gap:0.5em;margin-bottom:1rem}
+.foot-desc{font-size:0.9rem;line-height:1.7;max-width:30ch}
+.foot-col h4{font-family:var(--disp);font-size:0.78rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.foot-col a,.foot-col p{display:block;font-size:0.9rem;margin-bottom:0.5rem;transition:color 0.25s}.foot-col a:hover{color:#fff}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;flex-wrap:wrap;gap:0.7rem}
+.foot-bot p{font-size:0.8rem}.foot-bot a{color:var(--gold)}.foot-bot a:hover{text-decoration:underline}
+
+/* REVEAL */
+html.js .reveal{opacity:0;transform:translateY(28px)}
+html.js .reveal.in{opacity:1;transform:none;transition:opacity 0.9s var(--ease),transform 0.9s var(--ease)}
+html.js .reveal.d1.in{transition-delay:0.1s}html.js .reveal.d2.in{transition-delay:0.2s}html.js .reveal.d3.in{transition-delay:0.3s}
+@media(prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none}html.js .reveal.in{transition:none}html{scroll-behavior:auto}}
+
+@media(max-width:980px){.nav-links,.nav-inner>.nav-cta{display:none}.burger{display:flex}.gallery-grid{columns:2}.foot-top{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.gallery-grid{columns:1}.foot-top{grid-template-columns:1fr}.filter-bar{gap:0.4rem}.filter-btn{font-size:0.78rem;padding:0.5em 1em}.emergency-bar{font-size:0.78rem;gap:0.8rem}}
+</style>
+</head>
+<body>
+
+<div class="back-pill-wrap"><a class="back-pill" href="index.html">← Retour au portfolio</a></div>
+
+<div class="emergency-bar" id="emBar">
+  <span>Urgence plomberie 24h/7j &mdash; Intervention rapide sur Le Havre</span>
+  <a href="tel:0235421800" class="em-cta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.12 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>02 35 42 18 00</a>
+</div>
+
+<header id="header">
+  <div class="wrap nav-inner">
+    <a href="voltaique-bar-demo.html" class="nav-logo">
+      <div class="logo-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><path d="M3 9V7a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v2"/><line x1="12" y1="13" x2="12" y2="17"/></svg></div>
+      Atlantique Plomberie
+    </a>
+    <ul class="nav-links">
+      <li><a href="voltaique-bar-demo.html">Accueil</a></li>
+      <li><a href="plomberie-services.html">Services</a></li>
+      <li><a href="plomberie-galerie.html" class="active">Galerie</a></li>
+      <li><a href="plomberie-contact.html">Contact</a></li>
+    </ul>
+    <a href="tel:0235421800" class="nav-cta"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.12 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>02 35 42 18 00</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="voltaique-bar-demo.html">Accueil</a></li>
+    <li><a href="plomberie-services.html">Services</a></li>
+    <li><a href="plomberie-galerie.html">Galerie</a></li>
+    <li><a href="plomberie-contact.html">Contact</a></li>
+  </ul>
+  <div class="mm-phone"><a href="tel:0235421800">02 35 42 18 00</a></div>
+</nav>
+
+<main>
+
+<section class="page-hero">
+  <div class="wrap page-hero-in">
+    <div class="page-eyebrow reveal"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>Atlantique Plomberie · Le Havre</div>
+    <h1 class="reveal d1">Nos <span class="acc">réalisations</span></h1>
+    <p class="page-hero-sub reveal d2">Un aperçu de nos chantiers : salles de bain, installations de chauffage, rénovations complètes et dépannages réalisés à Le Havre et ses environs.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <span class="sec-eyebrow">Galerie de chantiers</span>
+      <h2 class="sec-h2">Plus de 1 200 réalisations</h2>
+      <p class="sec-p">Filtrez par type de prestation pour trouver des réalisations similaires à votre projet.</p>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-f="all">Toutes les réalisations</button>
+      <button class="filter-btn" data-f="sdb">Salle de bain</button>
+      <button class="filter-btn" data-f="plom">Plomberie</button>
+      <button class="filter-btn" data-f="chauf">Chauffage</button>
+      <button class="filter-btn" data-f="renov">Rénovation</button>
+      <button class="filter-btn" data-f="eau">Chauffe-eau</button>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="gallery-grid reveal" id="galGrid">
+
+      <div class="gal-card" data-cat="sdb">
+        <div class="gal-ph">
+          <div class="gal-bg g1">
+            <div class="gal-overlay"><div class="gal-zoom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+            <div class="gal-info"><div class="gal-label">Douche à l'italienne</div><span class="gal-cat">Salle de bain</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gal-card" data-cat="plom">
+        <div class="gal-ph">
+          <div class="gal-bg g2">
+            <div class="gal-overlay"><div class="gal-zoom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+            <div class="gal-info"><div class="gal-label">Réfection tuyauterie</div><span class="gal-cat">Plomberie</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gal-card" data-cat="renov">
+        <div class="gal-ph">
+          <div class="gal-bg g3">
+            <div class="gal-overlay"><div class="gal-zoom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+            <div class="gal-info"><div class="gal-label">Rénovation complète</div><span class="gal-cat">Rénovation</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gal-card" data-cat="eau">
+        <div class="gal-ph">
+          <div class="gal-bg g4">
+            <div class="gal-overlay"><div class="gal-zoom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+            <div class="gal-info"><div class="gal-label">Chauffe-eau thermodynamique</div><span class="gal-cat">Chauffe-eau</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gal-card" data-cat="chauf">
+        <div class="gal-ph">
+          <div class="gal-bg g5">
+            <div class="gal-overlay"><div class="gal-zoom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+            <div class="gal-info"><div class="gal-label">Chaudière gaz à condensation</div><span class="gal-cat">Chauffage</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gal-card" data-cat="sdb">
+        <div class="gal-ph">
+          <div class="gal-bg g6">
+            <div class="gal-overlay"><div class="gal-zoom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+            <div class="gal-info"><div class="gal-label">Carrelage grand format</div><span class="gal-cat">Salle de bain</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gal-card" data-cat="plom">
+        <div class="gal-ph">
+          <div class="gal-bg g7">
+            <div class="gal-overlay"><div class="gal-zoom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+            <div class="gal-info"><div class="gal-label">Robinetterie thermostatique</div><span class="gal-cat">Plomberie</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gal-card" data-cat="renov">
+        <div class="gal-ph">
+          <div class="gal-bg g8">
+            <div class="gal-overlay"><div class="gal-zoom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+            <div class="gal-info"><div class="gal-label">Rénovation cuisine</div><span class="gal-cat">Rénovation</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gal-card" data-cat="chauf">
+        <div class="gal-ph">
+          <div class="gal-bg g9">
+            <div class="gal-overlay"><div class="gal-zoom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+            <div class="gal-info"><div class="gal-label">Plancher chauffant hydraulique</div><span class="gal-cat">Chauffage</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gal-card" data-cat="sdb">
+        <div class="gal-ph">
+          <div class="gal-bg g10">
+            <div class="gal-overlay"><div class="gal-zoom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+            <div class="gal-info"><div class="gal-label">Baignoire îlot &amp; carrelage</div><span class="gal-cat">Salle de bain</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gal-card" data-cat="eau">
+        <div class="gal-ph">
+          <div class="gal-bg g11">
+            <div class="gal-overlay"><div class="gal-zoom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+            <div class="gal-info"><div class="gal-label">Chauffe-eau solaire (CESI)</div><span class="gal-cat">Chauffe-eau</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gal-card" data-cat="plom">
+        <div class="gal-ph">
+          <div class="gal-bg g12">
+            <div class="gal-overlay"><div class="gal-zoom"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+            <div class="gal-info"><div class="gal-label">Sanitaires suspendus</div><span class="gal-cat">Plomberie</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /gallery-grid -->
+
+    <!-- count -->
+    <p id="galCount" style="margin-top:2rem;font-size:0.88rem;color:var(--muted);text-align:center"></p>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="wrap" style="padding:clamp(80px,12vh,140px) var(--gut)">
+    <span class="sec-eyebrow reveal" style="justify-content:center;color:var(--gold)">Votre projet</span>
+    <h2 class="reveal d1">Un chantier à <span class="gold">planifier</span> ?</h2>
+    <p class="reveal d2" style="position:relative;color:rgba(255,255,255,0.68);max-width:44ch;margin:1.4rem auto 0;text-align:center">Devis gratuit sous 24h. Nos équipes se déplacent sur Le Havre et toute la Seine-Maritime.</p>
+    <div class="cta-actions reveal d3">
+      <a href="plomberie-contact.html" class="btn btn-gold">Demander un devis gratuit</a>
+      <a href="tel:0235421800" class="btn btn-ghost">02 35 42 18 00</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">
+          <div class="logo-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><path d="M3 9V7a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v2"/><line x1="12" y1="13" x2="12" y2="17"/></svg></div>
+          Atlantique Plomberie
+        </div>
+        <p class="foot-desc">Votre artisan plombier de confiance à Le Havre depuis 1998. Travail soigné, devis gratuit, garantie 2 ans.</p>
+      </div>
+      <div class="foot-col"><h4>Services</h4><a href="plomberie-services.html">Plomberie générale</a><a href="plomberie-services.html">Urgence &amp; fuite</a><a href="plomberie-services.html">Salle de bain</a><a href="plomberie-services.html">Chauffage</a><a href="plomberie-services.html">Rénovation</a></div>
+      <div class="foot-col"><h4>Navigation</h4><a href="voltaique-bar-demo.html">Accueil</a><a href="plomberie-services.html">Nos services</a><a href="plomberie-galerie.html">Galerie</a><a href="plomberie-contact.html">Contact &amp; devis</a></div>
+      <div class="foot-col"><h4>Contact</h4><p>8 Rue du Gén. Faidherbe</p><p>76600 Le Havre</p><a href="tel:0235421800">02 35 42 18 00</a><a href="mailto:contact@atlantique-plomberie.fr">contact@atlantique-plomberie.fr</a></div>
+    </div>
+    <div class="foot-bot">
+      <p>&copy; 2026 Atlantique Plomberie &middot; Le Havre</p>
+      <p>Site démo réalisé par <a href="index.html">Simon Rioult</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// nav scroll
+const emBar = document.getElementById('emBar');
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => { const h = window.scrollY > 80; emBar.classList.toggle('hidden', h); header.classList.toggle('stuck', h); }, { passive: true });
+
+// burger
+const burger = document.getElementById('burger'), mmenu = document.getElementById('mobileMenu');
+const toggle = f => { const open = f !== undefined ? f : !mmenu.classList.contains('open'); mmenu.classList.toggle('open', open); burger.classList.toggle('open', open); document.body.style.overflow = open ? 'hidden' : ''; };
+burger.addEventListener('click', () => toggle());
+mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
+
+// reveal
+const animated = document.querySelectorAll('.reveal');
+const forceShow = el => { el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none'; };
+if (!('IntersectionObserver' in window)) { animated.forEach(forceShow); }
+else {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+  animated.forEach(el => { io.observe(el); const r = el.getBoundingClientRect(); if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in'); });
+  setTimeout(() => animated.forEach(el => { el.classList.add('in'); if (parseFloat(getComputedStyle(el).opacity) < 0.99) forceShow(el); }), 1600);
+}
+
+// filter
+const filterBar = document.getElementById('filterBar');
+const cards     = [...document.querySelectorAll('#galGrid .gal-card')];
+const grid      = document.getElementById('galGrid');
+const countEl   = document.getElementById('galCount');
+
+function updateCount(visible) {
+  const total = cards.length;
+  countEl.textContent = visible === total ? total + ' réalisations affichées' : visible + ' réalisation' + (visible > 1 ? 's' : '') + ' sur ' + total;
+}
+updateCount(cards.length);
+
+filterBar.addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const f = btn.dataset.f;
+  grid.classList.add('filtering');
+  setTimeout(() => {
+    let visible = 0;
+    cards.forEach(c => {
+      const show = f === 'all' || c.dataset.cat === f;
+      c.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    updateCount(visible);
+    grid.classList.remove('filtering');
+  }, 200);
+});
+</script>
+</body>
+</html>

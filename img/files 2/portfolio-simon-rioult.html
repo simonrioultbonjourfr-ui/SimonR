@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simon Rioult — Création de sites web · Le Havre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f2f1ec;
+    --bg2:#fffdf8;
+    --ink:#141318;
+    --muted:#5f5d66;
+    --accent:#2f44ff;
+    --accent-d:#2233d6;
+    --line:rgba(20,19,24,.13);
+    --display:"Syne",sans-serif;
+    --body:"Manrope",-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--accent);color:#fff}
+  a{color:inherit}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(20px,5vw,60px);transition:.4s}
+  nav.scrolled{background:rgba(242,241,236,.9);backdrop-filter:blur(12px);padding:13px clamp(20px,5vw,60px);border-bottom:1px solid var(--line)}
+  .brand{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.01em}
+  .brand b{color:var(--accent)}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{text-decoration:none;font-size:14px;font-weight:600;transition:color .3s}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-cta{background:var(--ink);color:var(--bg)!important;padding:10px 18px;border-radius:40px;font-size:13px}
+  .nav-cta:hover{background:var(--accent)}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0}
+  .burger span{width:26px;height:2.5px;background:var(--ink);border-radius:2px;transition:.3s}
+
+  /* HERO */
+  .hero{padding:clamp(140px,20vh,200px) clamp(20px,5vw,60px) 60px;max-width:1200px;margin:0 auto}
+  .avail{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:30px;
+    opacity:0;transform:translateY(14px);animation:rise .8s .1s forwards}
+  .avail i{width:9px;height:9px;border-radius:50%;background:#1fb46a;box-shadow:0 0 0 4px rgba(31,180,106,.18)}
+  .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,7.5vw,96px);line-height:.98;letter-spacing:-.02em;max-width:16ch}
+  .hero h1 span{opacity:0;display:inline-block;transform:translateY(30px);animation:rise .9s forwards}
+  .hero h1 span:nth-child(1){animation-delay:.2s}.hero h1 span:nth-child(2){animation-delay:.32s}.hero h1 span:nth-child(3){animation-delay:.44s}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero-sub{font-size:clamp(17px,2vw,21px);color:var(--muted);max-width:50ch;margin-top:30px;opacity:0;animation:fade 1s .7s forwards}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px;opacity:0;animation:fade 1s .85s forwards}
+  @keyframes rise{to{opacity:1;transform:none}}@keyframes fade{to{opacity:1}}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;padding:15px 28px;border-radius:40px;font-size:15px;font-weight:700;transition:transform .3s,background .3s,color .3s}
+  .btn-ink{background:var(--ink);color:var(--bg)}.btn-ink:hover{background:var(--accent);transform:translateY(-2px)}
+  .btn-out{border:1.5px solid var(--ink);color:var(--ink)}.btn-out:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* MARQUEE */
+  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:18px 0;margin-top:30px;background:var(--bg2)}
+  .mtrack{display:flex;white-space:nowrap;animation:slide 30s linear infinite;font-family:var(--display);font-weight:700;font-size:clamp(18px,2.4vw,26px)}
+  .mtrack span{padding:0 26px;display:flex;align-items:center;gap:26px}
+  .mtrack span::after{content:"●";color:var(--accent);font-size:9px}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* WORK */
+  section{padding:clamp(70px,11vh,120px) clamp(20px,5vw,60px);max-width:1200px;margin:0 auto}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:50px}
+  .sec-head h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,56px);letter-spacing:-.01em}
+  .sec-head p{color:var(--muted);max-width:34ch}
+  .label{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.04em;margin-bottom:14px}
+
+  .works{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+  .work{text-decoration:none;display:block;group:work}
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .frame{border-radius:14px;overflow:hidden;box-shadow:0 18px 40px rgba(20,19,24,.12);border:1px solid var(--line);transition:transform .4s,box-shadow .4s}
+  .work:hover .frame{transform:translateY(-6px);box-shadow:0 26px 60px rgba(20,19,24,.2)}
+  .bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:#e7e6e1}
+  .bar i{width:10px;height:10px;border-radius:50%;background:#c4c3bd}
+  .bar span{margin-left:12px;font-size:12px;color:#8a897f;font-family:var(--body)}
+  .shot{height:240px;display:flex;flex-direction:column;justify-content:center;padding:0 34px;position:relative;overflow:hidden}
+  .shot-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:12px;opacity:.85}
+  .shot-title{font-size:46px;line-height:1}
+  .shot.ecume{background:radial-gradient(120% 120% at 75% 10%,#1d4a45,#0a201f)}
+  .shot.ecume .shot-eyebrow{color:#e6dac2}.shot.ecume .shot-title{font-family:"Syne";font-weight:700;color:#faf6ee}
+  .shot.ecume .shot-title em{font-style:italic;color:#c75b39;font-family:Georgia,serif}
+  .shot.delhi{background:radial-gradient(120% 120% at 50% 0%,#2e1d08,#160d03)}
+  .shot.delhi .shot-eyebrow{color:#d9a441}.shot.delhi .shot-title{font-family:Georgia,serif;font-style:italic;color:#f1e6d2}
+  .shot.delhi .shot-title b{color:#d9a441;font-weight:400}
+  .shot.bidule{background:#f7efe1}
+  .shot.bidule .shot-eyebrow{color:#e26d82}.shot.bidule .shot-title{font-family:Georgia,serif;color:#7a2434}
+  .work-meta{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+  .work-meta h3{font-family:var(--display);font-weight:700;font-size:22px}
+  .work-meta p{color:var(--muted);font-size:14px}
+  .arrow{font-weight:700;font-size:14px;color:var(--accent);transition:transform .3s}
+  .work:hover .arrow{transform:translate(3px,-3px)}
+
+  /* SERVICES */
+  .services{background:var(--ink);color:var(--bg);max-width:none;margin:0}
+  .services-in{max-width:1200px;margin:0 auto}
+  .services .label{color:#8b96ff}
+  .services .sec-head h2{color:var(--bg)}
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(242,241,236,.15);border:1px solid rgba(242,241,236,.15);border-radius:14px;overflow:hidden}
+  .svc{background:var(--ink);padding:clamp(28px,4vw,42px)}
+  .svc .n{font-family:var(--display);font-weight:700;color:var(--accent);font-size:16px;margin-bottom:18px}
+  .svc h3{font-family:var(--display);font-weight:700;font-size:23px;margin-bottom:10px}
+  .svc p{color:#a9a8b3;font-size:15px}
+
+  /* ABOUT */
+  .about{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(36px,6vw,80px);align-items:center}
+  .about-img{aspect-ratio:1;border-radius:16px;background:linear-gradient(140deg,#2f44ff,#7a8bff);display:flex;align-items:center;justify-content:center}
+  .about-img span{font-family:var(--display);font-weight:800;font-size:clamp(48px,8vw,96px);color:#fff;opacity:.9}
+  .about h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,46px);line-height:1.08;margin-bottom:22px}
+  .about p{color:var(--muted);font-size:17px;margin-bottom:16px}
+
+  /* CONTACT */
+  .contact{text-align:center}
+  .contact h2{font-family:var(--display);font-weight:800;font-size:clamp(36px,7vw,84px);line-height:1;letter-spacing:-.02em}
+  .contact h2 em{font-style:normal;color:var(--accent)}
+  .contact p{color:var(--muted);font-size:18px;margin:24px auto 38px;max-width:44ch}
+  .mail{font-family:var(--display);font-weight:700;font-size:clamp(20px,3vw,30px);text-decoration:none;border-bottom:3px solid var(--accent);padding-bottom:4px;transition:color .3s}
+  .mail:hover{color:var(--accent)}
+
+  footer{border-top:1px solid var(--line);padding:36px clamp(20px,5vw,60px);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--muted);max-width:1200px;margin:0 auto}
+
+  @media(max-width:860px){
+    .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:320px;background:var(--bg2);flex-direction:column;justify-content:center;gap:28px;transform:translateX(100%);transition:transform .45s cubic-bezier(.6,.05,.2,1);padding:40px;box-shadow:-10px 0 40px rgba(20,19,24,.12)}
+    .nav-links.open{transform:translateX(0)}.burger{display:flex;z-index:120}
+    .burger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+    .burger.open span:nth-child(2){opacity:0}
+    .burger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+    .works,.svc-grid,.about{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="brand">Simon<b>.</b></a>
+  <div class="nav-links" id="navlinks">
+    <a href="#travaux">Travaux</a>
+    <a href="#services">Services</a>
+    <a href="#apropos">À propos</a>
+    <a href="#contact" class="nav-cta">Me contacter</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="avail"><i></i>Disponible pour de nouveaux projets</div>
+  <h1><span>Je crée des sites web</span> <span>sur-mesure pour les</span> <span><em>commerces du Havre.</em></span></h1>
+  <p class="hero-sub">Sites vitrines élégants, rapides et pensés pour vos clients. Fini la page Facebook poussiéreuse — place à une vraie présence en ligne qui vous ressemble.</p>
+  <div class="hero-actions">
+    <a href="#travaux" class="btn btn-ink">Voir mes travaux</a>
+    <a href="#contact" class="btn btn-out">Discutons de votre projet</a>
+  </div>
+</header>
+
+<div class="marquee">
+  <div class="mtrack">
+    <span>Sites vitrines</span><span>Design sur-mesure</span><span>100% responsive</span><span>Référencement local</span><span>Mise en ligne</span>
+    <span>Sites vitrines</span><span>Design sur-mesure</span><span>100% responsive</span><span>Référencement local</span><span>Mise en ligne</span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section id="travaux">
+  <div class="sec-head reveal">
+    <div>
+      <p class="label">Travaux récents</p>
+      <h2>Quelques projets</h2>
+    </div>
+    <p>Trois commerces, trois identités. Chaque site est conçu sur-mesure, jamais un template recopié.</p>
+  </div>
+  <div class="works">
+    <a class="work reveal" href="lecume-bistrot-demo.html" target="_blank" rel="noopener">
+      <div class="frame">
+        <div class="bar"><i></i><i></i><i></i><span>lecume-lehavre.fr</span></div>
+        <div class="shot ecume"><div class="shot-eyebrow">Bistrot de la mer</div><div class="shot-title">L'<em>Écume</em></div></div>
+      </div>
+      <div class="work-meta"><div><h3>L'Écume</h3><p>Restaurant · Bistrot de la mer</p></div><span class="arrow">Voir le site ↗</span></div>
+    </a>
+    <a class="work reveal" href="le-tigre-dore-demo.html" target="_blank" rel="noopener">
+      <div class="frame">
+        <div class="bar"><i></i><i></i><i></i><span>letigredore.fr</span></div>
+        <div class="shot delhi"><div class="shot-eyebrow">Cuisine indienne</div><div class="shot-title">Le Tigre <b>Doré</b></div></div>
+      </div>
+      <div class="work-meta"><div><h3>Le Tigre Doré</h3><p>Restaurant · Cuisine indienne</p></div><span class="arrow">Voir le site ↗</span></div>
+    </a>
+    <a class="work reveal" href="le-margaux-demo.html" target="_blank" rel="noopener">
+      <div class="frame">
+        <div class="bar"><i></i><i></i><i></i><span>lemargaux-lehavre.fr</span></div>
+        <div class="shot bidule"><div class="shot-eyebrow">Resto &amp; bar à vins</div><div class="shot-title">Le Margaux</div></div>
+      </div>
+      <div class="work-meta"><div><h3>Le Margaux</h3><p>Restaurant · Bar à vins</p></div><span class="arrow">Voir le site ↗</span></div>
+    </a>
+    <a class="work reveal" href="#contact" style="display:flex;align-items:center;justify-content:center;border:2px dashed var(--line);border-radius:14px;min-height:340px;text-align:center;padding:30px">
+      <div><div style="font-family:var(--display);font-weight:800;font-size:30px;color:var(--accent)">+ Votre projet</div><p style="color:var(--muted);margin-top:10px">La prochaine vitrine, c'est peut-être la vôtre.</p></div>
+    </a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="services-in">
+    <div class="sec-head reveal">
+      <div><p class="label">Ce que je propose</p><h2>Services</h2></div>
+    </div>
+    <div class="svc-grid reveal">
+      <div class="svc"><div class="n">01</div><h3>Site vitrine</h3><p>Une page élégante qui présente votre commerce : carte, horaires, contact. Prête en quelques jours.</p></div>
+      <div class="svc"><div class="n">02</div><h3>Site complet</h3><p>Plusieurs pages : galerie, menu détaillé, réservation, histoire de la maison. Sur-mesure de A à Z.</p></div>
+      <div class="svc"><div class="n">03</div><h3>Refonte &amp; mise en ligne</h3><p>On modernise votre présence et je m'occupe de tout : nom de domaine, hébergement, mise en ligne.</p></div>
+      <div class="svc"><div class="n">04</div><h3>Suivi &amp; mises à jour</h3><p>Votre site reste à jour sans que vous y touchiez : changement de carte, horaires, photos.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="apropos">
+  <div class="about-img reveal"><span>SR</span></div>
+  <div class="reveal">
+    <p class="label">À propos</p>
+    <h2>Salut, moi c'est Simon.</h2>
+    <p>Jeune créateur de sites web basé au Havre, passionné de design et du web. J'aide les commerces de ma ville à avoir une présence en ligne dont ils peuvent être fiers — pas un site générique, mais quelque chose qui leur ressemble vraiment.</p>
+    <p>Chaque projet est unique : je prends le temps de comprendre votre univers avant de dessiner la moindre ligne.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <p class="label" style="text-align:center">Contact</p>
+    <h2>On crée votre <em>site</em> ?</h2>
+    <p>Un projet, une question, ou juste envie d'en discuter — écrivez-moi, je réponds vite.</p>
+    <a href="mailto:bonjour@simonrioult.fr" class="mail">bonjour@simonrioult.fr</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Simon Rioult · Création de sites web · Le Havre</span>
+  <span>Conçu &amp; développé par moi-même 👋</span>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
+  const burger=document.getElementById('burger'),links=document.getElementById('navlinks');
+  burger.addEventListener('click',()=>{burger.classList.toggle('open');links.classList.toggle('open')});
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');links.classList.remove('open')}));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%2*90)+'ms';io.observe(el)});
+</script>
+</body>
+</html>

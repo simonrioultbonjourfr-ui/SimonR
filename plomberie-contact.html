@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<script>document.documentElement.className += ' js';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact &amp; Devis · Atlantique Plomberie · Le Havre</title>
+<meta name="description" content="Contactez Atlantique Plomberie pour un devis gratuit à Le Havre. Urgence plomberie 24h/7j au 02 35 42 18 00." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --navy:#0d1b3e; --navy2:#152449; --navy3:#1e3260;
+  --gold:#c8960c; --gold2:#e8b020;
+  --red:#b91c1c; --white:#ffffff; --off:#f4f6fb; --text:#111827; --muted:#6b7280;
+  --border:rgba(255,255,255,0.12);
+  --disp:"Barlow Condensed",sans-serif; --sans:"Barlow",sans-serif;
+  --gut:clamp(20px,5vw,64px); --maxw:1200px; --ease:cubic-bezier(0.22,1,0.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--white);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+
+/* EMERGENCY BAR */
+.emergency-bar{position:fixed;top:0;left:0;right:0;z-index:110;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;gap:2rem;padding:0 var(--gut);height:44px;font-size:0.87rem;font-weight:600;transition:transform 0.4s var(--ease);flex-wrap:wrap;overflow:hidden}
+.emergency-bar.hidden{transform:translateY(-100%)}
+.em-cta{display:inline-flex;align-items:center;gap:0.5em;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);padding:0.3em 0.9em;border-radius:100px;font-weight:700;white-space:nowrap}
+
+/* HEADER */
+header{position:fixed;top:44px;left:0;right:0;z-index:100;background:var(--navy);transition:top 0.4s var(--ease),box-shadow 0.3s var(--ease)}
+header.stuck{top:0;box-shadow:0 4px 24px rgba(0,0,0,0.35)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:78px}
+.nav-logo{font-family:var(--disp);font-size:1.45rem;font-weight:800;color:#fff;text-transform:uppercase;display:flex;align-items:center;gap:0.55em}
+.logo-icon{width:34px;height:34px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:0.86rem;font-weight:600;color:rgba(255,255,255,0.72);text-transform:uppercase;letter-spacing:0.08em;position:relative;transition:color 0.25s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--gold);transition:width 0.3s var(--ease)}
+.nav-links a:hover{color:#fff}.nav-links a:hover::after,.nav-links a.active::after{width:100%}.nav-links a.active{color:#fff}
+.nav-cta{display:inline-flex;align-items:center;gap:0.5em;background:var(--gold);color:var(--navy);font-weight:700;font-size:0.88rem;padding:0.7em 1.4em;border-radius:8px;transition:background 0.25s,transform 0.25s;white-space:nowrap}
+.nav-cta:hover{background:var(--gold2);transform:translateY(-1px)}
+.burger{display:none;flex-direction:column;gap:5px;width:28px;background:none;border:none;cursor:pointer;padding:2px 0}
+.burger span{display:block;height:2px;width:100%;background:#fff;transition:transform 0.35s var(--ease),opacity 0.25s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger.open span:nth-child(2){opacity:0}.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;background:var(--navy);z-index:95;display:flex;flex-direction:column;justify-content:center;padding:var(--gut);transform:translateY(-100%);transition:transform 0.5s var(--ease)}
+.mobile-menu.open{transform:translateY(0)}.mobile-menu ul{list-style:none}
+.mobile-menu a{display:block;font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2.5rem,10vw,4rem);color:#fff;padding:0.15em 0;border-bottom:1px solid var(--border);transition:color 0.25s}
+.mobile-menu a:hover{color:var(--gold)}.mm-phone{margin-top:2.2rem}.mm-phone a{font-family:var(--sans)!important;font-size:1.2rem!important;color:var(--gold)!important;border:none!important}
+
+/* BACK PILL */
+.back-pill-wrap{position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%);z-index:200;pointer-events:none}
+.back-pill{pointer-events:auto;display:inline-flex;align-items:center;gap:0.5em;background:rgba(13,27,62,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.22);color:#fff;font-family:var(--sans);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:0.65em 1.4em;border-radius:100px;white-space:nowrap;transition:background 0.3s,color 0.3s,transform 0.3s}
+.back-pill:hover{background:var(--gold);color:var(--navy);transform:translateY(-2px)}
+
+main{padding-top:122px}
+
+/* PAGE HERO */
+.page-hero{background:linear-gradient(135deg,#060f28 0%,#0d1b3e 55%,#152449 100%);padding:clamp(80px,12vh,140px) 0;position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.04) 1px,transparent 1px);background-size:32px 32px}
+.page-hero::after{content:"";position:absolute;right:-80px;top:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(200,150,12,0.1),transparent 65%);pointer-events:none}
+.page-hero-in{position:relative;z-index:1}
+.page-eyebrow{display:inline-flex;align-items:center;gap:0.7em;font-size:0.78rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.page-hero h1{font-family:var(--disp);font-size:clamp(2.8rem,8vw,6rem);font-weight:800;color:#fff;text-transform:uppercase;line-height:0.96;letter-spacing:-0.01em}
+.page-hero h1 .acc{color:var(--gold)}
+.page-hero-sub{font-size:clamp(1rem,1.6vw,1.2rem);color:rgba(255,255,255,0.68);max-width:52ch;margin-top:1.4rem;line-height:1.7}
+
+/* SECTIONS */
+section{padding:clamp(80px,12vh,140px) 0}
+section.tight{padding:clamp(60px,8vh,100px) 0}
+.sec-eyebrow{font-family:var(--sans);font-size:0.78rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:0.8em;margin-bottom:0.9rem}
+.sec-eyebrow::before{content:"";width:28px;height:2px;background:var(--gold)}
+.sec-h2{font-family:var(--disp);font-size:clamp(2.4rem,6vw,4.4rem);font-weight:800;text-transform:uppercase;line-height:0.97;color:var(--navy);margin-bottom:1rem}
+.sec-p{font-size:1.05rem;color:var(--muted)}
+
+/* CONTACT LAYOUT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:start;margin-top:clamp(36px,5vh,54px)}
+
+/* CONTACT FORM */
+.contact-form-wrap{background:var(--off);border-radius:20px;padding:clamp(28px,4vw,48px)}
+.form-title{font-family:var(--disp);font-size:1.9rem;font-weight:800;text-transform:uppercase;color:var(--navy);margin-bottom:0.4rem}
+.form-sub{font-size:0.92rem;color:var(--muted);margin-bottom:2rem}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.field{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.1rem}
+.field label{font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy)}
+.field input,.field select,.field textarea{font-family:var(--sans);font-size:0.96rem;padding:0.8em 1em;border:2px solid #dde3ee;border-radius:10px;background:#fff;color:var(--text);transition:border-color 0.25s,box-shadow 0.25s;outline:none;appearance:none;-webkit-appearance:none;width:100%}
+.field input:focus,.field select,.field textarea:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(13,27,62,0.08)}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.9em center;padding-right:2.5em;cursor:pointer}
+.field textarea{resize:vertical;min-height:120px}
+.form-note{font-size:0.78rem;color:var(--muted);margin-bottom:1.4rem;display:flex;align-items:flex-start;gap:0.5em}
+.btn-submit{width:100%;display:flex;align-items:center;justify-content:center;gap:0.6em;background:var(--navy);color:#fff;font-family:var(--sans);font-weight:700;font-size:1rem;padding:1em 2em;border-radius:10px;border:none;cursor:pointer;transition:background 0.25s,transform 0.3s var(--ease),box-shadow 0.3s var(--ease)}
+.btn-submit:hover{background:var(--navy2);transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(13,27,62,0.45)}
+.btn-submit svg{transition:transform 0.3s var(--ease)}
+.btn-submit:hover svg{transform:translateX(4px)}
+.form-success{display:none;text-align:center;padding:2.5rem 1rem}
+.form-success svg{color:var(--gold);margin-bottom:1rem}
+.form-success h3{font-family:var(--disp);font-size:2rem;font-weight:800;text-transform:uppercase;color:var(--navy);margin-bottom:0.6rem}
+.form-success p{color:var(--muted)}
+
+/* CONTACT INFO PANEL */
+.info-panel{display:flex;flex-direction:column;gap:1.8rem}
+.info-card{background:var(--navy);border-radius:16px;padding:2rem;position:relative;overflow:hidden}
+.info-card::after{content:"";position:absolute;right:-24px;top:-24px;width:120px;height:120px;border-radius:50%;background:rgba(200,150,12,0.1);pointer-events:none}
+.info-card h3{font-family:var(--disp);font-size:1.3rem;font-weight:800;text-transform:uppercase;color:#fff;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.6em}
+.info-card h3 svg{color:var(--gold)}
+.info-row{display:flex;align-items:flex-start;gap:0.9em;margin-bottom:1rem;position:relative;z-index:1}
+.info-row:last-child{margin-bottom:0}
+.info-icon{width:36px;height:36px;background:rgba(200,150,12,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.info-icon svg{color:var(--gold)}
+.info-text strong{display:block;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:0.1rem}
+.info-text span,.info-text a{font-size:0.96rem;color:rgba(255,255,255,0.9);transition:color 0.2s}
+.info-text a:hover{color:var(--gold)}
+
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.35rem 1rem}
+.hours-row{display:flex;justify-content:space-between;font-size:0.88rem;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:0.3rem}
+.hours-row .day{color:rgba(255,255,255,0.55)}
+.hours-row .time{color:rgba(255,255,255,0.9);font-weight:600}
+.hours-row.em{color:var(--gold)}.hours-row.em .time{color:var(--gold)}
+.badge-em{display:inline-block;background:var(--red);color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.25em 0.7em;border-radius:100px;margin-left:0.5em}
+
+/* MAP */
+.map-section{background:var(--off);padding-top:0}
+.map-header{padding:clamp(60px,8vh,100px) 0 0}
+.map-frame{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.12);margin-top:2.4rem}
+.map-frame iframe{display:block;width:100%;height:460px;border:0}
+
+/* FAQ */
+.faq-list{margin-top:2.8rem;display:flex;flex-direction:column;gap:0;border-top:1px solid #e5eaf2}
+.faq-item{border-bottom:1px solid #e5eaf2;overflow:hidden}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:1em;padding:1.4rem 0;cursor:pointer;font-family:var(--disp);font-size:1.25rem;font-weight:700;text-transform:uppercase;color:var(--navy);list-style:none;user-select:none}
+.faq-q::-webkit-details-marker{display:none}
+.faq-icon{width:28px;height:28px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.25s,transform 0.4s var(--ease)}
+.faq-icon svg{color:#fff;transition:transform 0.4s var(--ease)}
+.faq-item[open] .faq-icon{background:var(--gold);transform:rotate(45deg)}
+.faq-item[open] .faq-icon svg{transform:rotate(45deg)}
+.faq-a{font-size:0.98rem;color:var(--muted);line-height:1.75;padding:0 0 1.6rem;max-width:72ch}
+
+/* URGENCY BAND */
+.urgency-band{background:var(--red);padding:clamp(60px,8vh,100px) 0}
+.urg-inner{display:flex;align-items:center;justify-content:space-between;gap:2.5rem;flex-wrap:wrap}
+.urg-text h2{font-family:var(--disp);font-size:clamp(2.2rem,5vw,4rem);font-weight:800;color:#fff;text-transform:uppercase;line-height:0.97}
+.urg-text p{color:rgba(255,255,255,0.8);margin-top:0.7rem;font-size:1rem}
+.btn-white{display:inline-flex;align-items:center;gap:0.5em;background:#fff;color:var(--red);font-family:var(--sans);font-weight:700;font-size:0.98rem;padding:0.9em 1.8em;border-radius:10px;transition:transform 0.3s var(--ease),box-shadow 0.3s;white-space:nowrap}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,0.15)}
+
+/* FOOTER */
+footer{background:#060e22;color:rgba(255,255,255,0.62)}
+.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;padding:clamp(56px,9vh,86px) 0 clamp(36px,5vh,54px);border-bottom:1px solid rgba(255,255,255,0.07)}
+.foot-brand{font-family:var(--disp);font-size:1.4rem;font-weight:800;color:#fff;text-transform:uppercase;display:flex;align-items:center;gap:0.5em;margin-bottom:1rem}
+.foot-desc{font-size:0.9rem;line-height:1.7;max-width:30ch}
+.foot-col h4{font-family:var(--disp);font-size:0.78rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.foot-col a,.foot-col p{display:block;font-size:0.9rem;margin-bottom:0.5rem;transition:color 0.25s}.foot-col a:hover{color:#fff}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;flex-wrap:wrap;gap:0.7rem}
+.foot-bot p{font-size:0.8rem}.foot-bot a{color:var(--gold)}.foot-bot a:hover{text-decoration:underline}
+
+/* REVEAL */
+html.js .reveal{opacity:0;transform:translateY(28px)}
+html.js .reveal.in{opacity:1;transform:none;transition:opacity 0.9s var(--ease),transform 0.9s var(--ease)}
+html.js .reveal.d1.in{transition-delay:0.1s}html.js .reveal.d2.in{transition-delay:0.2s}html.js .reveal.d3.in{transition-delay:0.3s}
+@media(prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none}html.js .reveal.in{transition:none}html{scroll-behavior:auto}}
+
+@media(max-width:980px){.nav-links,.nav-inner>.nav-cta{display:none}.burger{display:flex}.contact-grid{grid-template-columns:1fr}.urg-inner{flex-direction:column;text-align:center}.foot-top{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.field-row{grid-template-columns:1fr}.foot-top{grid-template-columns:1fr}.emergency-bar{font-size:0.78rem;gap:0.8rem}.hours-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="back-pill-wrap"><a class="back-pill" href="index.html">← Retour au portfolio</a></div>
+
+<div class="emergency-bar" id="emBar">
+  <span>Urgence plomberie 24h/7j &mdash; Intervention rapide sur Le Havre</span>
+  <a href="tel:0235421800" class="em-cta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.12 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>02 35 42 18 00</a>
+</div>
+
+<header id="header">
+  <div class="wrap nav-inner">
+    <a href="voltaique-bar-demo.html" class="nav-logo">
+      <div class="logo-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><path d="M3 9V7a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v2"/><line x1="12" y1="13" x2="12" y2="17"/></svg></div>
+      Atlantique Plomberie
+    </a>
+    <ul class="nav-links">
+      <li><a href="voltaique-bar-demo.html">Accueil</a></li>
+      <li><a href="plomberie-services.html">Services</a></li>
+      <li><a href="plomberie-galerie.html">Galerie</a></li>
+      <li><a href="plomberie-contact.html" class="active">Contact</a></li>
+    </ul>
+    <a href="tel:0235421800" class="nav-cta"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.12 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>02 35 42 18 00</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="voltaique-bar-demo.html">Accueil</a></li>
+    <li><a href="plomberie-services.html">Services</a></li>
+    <li><a href="plomberie-galerie.html">Galerie</a></li>
+    <li><a href="plomberie-contact.html">Contact</a></li>
+  </ul>
+  <div class="mm-phone"><a href="tel:0235421800">02 35 42 18 00</a></div>
+</nav>
+
+<main>
+
+<section class="page-hero">
+  <div class="wrap page-hero-in">
+    <div class="page-eyebrow reveal"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>Atlantique Plomberie · Le Havre</div>
+    <h1 class="reveal d1">Devis <span class="acc">gratuit</span></h1>
+    <p class="page-hero-sub reveal d2">Réponse sous 24h. Déplacement gratuit à Le Havre et en Seine-Maritime. Urgence ? Appelez directement le 02 35 42 18 00.</p>
+  </div>
+</section>
+
+<!-- CONTACT + INFO -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <span class="sec-eyebrow">Contactez-nous</span>
+      <h2 class="sec-h2">Votre projet, nos experts</h2>
+      <p class="sec-p">Décrivez votre besoin et nous revenons vers vous dans les plus brefs délais.</p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- FORM -->
+      <div class="reveal d1">
+        <div class="contact-form-wrap">
+          <div id="formWrap">
+            <div class="form-title">Demande de devis</div>
+            <p class="form-sub">Tous les champs sont obligatoires.</p>
+            <form id="contactForm" novalidate>
+              <div class="field-row">
+                <div class="field"><label for="nom">Nom</label><input type="text" id="nom" name="nom" placeholder="Dupont" required /></div>
+                <div class="field"><label for="prenom">Prénom</label><input type="text" id="prenom" name="prenom" placeholder="Marie" required /></div>
+              </div>
+              <div class="field-row">
+                <div class="field"><label for="tel">Téléphone</label><input type="tel" id="tel" name="tel" placeholder="06 XX XX XX XX" required /></div>
+                <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="vous@email.fr" required /></div>
+              </div>
+              <div class="field">
+                <label for="adresse">Adresse du chantier</label>
+                <input type="text" id="adresse" name="adresse" placeholder="8 rue Victor Hugo, Le Havre" required />
+              </div>
+              <div class="field">
+                <label for="service">Type de prestation</label>
+                <select id="service" name="service" required>
+                  <option value="" disabled selected>Choisissez une prestation…</option>
+                  <option value="urgence">Urgence / Fuite</option>
+                  <option value="sdb">Salle de bain</option>
+                  <option value="chaudiere">Chaudière / Chauffage</option>
+                  <option value="chauffe-eau">Chauffe-eau</option>
+                  <option value="plomberie">Plomberie générale</option>
+                  <option value="renov">Rénovation complète</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="message">Décrivez votre besoin</label>
+                <textarea id="message" name="message" placeholder="Dites-nous en plus : surface, état actuel, délais souhaités…" required></textarea>
+              </div>
+              <p class="form-note"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0;margin-top:2px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Vos informations sont utilisées uniquement pour vous contacter. Aucun démarchage.</p>
+              <button type="submit" class="btn-submit">Envoyer ma demande <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            </form>
+          </div>
+          <div class="form-success" id="formSuccess">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <h3>Demande envoyée !</h3>
+            <p>Nous revenons vers vous sous 24h. Vous pouvez aussi nous appeler au 02 35 42 18 00.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- INFO PANEL -->
+      <div class="reveal d2">
+        <div class="info-panel">
+          <div class="info-card">
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.12 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Nous contacter</h3>
+            <div class="info-row">
+              <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.12 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+              <div class="info-text"><strong>Téléphone</strong><a href="tel:0235421800">02 35 42 18 00</a></div>
+            </div>
+            <div class="info-row">
+              <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+              <div class="info-text"><strong>Email</strong><a href="mailto:contact@atlantique-plomberie.fr">contact@atlantique-plomberie.fr</a></div>
+            </div>
+            <div class="info-row">
+              <div class="info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <div class="info-text"><strong>Adresse</strong><span>8 Rue du Gén. Faidherbe<br/>76600 Le Havre</span></div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Horaires d'ouverture</h3>
+            <div class="hours-grid" style="position:relative;z-index:1">
+              <div class="hours-row"><span class="day">Lundi</span><span class="time">8h – 18h</span></div>
+              <div class="hours-row"><span class="day">Mardi</span><span class="time">8h – 18h</span></div>
+              <div class="hours-row"><span class="day">Mercredi</span><span class="time">8h – 18h</span></div>
+              <div class="hours-row"><span class="day">Jeudi</span><span class="time">8h – 18h</span></div>
+              <div class="hours-row"><span class="day">Vendredi</span><span class="time">8h – 17h</span></div>
+              <div class="hours-row"><span class="day">Samedi</span><span class="time">9h – 12h</span></div>
+            </div>
+            <div style="margin-top:1.1rem;position:relative;z-index:1"><div class="hours-row em"><span class="day">Urgences</span><span class="time">24h/7j <span class="badge-em">24h</span></span></div></div>
+          </div>
+
+          <div class="info-card" style="background:linear-gradient(135deg,#b91c1c,#991c1c)">
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Urgence plomberie ?</h3>
+            <p style="color:rgba(255,255,255,0.85);font-size:0.96rem;margin-bottom:1.4rem;position:relative;z-index:1">Fuite, rupture de canalisation, chauffe-eau en panne — nous intervenons en moins d'une heure sur Le Havre.</p>
+            <a href="tel:0235421800" style="position:relative;z-index:1;display:inline-flex;align-items:center;gap:0.5em;background:#fff;color:#b91c1c;font-weight:700;font-size:0.96rem;padding:0.75em 1.5em;border-radius:8px;transition:transform 0.3s var(--ease)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.12 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Appeler maintenant
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <div class="wrap">
+    <div class="map-header reveal">
+      <span class="sec-eyebrow">Notre secteur</span>
+      <h2 class="sec-h2">Le Havre &amp; Seine-Maritime</h2>
+      <p class="sec-p">Nous intervenons sur tout l'arrondissement du Havre : centre-ville, Montivilliers, Gonfreville-l'Orcher, Sainte-Adresse, Harfleur et environs.</p>
+    </div>
+    <div class="map-frame reveal d1">
+      <iframe
+        src="https://maps.google.com/maps?q=49.4905,0.1130&hl=fr&z=13&output=embed"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Localisation Atlantique Plomberie — Le Havre"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <span class="sec-eyebrow">Questions fréquentes</span>
+      <h2 class="sec-h2">Vos questions, <br/>nos réponses</h2>
+    </div>
+    <div class="faq-list reveal d1">
+      <details class="faq-item" open>
+        <summary class="faq-q">Le devis est-il vraiment gratuit ?<div class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></summary>
+        <p class="faq-a">Oui, le déplacement et l'établissement du devis sont totalement gratuits et sans engagement pour tout chantier de rénovation ou installation. Pour les interventions d'urgence, un forfait déplacement peut s'appliquer selon les horaires.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Quel délai pour une intervention d'urgence ?<div class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></summary>
+        <p class="faq-a">Nous garantissons une intervention sous 1 heure sur Le Havre pour toute urgence plomberie (fuite, canalisation bouchée, rupture). Notre équipe est disponible 24h/24, 7j/7, y compris les jours fériés.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Travaillez-vous avec les assurances ?<div class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></summary>
+        <p class="faq-a">Oui. Nous établissons les rapports de constat nécessaires pour vos déclarations de sinistre et travaillons en lien direct avec les principaux assureurs (MMA, MAIF, Allianz, AXA). Nos techniciens connaissent les procédures de prise en charge.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Proposez-vous des aides financières pour les travaux ?<div class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></summary>
+        <p class="faq-a">Oui. En tant qu'artisan certifié RGE (Reconnu Garant de l'Environnement), nous vous accompagnons pour bénéficier de MaPrimeRénov', CEE, TVA réduite à 5,5 % et l'éco-prêt à taux zéro. Nous gérons les dossiers de A à Z.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Quelle est la garantie sur vos travaux ?<div class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></summary>
+        <p class="faq-a">Tous nos travaux sont garantis 2 ans pièces et main-d'œuvre. Nos installations de plomberie et chauffage bénéficient en plus de la garantie décennale (10 ans) couverte par notre assurance professionnelle. Nous remettons tous les documents à la fin du chantier.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Intervenez-vous hors de Le Havre ?<div class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></summary>
+        <p class="faq-a">Notre secteur principal couvre le Havre et son agglomération dans un rayon de 30 km : Montivilliers, Gonfreville, Sainte-Adresse, Harfleur, Fécamp, Bolbec, Lillebonne. Pour des chantiers importants de rénovation, nous pouvons intervenir sur toute la Seine-Maritime.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY BAND -->
+<section class="urgency-band">
+  <div class="wrap urg-inner reveal">
+    <div class="urg-text">
+      <h2>Fuite ou panne ?<br/>On arrive.</h2>
+      <p>Intervention garantie sous 1h sur Le Havre &mdash; 24h/24, 7j/7.</p>
+    </div>
+    <a href="tel:0235421800" class="btn-white"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.12 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>02 35 42 18 00</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">
+          <div class="logo-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><path d="M3 9V7a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v2"/><line x1="12" y1="13" x2="12" y2="17"/></svg></div>
+          Atlantique Plomberie
+        </div>
+        <p class="foot-desc">Votre artisan plombier de confiance à Le Havre depuis 1998. Travail soigné, devis gratuit, garantie 2 ans.</p>
+      </div>
+      <div class="foot-col"><h4>Services</h4><a href="plomberie-services.html">Plomberie générale</a><a href="plomberie-services.html">Urgence &amp; fuite</a><a href="plomberie-services.html">Salle de bain</a><a href="plomberie-services.html">Chauffage</a><a href="plomberie-services.html">Rénovation</a></div>
+      <div class="foot-col"><h4>Navigation</h4><a href="voltaique-bar-demo.html">Accueil</a><a href="plomberie-services.html">Nos services</a><a href="plomberie-galerie.html">Galerie</a><a href="plomberie-contact.html">Contact &amp; devis</a></div>
+      <div class="foot-col"><h4>Contact</h4><p>8 Rue du Gén. Faidherbe</p><p>76600 Le Havre</p><a href="tel:0235421800">02 35 42 18 00</a><a href="mailto:contact@atlantique-plomberie.fr">contact@atlantique-plomberie.fr</a></div>
+    </div>
+    <div class="foot-bot">
+      <p>&copy; 2026 Atlantique Plomberie &middot; Le Havre</p>
+      <p>Site démo réalisé par <a href="index.html">Simon Rioult</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// nav scroll
+const emBar = document.getElementById('emBar');
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => { const h = window.scrollY > 80; emBar.classList.toggle('hidden', h); header.classList.toggle('stuck', h); }, { passive: true });
+
+// burger
+const burger = document.getElementById('burger'), mmenu = document.getElementById('mobileMenu');
+const toggleMenu = f => { const open = f !== undefined ? f : !mmenu.classList.contains('open'); mmenu.classList.toggle('open', open); burger.classList.toggle('open', open); document.body.style.overflow = open ? 'hidden' : ''; };
+burger.addEventListener('click', () => toggleMenu());
+mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+
+// form
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.btn-submit');
+  btn.textContent = 'Envoi en cours…';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }, 900);
+});
+
+// faq icon toggle
+document.querySelectorAll('.faq-item').forEach(el => {
+  el.addEventListener('toggle', () => {
+    el.querySelector('.faq-icon').style.transform = el.open ? 'rotate(45deg)' : '';
+  });
+});
+
+// reveal
+const animated = document.querySelectorAll('.reveal');
+const forceShow = el => { el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none'; };
+if (!('IntersectionObserver' in window)) { animated.forEach(forceShow); }
+else {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+  animated.forEach(el => { io.observe(el); const r = el.getBoundingClientRect(); if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in'); });
+  setTimeout(() => animated.forEach(el => { el.classList.add('in'); if (parseFloat(getComputedStyle(el).opacity) < 0.99) forceShow(el); }), 1600);
+}
+</script>
+</body>
+</html>

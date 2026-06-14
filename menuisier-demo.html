@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<script>document.documentElement.className += ' js';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ateliers Leroy · Menuiserie & ébénisterie · Le Havre</title>
+<meta name="description" content="Ateliers Leroy, menuiserie et ébénisterie sur-mesure au Havre. Meubles en bois massif, agencements intérieurs, escaliers. Devis gratuit." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #1a0d05;
+    --bg2: #2a1608;
+    --paper: #f5ece0;
+    --ink: #1a0d05;
+    --sand: #c4824a;
+    --sea: #8b5a35;
+    --foam: #f5ece0;
+    --muted: rgba(245,236,224,0.6);
+    --line: rgba(245,236,224,0.14);
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "Manrope", sans-serif;
+    --mono: "Space Mono", monospace;
+    --gut: clamp(20px, 5vw, 64px);
+    --maxw: 1180px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--foam); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: var(--sand); color: var(--ink); }
+  a { color: inherit; text-decoration: none; }
+  h1,h2,h3 { font-family: var(--serif); font-weight: 500; line-height: 1.03; letter-spacing: -0.01em; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gut); }
+  .eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--sand); display: inline-flex; align-items: center; gap: 0.7em; }
+  .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--sand); opacity: 0.7; }
+
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 60; display: flex; justify-content: center; padding: 12px; pointer-events: none; }
+  .back-pill { pointer-events: auto; background: rgba(26,13,5,0.6); backdrop-filter: blur(12px); border: 1px solid var(--line); color: var(--foam); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6em 1.2em; border-radius: 100px; display: inline-flex; align-items: center; gap: 0.6em; transition: background 0.3s var(--ease), transform 0.3s var(--ease); }
+  .back-pill:hover { background: var(--sand); color: var(--ink); transform: translateY(-1px); }
+
+  nav.site { position: absolute; top: 0; left: 0; right: 0; z-index: 50; }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 90px; padding-top: 30px; }
+  .brand { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; }
+  .brand b { color: var(--sand); font-weight: 600; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--muted); transition: color 0.25s var(--ease); }
+  .nav-links a:hover { color: var(--foam); }
+  .cta { display: inline-flex; align-items: center; gap: 0.5em; font-weight: 600; font-size: 0.9rem; padding: 0.7em 1.5em; border-radius: 100px; background: var(--sand); color: var(--ink); border: 1px solid var(--sand); transition: transform 0.3s var(--ease), background 0.3s var(--ease); }
+  .cta:hover { transform: translateY(-2px); background: var(--foam); border-color: var(--foam); }
+  .cta-ghost { background: transparent; color: var(--foam); border-color: var(--line); }
+  .cta-ghost:hover { background: var(--foam); color: var(--ink); border-color: var(--foam); }
+
+  /* ── HERO ── */
+  .hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 130px 0 80px; background:
+      radial-gradient(120% 80% at 80% -10%, rgba(139,90,53,0.55), transparent 60%),
+      radial-gradient(90% 60% at 0% 110%, rgba(196,130,74,0.18), transparent 60%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); }
+  .hero-in { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(36px,5vw,72px); align-items: center; width: 100%; }
+  .hero h1 { font-size: clamp(3.4rem, 10vw, 7.6rem); line-height: 0.9; margin: 0.3em 0 0.35em; }
+  .hero h1 em { font-style: italic; color: var(--sand); }
+  .hero p.lede { font-size: clamp(1.1rem, 1.8vw, 1.35rem); color: var(--muted); max-width: 38ch; }
+  .hero-cta { display: flex; gap: 0.9rem; margin-top: 2.2rem; flex-wrap: wrap; }
+  .hero-figure { aspect-ratio: 3/4; border-radius: 18px; border: 1px solid var(--line); position: relative; overflow: hidden; background:
+      repeating-linear-gradient(135deg, rgba(245,236,224,0.04) 0 14px, transparent 14px 28px),
+      linear-gradient(160deg, #2a1200, #5a2e12 70%, #8b5a35); }
+  .hero-figure .corner { position: absolute; bottom: 18px; left: 18px; font-family: var(--serif); font-style: italic; font-size: 1.3rem; color: var(--foam); }
+
+  /* ── STRIP ── */
+  .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .strip-in { display: flex; flex-wrap: wrap; gap: 2rem 3rem; padding: 1.4rem 0; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .strip-in span { display: inline-flex; align-items: center; gap: 0.6em; }
+  .strip-in span::before { content: "◆"; color: var(--sand); font-size: 0.6em; }
+
+  section { padding: clamp(80px,12vh,140px) 0; }
+  .sec-head { max-width: 60ch; margin-bottom: clamp(40px,6vh,64px); }
+  .sec-head h2 { font-size: clamp(2.4rem,6vw,4rem); margin-top: 0.4em; }
+  .sec-head p { margin-top: 1rem; color: var(--muted); font-size: 1.06rem; max-width: 50ch; }
+
+  /* ── SAVOIR-FAIRE ── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px,6vw,80px); align-items: center; }
+  .about-lead { font-family: var(--serif); font-size: clamp(1.7rem,3.4vw,2.6rem); line-height: 1.2; }
+  .about-lead em { font-style: italic; color: var(--sand); }
+  .about-body p { color: var(--muted); margin-top: 1rem; font-size: 1.04rem; }
+
+  /* ── NOS CRÉATIONS ── */
+  .creations { background: var(--paper); color: var(--ink); }
+  .creations .eyebrow { color: var(--sea); }
+  .creations .eyebrow::before { background: var(--sea); }
+  .creations .sec-head h2 { color: var(--ink); }
+  .creations .sec-head p { color: rgba(26,13,5,0.58); }
+  .creations-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px,2vw,22px); }
+  .creation-card { position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 3/4; }
+  .creation-ph { width: 100%; height: 100%; }
+  .creation-ph.ph1 { background: repeating-linear-gradient(135deg, rgba(26,13,5,0.07) 0 16px, transparent 16px 32px), linear-gradient(160deg, #3d2410, #6e3b1a 60%, #a05a2a); }
+  .creation-ph.ph2 { background: repeating-linear-gradient(135deg, rgba(26,13,5,0.07) 0 16px, transparent 16px 32px), linear-gradient(160deg, #2a1c0a, #5a3a18 60%, #8b5a2a); }
+  .creation-ph.ph3 { background: repeating-linear-gradient(135deg, rgba(26,13,5,0.07) 0 16px, transparent 16px 32px), linear-gradient(160deg, #1a1205, #3d2e12 60%, #6e5020); }
+  .creation-label { position: absolute; bottom: 0; left: 0; right: 0; padding: clamp(16px,2vw,24px); background: linear-gradient(to top, rgba(26,13,5,0.92) 0%, transparent 100%); }
+  .creation-type { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 0.4rem; }
+  .creation-name { font-family: var(--serif); font-size: clamp(1.3rem,2.2vw,1.7rem); color: var(--foam); line-height: 1.1; }
+  .creation-desc { font-size: 0.88rem; color: rgba(245,236,224,0.65); margin-top: 0.4rem; line-height: 1.5; }
+
+  /* ── NOUS TROUVER ── */
+  .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,4vw,48px); }
+  .info-card { border: 1px solid var(--line); border-radius: 16px; padding: clamp(28px,3.5vw,40px); }
+  .info-card h3 { font-size: 1.7rem; margin-bottom: 1rem; }
+  .info-card .row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--line); font-size: 0.98rem; }
+  .info-card .row:last-child { border-bottom: none; }
+  .info-card .row span:first-child { color: var(--muted); }
+  .info-card .addr { color: var(--muted); font-size: 1rem; line-height: 1.7; }
+  .map-link { display: inline-flex; align-items: center; gap: 0.55em; margin-top: 1.4rem; font-family: var(--mono); font-size: 0.69rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 100px; padding: 0.65em 1.1em; transition: color 0.25s var(--ease), border-color 0.25s var(--ease); }
+  .map-link:hover { color: var(--foam); border-color: var(--sand); }
+
+  /* ── DEVIS CTA ── */
+  .devis { text-align: center; background:
+      radial-gradient(80% 120% at 50% 0%, rgba(139,90,53,0.45), transparent 60%), var(--bg2); }
+  .devis h2 { font-size: clamp(2.6rem,7vw,5rem); }
+  .devis h2 em { font-style: italic; color: var(--sand); }
+  .devis p { color: var(--muted); max-width: 44ch; margin: 1.4rem auto 0; font-size: 1.08rem; }
+  .devis .hero-cta { justify-content: center; }
+  .phone { display: inline-flex; align-items: center; gap: 0.6em; margin-top: 2.4rem; font-family: var(--serif); font-size: clamp(1.6rem,4vw,2.4rem); border-bottom: 1.5px solid var(--line); padding-bottom: 0.1em; }
+
+  footer { border-top: 1px solid var(--line); }
+  .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; padding: 2.4rem 0; }
+  .foot .brand { font-size: 1.4rem; }
+  .foot p { font-size: 0.82rem; color: var(--muted); }
+  .made { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--muted); }
+  .made a { color: var(--sand); }
+
+  html.js .reveal { opacity: 0; transform: translateY(26px); }
+  html.js .reveal.in { opacity: 1; transform: none; transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+  html.js .d1.in { transition-delay: 0.08s; } html.js .d2.in { transition-delay: 0.16s; } html.js .d3.in { transition-delay: 0.24s; }
+  @media (prefers-reduced-motion: reduce) { html.js .reveal { opacity: 1; transform: none; } html.js .reveal.in { transition: none; } html { scroll-behavior: auto; } }
+
+  @media (max-width: 880px) {
+    .hero-in, .about-grid, .visit-grid { grid-template-columns: 1fr; }
+    .hero-figure { max-width: 380px; order: -1; }
+    .nav-links { display: none; }
+    .creations-grid { grid-template-columns: 1fr; gap: 14px; }
+    .creation-card { aspect-ratio: 4/3; }
+  }
+  @media (max-width: 560px) {
+    .creations-grid { grid-template-columns: repeat(2, 1fr); }
+    .creation-card { aspect-ratio: 3/4; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar"><a class="back-pill" href="index.html">← Retour au portfolio</a></div>
+
+<nav class="site">
+  <div class="wrap nav-in">
+    <a href="#" class="brand">Ateliers <b>Leroy</b></a>
+    <ul class="nav-links">
+      <li><a href="#savoir-faire">Savoir-faire</a></li>
+      <li><a href="#creations">Réalisations</a></li>
+      <li><a href="#visite">Nous trouver</a></li>
+    </ul>
+    <a href="#devis" class="cta">Devis gratuit</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <span class="eyebrow reveal">Menuiserie &amp; ébénisterie · Le Havre</span>
+      <h1 class="reveal d1">Le bois,<br/>travaillé<br/><em>à la main</em>.</h1>
+      <p class="lede reveal d2">Depuis notre atelier du Havre, nous façonnons chaque pièce en bois massif selon vos plans. Meubles, agencements, escaliers : tout commence par une belle rencontre avec la matière.</p>
+      <div class="hero-cta reveal d3">
+        <a href="#devis" class="cta">Demander un devis</a>
+        <a href="#creations" class="cta cta-ghost">Voir les réalisations</a>
+      </div>
+    </div>
+    <div class="hero-figure reveal d2" style="background:url('img/menuisier/hero.jpg') center/cover no-repeat;">
+      <div class="corner">Bois massif</div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap strip-in">
+    <span>Bois massif</span><span>Sur-mesure</span><span>Fabrication locale</span><span>Devis gratuit</span>
+  </div>
+</div>
+
+<section id="savoir-faire">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <span class="eyebrow">Savoir-faire</span>
+      <p class="about-lead" style="margin-top:1em">Chaque pièce naît d'une <em>conversation</em> et d'un beau morceau de bois.</p>
+    </div>
+    <div class="about-body reveal d1">
+      <p>Nous prenons le temps de comprendre votre espace, vos besoins et vos goûts avant de toucher la première planche. Chaque projet est unique, chaque meuble aussi.</p>
+      <p>Dans notre atelier, les essences sont sélectionnées à la main : chêne, noyer, hêtre, frêne. On travaille dans le respect du bois, sans raccourcis.</p>
+    </div>
+  </div>
+</section>
+
+<section class="creations" id="creations">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Réalisations</span>
+      <h2>Ce que nous fabriquons</h2>
+      <p>Du meuble unique à l'agencement complet d'une pièce — toujours en bois massif, toujours sur-mesure.</p>
+    </div>
+    <div class="creations-grid">
+      <div class="creation-card reveal">
+        <div class="creation-ph ph1" style="background:url('img/menuisier/mobilier.jpg') center/cover no-repeat;"></div>
+        <div class="creation-label">
+          <div class="creation-type">01 · Mobilier</div>
+          <div class="creation-name">Mobilier sur-mesure</div>
+          <div class="creation-desc">Armoires, tables, bibliothèques, dressings. Chaque meuble conçu pour durer.</div>
+        </div>
+      </div>
+      <div class="creation-card reveal d1">
+        <div class="creation-ph ph2" style="background:url('img/menuisier/agencement.jpg') center/cover no-repeat;"></div>
+        <div class="creation-label">
+          <div class="creation-type">02 · Agencement</div>
+          <div class="creation-name">Agencement intérieur</div>
+          <div class="creation-desc">Cuisines, entrées, caves à vins, salles de bain. L'espace optimisé, le bois sublimé.</div>
+        </div>
+      </div>
+      <div class="creation-card reveal d2">
+        <div class="creation-ph ph3" style="background:url('img/menuisier/escalier.jpg') center/cover no-repeat;"></div>
+        <div class="creation-label">
+          <div class="creation-type">03 · Menuiserie</div>
+          <div class="creation-name">Escaliers &amp; menuiserie</div>
+          <div class="creation-desc">Escaliers, garde-corps, fenêtres, portes, parquet. Le détail qui fait la différence.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visite">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Nous trouver</span><h2>Venez à l'atelier</h2></div>
+    <div class="visit-grid">
+      <div class="info-card reveal">
+        <h3>Horaires</h3>
+        <div class="row"><span>Lundi – Vendredi</span><span>8h – 12h · 14h – 18h</span></div>
+        <div class="row"><span>Samedi</span><span>Sur rendez-vous</span></div>
+        <div class="row"><span>Dimanche</span><span>Fermé</span></div>
+      </div>
+      <div class="info-card reveal d1">
+        <h3>Adresse</h3>
+        <p class="addr">Zone Artisanale des Neiges<br/>76600 Le Havre<br/>02 35 44 55 66</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Zone+Artisanale+Le+Havre" target="_blank" rel="noopener" class="map-link">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Voir l'itinéraire →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="devis" id="devis">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="justify-content:center">Devis gratuit</span>
+    <h2 class="reveal d1" style="margin-top:0.5em">Un projet ?<br/><em>Parlons-en.</em></h2>
+    <p class="reveal d2">Venez à l'atelier avec vos plans ou vos idées. Devis gratuit, sans engagement. On vous répond sous 48h.</p>
+    <div class="hero-cta reveal d3">
+      <a href="tel:0235445566" class="cta">Appeler l'atelier</a>
+      <a href="mailto:contact@ateliers-leroy.fr" class="cta cta-ghost">Envoyer un message</a>
+    </div>
+    <div class="reveal d3"><span class="phone">02 35 44 55 66</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <a href="#" class="brand">Ateliers <b style="color:var(--sand)">Leroy</b></a>
+    <p>Menuiserie &amp; ébénisterie · Zone Artisanale, Le Havre.</p>
+    <span class="made">Site démo · <a href="index.html">Simon Rioult</a></span>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const forceShow = (el) => { el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none'; };
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(forceShow);
+  } else {
+    const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => {
+      io.observe(el);
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
+    });
+    setTimeout(() => {
+      reveals.forEach(el => {
+        el.classList.add('in');
+        if (parseFloat(getComputedStyle(el).opacity) < 0.99) forceShow(el);
+      });
+    }, 1600);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<script>document.documentElement.className += ' js';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Le Margaux · Resto & bar à vins · Le Havre</title>
+<meta name="description" content="Le Margaux, restaurant et bar à vins au Havre. Assiettes à partager, belle cave et crus au verre. Réservez votre table." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #240a16;
+    --bg2: #2f0f1e;
+    --paper: #f4ece4;
+    --ink: #240a16;
+    --sand: #d9a679;
+    --sea: #8d2f4e;
+    --foam: #f4ece4;
+    --muted: rgba(244,236,228,0.62);
+    --line: rgba(244,236,228,0.16);
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "Manrope", sans-serif;
+    --mono: "Space Mono", monospace;
+    --gut: clamp(20px, 5vw, 64px);
+    --maxw: 1180px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--foam); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: var(--sand); color: var(--ink); }
+  a { color: inherit; text-decoration: none; }
+  h1,h2,h3 { font-family: var(--serif); font-weight: 500; line-height: 1.03; letter-spacing: -0.01em; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gut); }
+  .eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--sand); display: inline-flex; align-items: center; gap: 0.7em; }
+  .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--sand); opacity: 0.7; }
+
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 60; display: flex; justify-content: center; padding: 12px; pointer-events: none; }
+  .back-pill { pointer-events: auto; background: rgba(36,10,22,0.6); backdrop-filter: blur(12px); border: 1px solid var(--line); color: var(--foam); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6em 1.2em; border-radius: 100px; display: inline-flex; align-items: center; gap: 0.6em; transition: background 0.3s var(--ease), transform 0.3s var(--ease); }
+  .back-pill:hover { background: var(--sand); color: var(--ink); transform: translateY(-1px); }
+
+  nav.site { position: absolute; top: 0; left: 0; right: 0; z-index: 50; }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 90px; padding-top: 30px; }
+  .brand { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; }
+  .brand b { color: var(--sand); font-weight: 600; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--muted); transition: color 0.25s var(--ease); }
+  .nav-links a:hover { color: var(--foam); }
+  .cta { display: inline-flex; align-items: center; gap: 0.5em; font-weight: 600; font-size: 0.9rem; padding: 0.7em 1.5em; border-radius: 100px; background: var(--sand); color: var(--ink); border: 1px solid var(--sand); transition: transform 0.3s var(--ease), background 0.3s var(--ease); }
+  .cta:hover { transform: translateY(-2px); background: var(--foam); border-color: var(--foam); }
+  .cta-ghost { background: transparent; color: var(--foam); border-color: var(--line); }
+  .cta-ghost:hover { background: var(--foam); color: var(--ink); border-color: var(--foam); }
+
+  /* ── HERO full-bleed ── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: clamp(64px, 10vh, 110px);
+    background:
+      url('img/margaux/hero.jpg') center/cover no-repeat,
+      linear-gradient(160deg, #3a1325 0%, #5e2038 60%, #8d2f4e 100%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--bg) 0%, rgba(36,10,22,0.72) 45%, rgba(36,10,22,0.22) 100%);
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+  .hero-content { max-width: 56ch; }
+  .hero h1 { font-size: clamp(3.8rem, 11vw, 9rem); line-height: 0.87; margin: 0.25em 0 0.3em; }
+  .hero h1 em { font-style: italic; color: var(--sand); }
+  .hero p.lede { font-size: clamp(1.1rem, 1.8vw, 1.32rem); color: var(--muted); max-width: 42ch; }
+  .hero-cta { display: flex; gap: 0.9rem; margin-top: 2rem; flex-wrap: wrap; }
+
+  .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .strip-in { display: flex; flex-wrap: wrap; gap: 2rem 3rem; padding: 1.4rem 0; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .strip-in span { display: inline-flex; align-items: center; gap: 0.6em; }
+  .strip-in span::before { content: "◆"; color: var(--sand); font-size: 0.6em; }
+
+  section { padding: clamp(80px,12vh,140px) 0; }
+
+  /* ── LA MAISON — editorial centré ── */
+  .maison-inner { text-align: center; }
+  .maison-inner .eyebrow { justify-content: center; }
+  .maison-inner .eyebrow::before { display: none; }
+  .maison-quote { font-family: var(--serif); font-style: italic; font-size: clamp(2rem, 4.8vw, 3.6rem); line-height: 1.16; margin: 0.7em auto 0; max-width: 20ch; }
+  .maison-quote em { font-style: normal; color: var(--sand); }
+  .maison-rule { width: 52px; height: 1px; background: var(--sand); opacity: 0.55; margin: 2.2rem auto; }
+  .maison-cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px,5vw,64px); text-align: left; max-width: 860px; margin: 0 auto; }
+  .maison-cols p { color: var(--muted); font-size: 1.04rem; line-height: 1.7; }
+
+  /* ── LA CARTE — 2 colonnes vins / assiettes ── */
+  .menu { background: var(--paper); color: var(--ink); }
+  .menu .eyebrow { color: var(--sea); }
+  .menu .eyebrow::before { background: var(--sea); }
+  .sec-head { margin-bottom: clamp(40px,6vh,64px); }
+  .sec-head h2 { font-size: clamp(2.4rem,6vw,4rem); margin-top: 0.4em; }
+  .sec-head p { margin-top: 1rem; color: rgba(36,10,22,0.58); font-size: 1.06rem; max-width: 50ch; }
+  .carte-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,100px); }
+  .carte-col-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sea); padding-bottom: 1rem; border-bottom: 1.5px solid var(--sea); margin-bottom: 0; display: flex; align-items: center; gap: 0.6em; }
+  .carte-col-label::before { content: ""; width: 22px; height: 1px; background: var(--sea); }
+  .wine-item { padding: 1.3rem 0; border-bottom: 1px solid rgba(36,10,22,0.1); }
+  .wine-item:last-child { border-bottom: none; }
+  .wine-name { font-family: var(--serif); font-size: clamp(1.3rem, 2.4vw, 1.75rem); line-height: 1.1; }
+  .wine-desc { color: rgba(36,10,22,0.55); font-size: 0.93rem; margin-top: 0.3rem; line-height: 1.5; }
+  .wine-price { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.08em; color: var(--sea); margin-top: 0.5rem; }
+
+  /* ── NOUS TROUVER — colonnes sans carte ── */
+  .visit-cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,7vw,96px); }
+  .visit-col { padding-top: 2rem; border-top: 1px solid var(--line); }
+  .visit-col h3 { font-family: var(--serif); font-size: 1.7rem; margin-bottom: 1.4rem; }
+  .visit-row { display: flex; justify-content: space-between; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.97rem; }
+  .visit-row:last-child { border-bottom: none; }
+  .visit-row span:first-child { color: var(--muted); }
+  .visit-addr { color: var(--muted); font-size: 1rem; line-height: 1.8; }
+  .map-link { display: inline-flex; align-items: center; gap: 0.55em; margin-top: 1.6rem; font-family: var(--mono); font-size: 0.69rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 100px; padding: 0.65em 1.1em; transition: color 0.25s var(--ease), border-color 0.25s var(--ease); }
+  .map-link:hover { color: var(--foam); border-color: var(--sand); }
+
+  /* ── RÉSERVATION ── */
+  .reserve { text-align: center; background: radial-gradient(80% 120% at 50% 0%, rgba(141,47,78,0.5), transparent 60%), var(--bg2); }
+  .reserve h2 { font-size: clamp(2.6rem,7vw,5rem); }
+  .reserve h2 em { font-style: italic; color: var(--sand); }
+  .reserve p { color: var(--muted); max-width: 44ch; margin: 1.4rem auto 0; font-size: 1.08rem; }
+  .reserve .hero-cta { justify-content: center; }
+  .phone { display: inline-flex; align-items: center; gap: 0.6em; margin-top: 2.4rem; font-family: var(--serif); font-size: clamp(1.6rem,4vw,2.4rem); border-bottom: 1.5px solid var(--line); padding-bottom: 0.1em; }
+
+  footer { border-top: 1px solid var(--line); }
+  .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; padding: 2.4rem 0; }
+  .foot .brand { font-size: 1.4rem; }
+  .foot p { font-size: 0.82rem; color: var(--muted); }
+  .made { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--muted); }
+  .made a { color: var(--sand); }
+
+  html.js .reveal { opacity: 0; transform: translateY(26px); }
+  html.js .reveal.in { opacity: 1; transform: none; transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+  html.js .d1.in { transition-delay: 0.08s; } html.js .d2.in { transition-delay: 0.16s; } html.js .d3.in { transition-delay: 0.24s; }
+  @media (prefers-reduced-motion: reduce) { html.js .reveal { opacity: 1; transform: none; } html.js .reveal.in { transition: none; } html { scroll-behavior: auto; } }
+
+  @media (max-width: 880px) {
+    .carte-grid, .visit-cols, .maison-cols { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar"><a class="back-pill" href="index.html">← Retour au portfolio</a></div>
+
+<nav class="site">
+  <div class="wrap nav-in">
+    <a href="#" class="brand">Le <b>Margaux</b></a>
+    <ul class="nav-links">
+      <li><a href="#maison">La maison</a></li>
+      <li><a href="#carte">À la carte</a></li>
+      <li><a href="#visite">Nous trouver</a></li>
+    </ul>
+    <a href="#reserver" class="cta">Réserver</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="eyebrow reveal">Resto &amp; bar à vins · Le Havre</span>
+      <h1 class="reveal d1">Le verre,<br/><em>l'assiette</em>.</h1>
+      <p class="lede reveal d2">Une cave vivante, des crus au verre qui changent souvent, et des assiettes à partager pensées pour les accompagner. L'art de prolonger la soirée.</p>
+      <div class="hero-cta reveal d3">
+        <a href="#reserver" class="cta">Réserver une table</a>
+        <a href="#carte" class="cta cta-ghost">Voir la carte</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap strip-in">
+    <span>Crus au verre</span><span>Vins nature &amp; bio</span><span>Assiettes à partager</span><span>Conseil sommelier</span>
+  </div>
+</div>
+
+<section id="maison">
+  <div class="wrap">
+    <div class="maison-inner reveal">
+      <span class="eyebrow">La maison</span>
+      <p class="maison-quote">On choisit d'abord <em>le vin</em>, et l'assiette se met à table.</p>
+      <div class="maison-rule"></div>
+      <div class="maison-cols">
+        <p>Une sélection qui fait la part belle aux vignerons et aux cuvées nature. On débouche, on goûte, on raconte, et on vous oriente selon votre humeur du soir.</p>
+        <p>Côté cuisine, des planches, des petites assiettes et quelques plats du marché, taillés pour se partager au centre de la table.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="carte">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">À la carte</span>
+      <h2>À boire &amp; à manger</h2>
+      <p>Notre sélection du moment. La carte des vins au verre tourne chaque semaine — demandez conseil.</p>
+    </div>
+    <div class="carte-grid">
+      <div>
+        <div class="carte-col-label">Les vins</div>
+        <div class="wine-item reveal">
+          <div class="wine-name">Verre du moment</div>
+          <div class="wine-desc">Notre coup de cœur de la semaine, nature ou bio.</div>
+          <div class="wine-price">6 – 9 €</div>
+        </div>
+        <div class="wine-item reveal d1">
+          <div class="wine-name">Orange du Sud</div>
+          <div class="wine-desc">Macération pelliculaire, tanins doux, légèrement ambre.</div>
+          <div class="wine-price">7 €</div>
+        </div>
+        <div class="wine-item reveal d2">
+          <div class="wine-name">Pétillant naturel</div>
+          <div class="wine-desc">Méthode ancestrale, bulles fines, finale fraîche.</div>
+          <div class="wine-price">8 €</div>
+        </div>
+        <div class="wine-item reveal d2">
+          <div class="wine-name">Rouge de Garrigue</div>
+          <div class="wine-desc">Grenache vieilles vignes, élevage en amphore, sans soufre.</div>
+          <div class="wine-price">9 €</div>
+        </div>
+      </div>
+      <div>
+        <div class="carte-col-label">À manger</div>
+        <div class="wine-item reveal">
+          <div class="wine-name">Planche charcuterie &amp; fromages</div>
+          <div class="wine-desc">Sélection d'artisans, pain au levain, condiments maison.</div>
+          <div class="wine-price">19 €</div>
+        </div>
+        <div class="wine-item reveal d1">
+          <div class="wine-name">Burrata, tomates anciennes</div>
+          <div class="wine-desc">Huile d'olive, basilic, fleur de sel.</div>
+          <div class="wine-price">13 €</div>
+        </div>
+        <div class="wine-item reveal d2">
+          <div class="wine-name">Tartine poireaux &amp; chèvre</div>
+          <div class="wine-desc">Pain de campagne grillé, poireaux confits, chèvre frais.</div>
+          <div class="wine-price">12 €</div>
+        </div>
+        <div class="wine-item reveal d2">
+          <div class="wine-name">Fondant chocolat, fleur de sel</div>
+          <div class="wine-desc">Cœur coulant, crème fouettée.</div>
+          <div class="wine-price">8 €</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visite">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Nous trouver</span><h2>Passez nous voir</h2></div>
+    <div class="visit-cols">
+      <div class="visit-col reveal">
+        <h3>Horaires</h3>
+        <div class="visit-row"><span>Mardi – Jeudi</span><span>18h – 00h</span></div>
+        <div class="visit-row"><span>Vendredi – Samedi</span><span>18h – 01h</span></div>
+        <div class="visit-row"><span>Dimanche – Lundi</span><span>Fermé</span></div>
+      </div>
+      <div class="visit-col reveal d1">
+        <h3>Adresse</h3>
+        <p class="visit-addr">Rue Victor Hugo<br/>76600 Le Havre<br/>02 35 22 22 22</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Rue+Victor+Hugo+Le+Havre" target="_blank" rel="noopener" class="map-link">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Voir l'itinéraire →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reserve" id="reserver">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="justify-content:center">Réservation</span>
+    <h2 class="reveal d1" style="margin-top:0.5em">Une table,<br/><em>une belle bouteille</em>.</h2>
+    <p class="reveal d2">Réservez votre soirée. On garde la bouteille au frais et l'assiette qui va avec.</p>
+    <div class="hero-cta reveal d3">
+      <a href="tel:0235222222" class="cta">Appeler le bar à vins</a>
+      <a href="mailto:contact@le-margaux.fr" class="cta cta-ghost">Écrire un message</a>
+    </div>
+    <div class="reveal d3"><span class="phone">02 35 22 22 22</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <a href="#" class="brand">Le <b style="color:var(--sand)">Margaux</b></a>
+    <p>Resto &amp; bar à vins · Rue Victor Hugo, Le Havre.</p>
+    <span class="made">Site démo · <a href="index.html">Simon Rioult</a></span>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const forceShow = (el) => { el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none'; };
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(forceShow);
+  } else {
+    const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => {
+      io.observe(el);
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
+    });
+    setTimeout(() => {
+      reveals.forEach(el => {
+        el.classList.add('in');
+        if (parseFloat(getComputedStyle(el).opacity) < 0.99) forceShow(el);
+      });
+    }, 1600);
+  }
+</script>
+</body>
+</html>

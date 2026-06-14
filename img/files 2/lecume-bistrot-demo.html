@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Écume — Bistrot de la mer · Le Havre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#10302e;
+    --deep:#0a201f;
+    --cream:#f3ecdf;
+    --sand:#e6dac2;
+    --foam:#faf6ee;
+    --rust:#c75b39;
+    --rust-deep:#a8462b;
+    --line:rgba(16,48,46,.16);
+    --display:"Fraunces",Georgia,serif;
+    --body:"Hanken Grotesk",-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    background:var(--foam);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* grain overlay */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection{background:var(--rust);color:var(--foam)}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px clamp(20px,5vw,64px);
+    transition:background .4s ease,padding .4s ease,box-shadow .4s ease;
+    mix-blend-mode:normal;
+  }
+  nav.scrolled{background:var(--foam);padding:14px clamp(20px,5vw,64px);box-shadow:0 1px 0 var(--line)}
+  .brand{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:.02em;color:var(--foam);transition:color .4s}
+  nav.scrolled .brand{color:var(--ink)}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{
+    color:var(--foam);text-decoration:none;font-size:13px;letter-spacing:.14em;
+    text-transform:uppercase;font-weight:500;transition:color .3s;position:relative;
+  }
+  nav.scrolled .nav-links a{color:var(--ink)}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--rust);transition:width .3s}
+  .nav-links a:hover::after{width:100%}
+  .nav-links a:hover{color:var(--rust)}
+  .nav-cta{border:1px solid currentColor;padding:9px 18px;border-radius:40px}
+  .nav-cta::after{display:none}
+  .nav-cta:hover{background:var(--rust);border-color:var(--rust);color:var(--foam)!important}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0}
+  .burger span{width:26px;height:2px;background:var(--foam);transition:.3s}
+  nav.scrolled .burger span{background:var(--ink)}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:flex-end;
+    background:
+      linear-gradient(180deg,rgba(10,32,31,.55) 0%,rgba(10,32,31,.25) 35%,rgba(10,32,31,.75) 100%),
+      radial-gradient(120% 120% at 70% 10%,#1d4a45 0%,#0a201f 60%);
+    color:var(--foam);overflow:hidden;
+    padding:0 clamp(20px,5vw,64px) clamp(48px,8vh,90px);
+  }
+  /* abstract water lines */
+  .hero .waves{position:absolute;inset:0;opacity:.5}
+  .hero .waves svg{position:absolute;width:140%;left:-20%}
+  .w1{top:30%;animation:drift 22s linear infinite}
+  .w2{top:48%;animation:drift 30s linear infinite reverse}
+  .w3{top:66%;animation:drift 26s linear infinite}
+  @keyframes drift{from{transform:translateX(0)}to{transform:translateX(-14%)}}
+  .hero-inner{position:relative;z-index:2;max-width:1100px;width:100%;margin:0 auto}
+  .eyebrow{
+    font-size:13px;letter-spacing:.34em;text-transform:uppercase;color:var(--sand);
+    margin-bottom:26px;opacity:0;transform:translateY(18px);animation:rise .9s .2s forwards;
+  }
+  .hero h1{
+    font-family:var(--display);font-weight:400;line-height:.96;
+    font-size:clamp(56px,12vw,168px);letter-spacing:-.02em;
+    opacity:0;transform:translateY(28px);animation:rise 1s .35s forwards;
+  }
+  .hero h1 em{font-style:italic;color:var(--rust)}
+  .hero-sub{
+    max-width:520px;font-size:clamp(17px,2vw,21px);font-weight:300;color:#eadfca;
+    margin-top:28px;opacity:0;transform:translateY(20px);animation:rise 1s .6s forwards;
+  }
+  .hero-meta{
+    display:flex;gap:30px;flex-wrap:wrap;margin-top:40px;font-size:13px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--sand);
+    opacity:0;animation:fade 1s .85s forwards;
+  }
+  .hero-meta span{display:flex;align-items:center;gap:10px}
+  .hero-meta span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--rust)}
+  @keyframes rise{to{opacity:1;transform:translateY(0)}}
+  @keyframes fade{to{opacity:1}}
+  .scroll-hint{position:absolute;bottom:26px;right:clamp(20px,5vw,64px);z-index:2;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sand);writing-mode:vertical-rl;opacity:.7}
+
+  /* ---------- SECTIONS base ---------- */
+  section{padding:clamp(70px,11vh,140px) clamp(20px,5vw,64px)}
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .label{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:22px;display:flex;align-items:center;gap:14px}
+  .label::before{content:"";width:34px;height:1px;background:var(--rust)}
+
+  /* ---------- STORY ---------- */
+  .story{background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,110px);align-items:center}
+  .story h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,4vw,52px);line-height:1.08;letter-spacing:-.01em}
+  .story h2 em{font-style:italic;color:var(--rust)}
+  .story p{font-size:17px;font-weight:300;color:#33514e;margin-top:22px;max-width:46ch}
+  .story-aside{border-left:1px solid var(--line);padding-left:clamp(28px,4vw,48px)}
+  .figure{font-family:var(--display);font-size:clamp(40px,6vw,76px);line-height:1;color:var(--ink)}
+  .figure small{display:block;font-family:var(--body);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#5c7572;margin-top:12px;font-weight:500}
+  .figs{display:flex;flex-direction:column;gap:38px}
+
+  /* ---------- MENU ---------- */
+  .menu{background:var(--deep);color:var(--foam)}
+  .menu .label{color:var(--rust)}
+  .menu-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:60px}
+  .menu-head h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,5vw,64px);line-height:1}
+  .menu-head h2 em{font-style:italic;color:var(--rust)}
+  .menu-note{font-size:14px;color:#bfd2cf;max-width:30ch;text-align:right}
+  .dishes{display:grid;gap:0}
+  .dish{
+    display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:baseline;
+    padding:26px 0;border-top:1px solid rgba(243,236,223,.14);transition:padding .3s;
+  }
+  .dish:last-child{border-bottom:1px solid rgba(243,236,223,.14)}
+  .dish:hover{padding-left:14px}
+  .dish:hover .dish-name{color:var(--rust)}
+  .dish-name{font-family:var(--display);font-size:clamp(21px,2.6vw,30px);font-weight:500;transition:color .3s}
+  .dish-name em{font-style:italic;font-weight:400}
+  .dish-desc{font-size:14.5px;color:#a9bfbb;font-weight:300;align-self:center}
+  .dish-price{font-family:var(--display);font-size:22px;color:var(--sand)}
+  .dish-tag{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--deep);background:var(--rust);padding:3px 8px;border-radius:3px;margin-left:12px;vertical-align:middle}
+
+  /* ---------- ARRIVAGE strip ---------- */
+  .strip{background:var(--rust);color:var(--foam);overflow:hidden;padding:26px 0}
+  .ticker{display:flex;white-space:nowrap;animation:slide 28s linear infinite;font-family:var(--display);font-style:italic;font-size:clamp(22px,3vw,34px)}
+  .ticker span{padding:0 40px;display:flex;align-items:center;gap:40px}
+  .ticker span::after{content:"✦";font-style:normal;font-size:16px}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- VISIT ---------- */
+  .visit{background:var(--cream);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(40px,6vw,90px)}
+  .visit h2{font-family:var(--display);font-weight:400;font-size:clamp(32px,4.5vw,58px);line-height:1.04;letter-spacing:-.01em;margin-bottom:30px}
+  .visit h2 em{font-style:italic;color:var(--rust)}
+  .info-row{display:grid;grid-template-columns:140px 1fr;gap:16px;padding:20px 0;border-top:1px solid var(--line);font-size:16px}
+  .info-row:last-child{border-bottom:1px solid var(--line)}
+  .info-row dt{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#5c7572;font-weight:600;padding-top:3px}
+  .info-row dd{color:var(--ink);font-weight:400}
+  .info-row dd strong{font-weight:600}
+  .reserve-card{background:var(--ink);color:var(--foam);border-radius:6px;padding:clamp(30px,4vw,46px);align-self:start;position:sticky;top:100px}
+  .reserve-card h3{font-family:var(--display);font-weight:400;font-size:30px;margin-bottom:8px}
+  .reserve-card p{font-size:15px;color:#bfd2cf;font-weight:300;margin-bottom:28px}
+  .btn{
+    display:inline-flex;align-items:center;gap:12px;background:var(--rust);color:var(--foam);
+    text-decoration:none;padding:15px 26px;border-radius:40px;font-size:14px;letter-spacing:.08em;
+    font-weight:600;transition:transform .3s,background .3s;width:100%;justify-content:center;
+  }
+  .btn:hover{background:var(--rust-deep);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;border:1px solid rgba(243,236,223,.3);margin-top:12px}
+  .btn-ghost:hover{background:rgba(243,236,223,.08);transform:none}
+  .phone{font-family:var(--display);font-size:26px;color:var(--foam);text-decoration:none;display:block;margin-top:26px;text-align:center}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--deep);color:var(--sand);padding:64px clamp(20px,5vw,64px) 40px}
+  .foot-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:30px;border-bottom:1px solid rgba(243,236,223,.12);padding-bottom:40px}
+  .foot-top .brand{color:var(--foam);font-size:40px}
+  .foot-soc{display:flex;gap:24px;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+  .foot-soc a{color:var(--sand);text-decoration:none;transition:color .3s}
+  .foot-soc a:hover{color:var(--rust)}
+  .foot-bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-top:28px;font-size:12.5px;color:#7d938f}
+  .credit{color:var(--rust);font-weight:600}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:860px){
+    .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;background:var(--ink);
+      flex-direction:column;justify-content:center;gap:30px;transform:translateX(100%);transition:transform .45s cubic-bezier(.6,.05,.2,1);padding:40px}
+    .nav-links.open{transform:translateX(0)}
+    .nav-links a,nav.scrolled .nav-links a{color:var(--foam)}
+    .burger{display:flex;z-index:120}
+    .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);background:var(--foam)}
+    .burger.open span:nth-child(2){opacity:0}
+    .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);background:var(--foam)}
+    .story,.visit{grid-template-columns:1fr}
+    .story-aside{border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:36px}
+    .figs{flex-direction:row;flex-wrap:wrap;gap:30px}
+    .reserve-card{position:static}
+    .dish{grid-template-columns:1fr auto;gap:6px 18px}
+    .dish-desc{grid-column:1/-1;order:3}
+    .menu-note{text-align:left}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="brand">L'Écume</a>
+  <div class="nav-links" id="navlinks">
+    <a href="#maison">La maison</a>
+    <a href="#carte">La carte</a>
+    <a href="#venir">Venir</a>
+    <a href="#venir" class="nav-cta">Réserver</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="waves">
+    <svg class="w1" height="120" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,60 C200,10 400,110 600,60 C800,10 1000,110 1200,60" fill="none" stroke="#3a6f68" stroke-width="1.5"/></svg>
+    <svg class="w2" height="120" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,60 C200,110 400,10 600,60 C800,110 1000,10 1200,60" fill="none" stroke="#2c5b55" stroke-width="1.5"/></svg>
+    <svg class="w3" height="120" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60" fill="none" stroke="#244c47" stroke-width="1.5"/></svg>
+  </div>
+  <div class="hero-inner">
+    <p class="eyebrow">Bistrot de la mer · Le Havre</p>
+    <h1>L'<em>Écume</em></h1>
+    <p class="hero-sub">La pêche du jour, cuisinée simplement, face au port. Une cuisine de marché qui change au rythme des marées.</p>
+    <div class="hero-meta">
+      <span>Quai de Southampton</span>
+      <span>Cuisine ouverte midi &amp; soir</span>
+      <span>Arrivage quotidien</span>
+    </div>
+  </div>
+  <div class="scroll-hint">Descendre ↓</div>
+</header>
+
+<!-- STORY -->
+<section class="story" id="maison">
+  <div class="reveal">
+    <p class="label">La maison</p>
+    <h2>Une cuisine qui se décide <em>le matin,</em> sur les quais.</h2>
+    <p>Chaque jour, on choisit le poisson directement auprès des pêcheurs du port. Pas de carte figée : une ardoise courte, des produits bruts, et le geste juste. Ici, la mer arrive entière dans l'assiette.</p>
+    <p>Une salle simple aux tons de bois flotté, une grande baie sur les bassins, et l'envie qu'on s'y sente comme à une table d'amis.</p>
+  </div>
+  <div class="story-aside reveal">
+    <div class="figs">
+      <div class="figure">100%<small>Pêche locale &amp; de saison</small></div>
+      <div class="figure">7h<small>Sélection au port chaque matin</small></div>
+      <div class="figure">2014<small>Maison ouverte au Havre</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="carte">
+  <div class="menu-head reveal">
+    <div>
+      <p class="label">La carte du jour</p>
+      <h2>L'<em>ardoise</em></h2>
+    </div>
+    <p class="menu-note">Sélection du moment — la carte évolue selon l'arrivage et les saisons.</p>
+  </div>
+  <div class="dishes">
+    <div class="dish reveal">
+      <span class="dish-name">Plateau <em>Grand Large</em><span class="dish-tag">Signature</span></span>
+      <span class="dish-desc">Huîtres, bulots, crevettes, tourteau &amp; langoustines</span>
+      <span class="dish-price">38€</span>
+    </div>
+    <div class="dish reveal">
+      <span class="dish-name">Cabillaud rôti</span>
+      <span class="dish-desc">Beurre blanc citronné, légumes du marché</span>
+      <span class="dish-price">24€</span>
+    </div>
+    <div class="dish reveal">
+      <span class="dish-name">Tartare de daurade</span>
+      <span class="dish-desc">Agrumes, huile d'olive vierge, fleur de sel de Guérande</span>
+      <span class="dish-price">19€</span>
+    </div>
+    <div class="dish reveal">
+      <span class="dish-name">Moules de bouchot</span>
+      <span class="dish-desc">Marinière, frites maison à la graisse de bœuf</span>
+      <span class="dish-price">18€</span>
+    </div>
+    <div class="dish reveal">
+      <span class="dish-name">Tarte normande <em>tiède</em></span>
+      <span class="dish-desc">Pommes, caramel au beurre salé, glace vanille</span>
+      <span class="dish-price">9€</span>
+    </div>
+  </div>
+</section>
+
+<!-- ARRIVAGE TICKER -->
+<div class="strip" aria-hidden="true">
+  <div class="ticker">
+    <span>Bar de ligne <span></span></span><span>Saint-Jacques de la baie <span></span></span><span>Sole meunière <span></span></span><span>Homard bleu <span></span></span>
+    <span>Bar de ligne <span></span></span><span>Saint-Jacques de la baie <span></span></span><span>Sole meunière <span></span></span><span>Homard bleu <span></span></span>
+  </div>
+</div>
+
+<!-- VISIT -->
+<section class="visit" id="venir">
+  <div class="reveal">
+    <p class="label">Nous trouver</p>
+    <h2>À deux pas des <em>bassins.</em></h2>
+    <dl>
+      <div class="info-row"><dt>Adresse</dt><dd><strong>12 quai de Southampton</strong><br>76600 Le Havre</dd></div>
+      <div class="info-row"><dt>Service</dt><dd>Du mardi au dimanche<br>12h – 14h30 &nbsp;·&nbsp; 19h – 22h30</dd></div>
+      <div class="info-row"><dt>Fermeture</dt><dd>Le lundi</dd></div>
+      <div class="info-row"><dt>Contact</dt><dd>bonjour@lecume-lehavre.fr</dd></div>
+    </dl>
+  </div>
+  <aside class="reserve-card reveal">
+    <h3>Réserver une table</h3>
+    <p>Les week-ends partent vite — on vous conseille de réserver quelques jours à l'avance.</p>
+    <a href="tel:+33235000000" class="btn">Réserver par téléphone</a>
+    <a href="#" class="btn btn-ghost">Réserver en ligne</a>
+    <a href="tel:+33235000000" class="phone">02 35 00 00 00</a>
+  </aside>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top">
+    <a href="#" class="brand">L'Écume</a>
+    <div class="foot-soc">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Tripadvisor</a>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <span>© 2026 L'Écume · Bistrot de la mer · Le Havre</span>
+    <span>Site démo — design &amp; développement par <span class="credit">Simon</span></span>
+  </div>
+</footer>
+
+<script>
+  // Nav background on scroll
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
+  // Mobile menu
+  const burger=document.getElementById('burger'),links=document.getElementById('navlinks');
+  burger.addEventListener('click',()=>{burger.classList.toggle('open');links.classList.toggle('open')});
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');links.classList.remove('open')}));
+  // Scroll reveal
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*70)+'ms';io.observe(el)});
+</script>
+</body>
+</html>

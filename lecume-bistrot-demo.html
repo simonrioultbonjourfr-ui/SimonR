@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<script>document.documentElement.className += ' js';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>L'Écume · Bistrot de la mer · Le Havre</title>
+<meta name="description" content="L'Écume, bistrot de la mer au Havre. Pêche du jour, cuisine iodée, vue sur le port. Réservez votre table." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ===== TOKENS ===== */
+  :root {
+    --navy:       #0c1a2e;
+    --navy-mid:   #0f2035;
+    --navy-light: #162840;
+    --white:      #ffffff;
+    --cream:      #f5f0e8;
+    --muted:      rgba(245, 240, 232, 0.65);
+    --gold:       #c8a870;
+    --line:       rgba(255, 255, 255, 0.14);
+    --line-s:     rgba(255, 255, 255, 0.28);
+    --serif:      "Playfair Display", Georgia, serif;
+    --sans:       "Raleway", -apple-system, sans-serif;
+    --gut:        clamp(24px, 5vw, 72px);
+    --maxw:       1200px;
+    --ease:       cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ===== RESET ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--navy);
+    color: var(--cream);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--gold); color: var(--navy); }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  /* ===== LAYOUT ===== */
+  .wrap {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding-left: var(--gut);
+    padding-right: var(--gut);
+  }
+
+  /* ===== BACK PILL ===== */
+  .topbar {
+    position: fixed;
+    bottom: 1.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    pointer-events: none;
+  }
+  .back-pill {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    background: rgba(12, 26, 46, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--line-s);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.6em 1.3em;
+    border-radius: 100px;
+    transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  .back-pill:hover {
+    background: var(--gold);
+    color: var(--navy);
+    transform: translateY(-2px);
+  }
+
+  /* ===== NAV ===== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    transition: background 0.45s var(--ease), border-color 0.45s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  header.scrolled {
+    background: var(--navy);
+    border-bottom-color: var(--line);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 82px;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--white);
+  }
+  .nav-logo em { font-style: italic; color: var(--gold); }
+  .nav-links {
+    display: flex;
+    gap: 2.6rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245, 240, 232, 0.82);
+    transition: color 0.25s var(--ease);
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* Ghost button — the Blue Ribbon signature */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 0.85em 1.8em;
+    border: 1px solid var(--white);
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+    transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+  }
+  .btn:hover { background: var(--white); color: var(--navy); }
+  .btn-gold { border-color: var(--gold); color: var(--gold); }
+  .btn-gold:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+  .btn-dark { border-color: var(--navy); background: transparent; color: var(--navy); }
+  .btn-dark:hover { background: var(--navy); color: var(--white); }
+
+  /* Burger */
+  .burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    width: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px 0;
+  }
+  .burger span {
+    display: block;
+    height: 1.5px;
+    width: 100%;
+    background: var(--white);
+    transition: transform 0.35s var(--ease), opacity 0.25s;
+  }
+  .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--navy);
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--gut);
+    transform: translateY(-100%);
+    transition: transform 0.5s var(--ease);
+  }
+  .mobile-menu.open { transform: translateY(0); }
+  .mobile-menu ul { list-style: none; }
+  .mobile-menu a {
+    display: block;
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 9vw, 3.2rem);
+    font-style: italic;
+    color: var(--white);
+    padding: 0.22em 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-menu .mm-btn { margin-top: 2.4rem; }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 640px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        120deg,
+        rgba(255,255,255,0.025) 0 1px,
+        transparent 1px 48px
+      ),
+      linear-gradient(170deg, #0e2840 0%, #14405c 35%, #1a5a75 65%, #0e3048 100%);
+  }
+  /* Atmospheric highlight — mimics ocean light on seafood */
+  .hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 65% 40%, rgba(100, 180, 210, 0.18), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(200, 168, 112, 0.14), transparent 65%);
+  }
+  .hero-photo-label {
+    position: absolute;
+    right: clamp(20px, 4vw, 60px);
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.28);
+    border: 1px dashed rgba(255,255,255,0.18);
+    padding: 1em 1.5em;
+    text-align: center;
+    line-height: 1.8;
+    max-width: 200px;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(12, 26, 46, 0.92) 0%,
+      rgba(12, 26, 46, 0.55) 40%,
+      rgba(12, 26, 46, 0.1) 75%,
+      transparent 100%
+    );
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding-bottom: clamp(60px, 9vh, 110px);
+    width: 100%;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3.4rem, 9vw, 7.5rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    max-width: 14ch;
+    margin-bottom: 2.2rem;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* ===== TICKER STRIP ===== */
+  .ticker {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+    background: var(--navy-mid);
+  }
+  .ticker-track {
+    display: flex;
+    gap: 0;
+    white-space: nowrap;
+    animation: ticker 22s linear infinite;
+  }
+  .ticker-track:hover { animation-play-state: paused; }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem 2rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .ticker-item::after {
+    content: "◆";
+    color: var(--gold);
+    font-size: 0.55em;
+    margin-left: 0;
+  }
+
+  /* ===== ABOUT ===== */
+  .about {
+    padding: clamp(90px, 13vh, 160px) 0;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(48px, 7vw, 100px);
+    align-items: center;
+  }
+  .about h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.08;
+    color: var(--white);
+    margin-bottom: 1.6rem;
+  }
+  .about h2 strong { font-style: normal; font-weight: 700; }
+  .about p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    max-width: 48ch;
+  }
+  .about p + p { margin-top: 1.1rem; }
+  .about-btn { margin-top: 2.4rem; }
+  .about-photo {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        rgba(255,255,255,0.03) 0 1px,
+        transparent 1px 36px
+      ),
+      linear-gradient(155deg, #0e3346 0%, #185a75 50%, #2a7d93 100%);
+  }
+  .about-photo .ph {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.28);
+    border: 1px dashed rgba(255,255,255,0.18);
+    padding: 0.8em 1.2em;
+    text-align: center;
+    line-height: 1.8;
+    white-space: nowrap;
+  }
+  /* subtle highlight orb on photo */
+  .about-photo::after {
+    content: "";
+    position: absolute;
+    right: -20%; bottom: -20%;
+    width: 70%; height: 70%;
+    background: radial-gradient(circle, rgba(200,168,112,0.22), transparent 65%);
+    pointer-events: none;
+  }
+
+  /* ===== DIVIDER PHOTO (full-bleed) ===== */
+  .divider-photo {
+    width: 100%;
+    aspect-ratio: 21 / 7;
+    position: relative;
+    overflow: hidden;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,0.025) 0 1px,
+        transparent 1px 60px
+      ),
+      linear-gradient(180deg, #0e3346 0%, #1a5a72 50%, #133040 100%);
+  }
+  .divider-photo .ph-center {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.22);
+    border: 1px dashed rgba(255,255,255,0.15);
+    padding: 0.8em 1.4em;
+    white-space: nowrap;
+  }
+  .divider-photo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 40% 50%, rgba(100,180,210,0.18), transparent 65%),
+      radial-gradient(ellipse 40% 60% at 80% 50%, rgba(200,168,112,0.12), transparent 60%);
+  }
+
+  /* ===== MENU ===== */
+  .menu-section {
+    padding: clamp(90px, 13vh, 160px) 0;
+    background: var(--navy-light);
+  }
+  .menu-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: end;
+    margin-bottom: clamp(48px, 7vh, 80px);
+    padding-bottom: clamp(32px, 4vh, 56px);
+    border-bottom: 1px solid var(--line);
+  }
+  .menu-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .menu-head h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.05;
+  }
+  .menu-head p {
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    max-width: 44ch;
+    align-self: end;
+  }
+  .menu-list { display: grid; gap: 0; }
+  .dish {
+    display: grid;
+    grid-template-columns: 3rem 1fr auto;
+    gap: 1.4rem;
+    align-items: baseline;
+    padding: 1.6rem 0;
+    border-bottom: 1px solid var(--line);
+    transition: opacity 0.3s var(--ease);
+  }
+  .dish:last-child { border-bottom: none; }
+  .dish:hover { opacity: 0.78; }
+  .d-num {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    padding-top: 0.3em;
+  }
+  .d-name {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.15;
+  }
+  .d-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+  .d-price {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--cream);
+    white-space: nowrap;
+    align-self: center;
+  }
+
+  /* ===== SECOND DIVIDER (narrower) ===== */
+  .divider-photo-sm {
+    width: 100%;
+    aspect-ratio: 21 / 8;
+    position: relative;
+    overflow: hidden;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.02) 0 1px,
+        transparent 1px 40px
+      ),
+      linear-gradient(160deg, #0a2030 0%, #154258 45%, #0e3048 100%);
+  }
+  .divider-photo-sm::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 100% at 60% 50%, rgba(45,125,147,0.22), transparent 60%);
+  }
+  .divider-photo-sm .ph-center {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.2);
+    border: 1px dashed rgba(255,255,255,0.14);
+    padding: 0.8em 1.4em;
+    white-space: nowrap;
+  }
+
+  /* ===== GALLERY (3-col edge to edge) ===== */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+  .gallery-cell {
+    aspect-ratio: 4 / 3;
+    position: relative;
+    overflow: hidden;
+  }
+  .gallery-cell:nth-child(1) {
+    background: linear-gradient(145deg, #0e2840 0%, #1a5472 60%, #2a7a8e 100%);
+  }
+  .gallery-cell:nth-child(2) {
+    background: linear-gradient(145deg, #122034 0%, #1c4a64 60%, #268090 100%);
+  }
+  .gallery-cell:nth-child(3) {
+    background: linear-gradient(145deg, #0c1e30 0%, #164466 60%, #206878 100%);
+  }
+  .gallery-cell .ph-g {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.22);
+    text-align: center;
+    line-height: 1.8;
+    pointer-events: none;
+  }
+  /* hover zoom effect */
+  .gallery-cell::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: rgba(12,26,46,0);
+    transition: background 0.4s var(--ease);
+  }
+  .gallery-cell:hover::after { background: rgba(12,26,46,0.3); }
+
+  /* ===== VISIT / INFO ===== */
+  .visit {
+    padding: clamp(90px, 13vh, 160px) 0;
+  }
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 5vw, 72px);
+    align-items: start;
+  }
+  .info-head {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.08;
+    margin-bottom: clamp(32px, 4vh, 48px);
+  }
+  .info-block { margin-bottom: 2.2rem; }
+  .info-block h3 {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+    color: var(--cream);
+  }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-row span:first-child { color: var(--muted); }
+  .addr-text {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  /* Map embed */
+  .map-wrap {
+    aspect-ratio: 4 / 3;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .map-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: brightness(0.85) saturate(0.7) invert(0.05);
+  }
+
+  /* ===== RESERVATION CTA ===== */
+  .reserve {
+    padding: clamp(90px, 13vh, 150px) 0;
+    text-align: center;
+    background: var(--navy-mid);
+    position: relative;
+    overflow: hidden;
+  }
+  .reserve::before {
+    content: "";
+    position: absolute; left: 50%; top: 0;
+    transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(45,125,147,0.22), transparent 70%);
+    pointer-events: none;
+  }
+  .reserve-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.4rem;
+  }
+  .reserve h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--white);
+    line-height: 0.96;
+    position: relative;
+  }
+  .reserve p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 44ch;
+    margin: 1.6rem auto 0;
+    line-height: 1.7;
+    position: relative;
+  }
+  .reserve-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2.8rem;
+    position: relative;
+  }
+  .phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-top: 2rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    color: var(--cream);
+    border-bottom: 1px solid var(--line-s);
+    padding-bottom: 0.1em;
+    transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+    position: relative;
+  }
+  .phone-link:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid var(--line);
+    padding: 0;
+  }
+  .foot-top {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 2.8rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .foot-logo {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--white);
+  }
+  .foot-center {
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .foot-social {
+    display: flex;
+    gap: 1.4rem;
+    justify-content: flex-end;
+  }
+  .foot-social a {
+    color: var(--muted);
+    transition: color 0.25s var(--ease);
+    display: flex;
+    align-items: center;
+  }
+  .foot-social a:hover { color: var(--white); }
+  .foot-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 0;
+    font-size: 0.78rem;
+    color: rgba(245,240,232,0.38);
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .foot-bottom a { color: var(--gold); }
+  .foot-bottom a:hover { text-decoration: underline; }
+
+  /* ===== REVEAL ANIMATIONS ===== */
+  html.js .reveal { opacity: 0; transform: translateY(30px); }
+  html.js .reveal.in {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  }
+  html.js .reveal.d1.in { transition-delay: 0.1s; }
+  html.js .reveal.d2.in { transition-delay: 0.2s; }
+  html.js .reveal.d3.in { transition-delay: 0.3s; }
+  @media (prefers-reduced-motion: reduce) {
+    html.js .reveal { opacity: 1; transform: none; }
+    html.js .reveal.in { transition: none; }
+    .ticker-track { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ===== STATS BAR ===== */
+  .stats-bar {
+    background: var(--navy-light);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: clamp(56px, 8vh, 96px) 0;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: center;
+    position: relative;
+  }
+  .stats-grid::before,
+  .stats-grid::after {
+    content: "";
+    position: absolute;
+    top: 10%; bottom: 10%;
+    width: 1px;
+    background: var(--line);
+  }
+  .stats-grid::before { left: 33.33%; }
+  .stats-grid::after  { left: 66.66%; }
+  .stat-item { padding: 0 2rem; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.8rem;
+    display: block;
+  }
+
+  /* ===== SLIDE-IN ANIMATIONS ===== */
+  html.js .slide-left  { opacity: 0; transform: translateX(-48px); }
+  html.js .slide-right { opacity: 0; transform: translateX(48px); }
+  html.js .slide-left.in,
+  html.js .slide-right.in {
+    opacity: 1;
+    transform: none;
+    transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
+  }
+  html.js .reveal.scale { opacity: 0; transform: scale(0.94) translateY(20px); }
+  html.js .reveal.scale.in {
+    opacity: 1;
+    transform: none;
+    transition: opacity 1s var(--ease), transform 1s var(--ease);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html.js .slide-left,
+    html.js .slide-right { opacity: 1; transform: none; }
+  }
+
+  /* ===== IMAGE STYLES & ANIMATIONS ===== */
+  /* Hero image */
+  .hero-bg { overflow: hidden; }
+  .hero-bg img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  /* About photo */
+  .about-photo img {
+    object-position: center top;
+    transition: transform 1.4s var(--ease);
+  }
+  .about-photo:hover img { transform: scale(1.05); }
+
+  /* Divider banners — Ken Burns slow drift */
+  .divider-photo img,
+  .divider-photo-sm img {
+    object-position: center 35%;
+    animation: kenburns 20s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns {
+    from { transform: scale(1)    translate(0,    0); }
+    to   { transform: scale(1.08) translate(-1%, -1%); }
+  }
+
+  /* Gallery hover zoom */
+  .gallery-cell img {
+    object-position: center;
+    transition: transform 0.7s var(--ease), filter 0.5s;
+  }
+  .gallery-cell:hover img { transform: scale(1.08); filter: brightness(1.12); }
+  .gallery-cell::after { display: none; } /* was old overlay, img handles it */
+
+  /* Image scroll reveal */
+  html.js .img-reveal { opacity: 0; transform: scale(0.97) translateY(20px); }
+  html.js .img-reveal.in {
+    opacity: 1; transform: none;
+    transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .divider-photo img, .divider-photo-sm img { animation: none; }
+    html.js .img-reveal { opacity: 1; transform: none; }
+  }
+
+  /* ===== ABOUT LINK ===== */
+  .about-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 2.4rem;
+    border-bottom: 1px solid rgba(200,168,112,0.35);
+    padding-bottom: 0.3em;
+    transition: color 0.3s var(--ease), border-color 0.3s var(--ease), gap 0.3s var(--ease);
+  }
+  .about-link:hover { color: var(--white); border-color: var(--white); gap: 0.85em; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .about-photo { aspect-ratio: 4 / 3; max-width: 500px; }
+    .menu-head { grid-template-columns: 1fr; }
+    .visit-grid { grid-template-columns: 1fr; }
+    .nav-links, .nav-inner > .btn { display: none; }
+    .burger { display: flex; }
+  }
+  @media (max-width: 640px) {
+    .gallery { grid-template-columns: 1fr; }
+    .gallery-cell { aspect-ratio: 4 / 3; }
+    .dish { grid-template-columns: 2rem 1fr auto; gap: 1rem; }
+    .foot-top { grid-template-columns: 1fr 1fr; }
+    .foot-center { display: none; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .stats-grid::before, .stats-grid::after { display: none; }
+    .stat-item { border-bottom: 1px solid var(--line); padding-bottom: 1.4rem; }
+    .stat-item:last-child { border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Back pill -->
+<div class="topbar">
+  <a class="back-pill" href="index.html">← Retour au portfolio</a>
+</div>
+
+<!-- Nav -->
+<header id="header">
+  <div class="wrap nav-inner">
+    <a href="#" class="nav-logo"><em>L'Écume</em></a>
+    <ul class="nav-links">
+      <li><a href="#maison">La maison</a></li>
+      <li><a href="lecume-about.html">Notre histoire</a></li>
+      <li><a href="#carte">La carte</a></li>
+      <li><a href="#visite">Nous trouver</a></li>
+    </ul>
+    <a href="#reserver" class="btn">Réserver</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<nav class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#maison">La maison</a></li>
+    <li><a href="lecume-about.html">Notre histoire</a></li>
+    <li><a href="#carte">La carte</a></li>
+    <li><a href="#visite">Nous trouver</a></li>
+    <li><a href="#reserver">Réservation</a></li>
+  </ul>
+  <div class="mm-btn">
+    <a href="tel:0235000000" class="btn">02 35 00 00 00</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg">
+    <img src="img/hero-seafood.png" alt="Plateau de fruits de mer frais" />
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="wrap">
+      <span class="hero-eyebrow reveal">Bistrot de la mer · Le Havre</span>
+      <h1 class="reveal d1">Le port<br/>dans<br/>l'assiette.</h1>
+      <div class="hero-cta reveal d2">
+        <a href="#reserver" class="btn">Réserver une table</a>
+        <a href="#carte" class="btn">Voir la carte</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ticker -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Pêche du jour</span>
+    <span class="ticker-item">Produits locaux</span>
+    <span class="ticker-item">Vue sur le port</span>
+    <span class="ticker-item">Ardoise du marché</span>
+    <span class="ticker-item">Ouvert depuis 2019</span>
+    <span class="ticker-item">Quai de Southampton</span>
+    <span class="ticker-item">Pêche du jour</span>
+    <span class="ticker-item">Produits locaux</span>
+    <span class="ticker-item">Vue sur le port</span>
+    <span class="ticker-item">Ardoise du marché</span>
+    <span class="ticker-item">Ouvert depuis 2019</span>
+    <span class="ticker-item">Quai de Southampton</span>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about" id="maison">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="slide-left">
+        <h2>Une cuisine qui sent l'embrun,<br/><strong>au plus près de la mer.</strong></h2>
+        <p>Chaque matin, Thomas descend sur le quai avant l'aube. Il choisit le poisson à la criée, à la main, en serrant la main des pêcheurs qu'il connaît depuis l'enfance. La carte du jour s'écrit à son retour.</p>
+        <p>Ce que vous avez dans l'assiette a souvent nagé le matin même. La fraîcheur ne se simule pas. Elle se choisit, elle s'honore, elle se cuisine avec respect.</p>
+        <p>L'Écume, c'est l'histoire d'un fils de pêcheur havrais et d'une cuisinière normande qui ont voulu que leur table raconte la mer. Une salle simple, des nappes claires, et la lumière du port qui entre par les grandes fenêtres.</p>
+        <a href="lecume-about.html" class="about-link">Notre histoire complète →</a>
+      </div>
+      <div class="about-photo slide-right">
+        <img src="img/salle-mer.png" alt="Salle de L'Écume avec vue sur le port" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats bar -->
+<div class="stats-bar">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <span class="stat-num" data-count="2019">2019</span>
+        <span class="stat-label">Depuis le début</span>
+      </div>
+      <div class="stat-item reveal d1">
+        <span class="stat-num" data-count="76">76</span>
+        <span class="stat-label">Couverts</span>
+      </div>
+      <div class="stat-item reveal d2">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Pêche locale</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Divider photo 1 -->
+<div class="divider-photo">
+  <img src="img/quai-poissons.png" alt="Marché aux poissons de Normandie" />
+</div>
+
+<!-- Menu -->
+<section class="menu-section" id="carte">
+  <div class="wrap">
+    <div class="menu-head reveal">
+      <div>
+        <span class="menu-eyebrow">La carte</span>
+        <h2>L'ardoise du jour.</h2>
+      </div>
+      <p>Quelques signatures de la maison. La carte évolue chaque semaine selon la marée. Ce qui est bon, c'est ce qui est frais.</p>
+    </div>
+
+    <div class="menu-list">
+      <div class="dish reveal">
+        <span class="d-num">01</span>
+        <div>
+          <div class="d-name">Plateau de fruits de mer</div>
+          <div class="d-desc">Huîtres de Normandie, bulots, crevettes grises, tourteau, sauce mignonette.</div>
+        </div>
+        <span class="d-price">28 €</span>
+      </div>
+      <div class="dish reveal">
+        <span class="d-num">02</span>
+        <div>
+          <div class="d-name">Cabillaud rôti, beurre blanc</div>
+          <div class="d-desc">Pêche du jour, légumes de saison rôtis, pommes grenaille à l'herbe.</div>
+        </div>
+        <span class="d-price">22 €</span>
+      </div>
+      <div class="dish reveal d1">
+        <span class="d-num">03</span>
+        <div>
+          <div class="d-name">Moules de bouchot, frites maison</div>
+          <div class="d-desc">Marinière ou à la crème normande, selon l'envie du chef.</div>
+        </div>
+        <span class="d-price">17 €</span>
+      </div>
+      <div class="dish reveal d1">
+        <span class="d-num">04</span>
+        <div>
+          <div class="d-name">Saint-Jacques poêlées</div>
+          <div class="d-desc">Beurre noisette, purée de panais, chips de lard fumé.</div>
+        </div>
+        <span class="d-price">24 €</span>
+      </div>
+      <div class="dish reveal d2">
+        <span class="d-num">05</span>
+        <div>
+          <div class="d-name">Tarte fine aux pommes</div>
+          <div class="d-desc">Caramel au beurre salé, glace vanille de Madagascar.</div>
+        </div>
+        <span class="d-price">9 €</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Divider photo 2 -->
+<div class="divider-photo-sm">
+  <img src="img/salle-tamisee.png" alt="Salle du restaurant, lumière tamisée" />
+</div>
+
+<!-- Gallery -->
+<div class="gallery">
+  <div class="gallery-cell img-reveal">
+    <img src="img/galerie-plateau.png" alt="Plateau de fruits de mer" />
+  </div>
+  <div class="gallery-cell img-reveal" style="transition-delay:0.15s">
+    <img src="img/galerie-cabillaud.png" alt="Cabillaud rôti en assiette" />
+  </div>
+  <div class="gallery-cell img-reveal" style="transition-delay:0.3s">
+    <img src="img/galerie-terrasse.png" alt="Terrasse avec vue sur le port" />
+  </div>
+</div>
+
+<!-- Visit / Info -->
+<section class="visit" id="visite">
+  <div class="wrap">
+    <div class="visit-grid">
+      <div>
+        <h2 class="info-head reveal">Passez<br/>nous voir.</h2>
+
+        <div class="info-block reveal d1">
+          <h3>Horaires</h3>
+          <div class="hours-row"><span>Mardi – Vendredi</span><span>12h – 14h · 19h – 22h</span></div>
+          <div class="hours-row"><span>Samedi</span><span>12h – 23h</span></div>
+          <div class="hours-row"><span>Dimanche</span><span>12h – 15h</span></div>
+          <div class="hours-row"><span>Lundi</span><span>Fermé</span></div>
+        </div>
+
+        <div class="info-block reveal d2">
+          <h3>Adresse</h3>
+          <p class="addr-text">
+            Quai de Southampton<br/>
+            76600 Le Havre<br/><br/>
+            <a href="tel:0235000000" style="color:var(--gold)">02 35 00 00 00</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="map-wrap reveal d1">
+        <iframe
+          src="https://maps.google.com/maps?q=Quai+de+Southampton,+76600+Le+Havre,+France&z=16&output=embed&hl=fr"
+          loading="lazy"
+          title="L'Écume · Quai de Southampton, Le Havre"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reservation CTA -->
+<section class="reserve" id="reserver">
+  <div class="wrap">
+    <span class="reserve-label reveal">Réservation</span>
+    <h2 class="reveal d1">Votre table<br/>face à la mer.</h2>
+    <p class="reveal d2">Réservez par téléphone ou écrivez-nous. Pour les grandes tablées, prévenez-nous un peu à l'avance, on vous prépare quelque chose de bien.</p>
+    <div class="reserve-cta reveal d2">
+      <a href="tel:0235000000" class="btn">Appeler le restaurant</a>
+      <a href="mailto:contact@lecume-bistrot.fr" class="btn">Écrire un message</a>
+    </div>
+    <div class="reveal d3">
+      <a href="tel:0235000000" class="phone-link">02 35 00 00 00</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a href="#" class="foot-logo">L'Écume</a>
+      <div class="foot-center">Bistrot de la mer · Le Havre · Depuis 2019</div>
+      <div class="foot-social">
+        <!-- Instagram -->
+        <a href="#" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <!-- Facebook -->
+        <a href="#" aria-label="Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <!-- X / Twitter -->
+        <a href="#" aria-label="X">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>Quai de Southampton · 76600 Le Havre</p>
+      <p>Site démo réalisé par <a href="index.html">Simon Rioult</a> · Le Havre</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+  header.classList.toggle('scrolled', window.scrollY > 60);
+
+  // Burger
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const toggleMenu = (force) => {
+    const open = force !== undefined ? force : !mobileMenu.classList.contains('open');
+    mobileMenu.classList.toggle('open', open);
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  burger.addEventListener('click', () => toggleMenu());
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+
+  // Scroll reveal + slide-in + image reveal
+  const reveals = document.querySelectorAll('.reveal, .slide-left, .slide-right, .img-reveal');
+  const forceShow = el => { el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none'; };
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(forceShow);
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    reveals.forEach(el => {
+      io.observe(el);
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
+    });
+    setTimeout(() => {
+      reveals.forEach(el => {
+        el.classList.add('in');
+        if (parseFloat(getComputedStyle(el).opacity) < 0.99) forceShow(el);
+      });
+    }, 1600);
+  }
+
+  // Parallax hero background
+  const heroBg = document.getElementById('heroBg');
+  if (heroBg && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    window.addEventListener('scroll', () => {
+      heroBg.style.transform = `translateY(${window.scrollY * 0.28}px)`;
+    }, { passive: true });
+  }
+
+  // Ticker pause on hover (already in CSS via animation-play-state)
+  // Gallery subtle zoom on scroll
+  document.querySelectorAll('.gallery-cell').forEach((cell, i) => {
+    const io2 = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        cell.style.transition = 'transform 0.7s cubic-bezier(0.22,1,0.36,1)';
+        cell.style.transform = e.isIntersecting ? 'scale(1)' : 'scale(0.97)';
+      });
+    }, { threshold: 0.2 });
+    io2.observe(cell);
+  });
+</script>
+</body>
+</html>

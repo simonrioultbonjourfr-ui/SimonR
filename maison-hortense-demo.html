@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<script>document.documentElement.className += ' js';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maison Hortense · Table gastronomique · Le Havre</title>
+<meta name="description" content="Maison Hortense, table gastronomique au Havre depuis 1987. Première étoile Michelin 2022. Cuisine normande d'auteur par Camille Beaumont — menu unique, cave choisie, produits locaux." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+/* ============ ROOT ============ */
+:root {
+  --bg:   #0c1109;
+  --bg2:  #141810;
+  --bg3:  #1c2417;
+  --paper: #f5f0e6;
+  --paper2: #ede6d2;
+  --ink:  #0c1109;
+  --gold: #c8a45a;
+  --gold-soft: #d9bd82;
+  --sage: #7c8a5e;
+  --cream: #f5f0e6;
+  --muted: rgba(245,240,230,.55);
+  --muted-ink: rgba(12,17,9,.58);
+  --line: rgba(245,240,230,.12);
+  --line-ink: rgba(12,17,9,.13);
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans:  "Manrope", sans-serif;
+  --mono:  "Space Mono", monospace;
+  --gut:   clamp(20px,5vw,72px);
+  --maxw:  1240px;
+  --ease:  cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--gold);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.02;letter-spacing:-.01em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:.7em}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--gold);opacity:.7}
+.eyebrow.dark{color:var(--sage)}
+.eyebrow.dark::before{background:var(--sage)}
+
+/* ============ PROGRESS + TOPBAR ============ */
+.progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--gold);z-index:200;transition:width .1s linear}
+.topbar{position:fixed;bottom:28px;left:0;right:0;z-index:60;display:flex;justify-content:center;pointer-events:none}
+.back-pill{pointer-events:auto;background:rgba(12,17,9,.55);backdrop-filter:blur(12px);border:1px solid var(--line);color:var(--cream);font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.6em 1.2em;border-radius:100px;display:inline-flex;align-items:center;gap:.6em;transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)}
+.back-pill:hover{background:var(--gold);color:var(--ink);transform:translateY(-1px)}
+
+/* ============ NAV ============ */
+header{position:fixed;top:0;left:0;right:0;z-index:90;transition:background .4s var(--ease),border-color .4s var(--ease);border-bottom:1px solid transparent}
+header.scrolled{background:rgba(12,17,9,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:84px}
+.brand{font-family:var(--serif);font-size:1.55rem;font-weight:600;letter-spacing:.02em;display:flex;align-items:center;gap:.55em}
+.brand .mark{width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--gold);font-family:var(--serif)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.88rem;font-weight:500;color:var(--muted);position:relative;transition:color .25s var(--ease)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--gold);transition:width .3s var(--ease)}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a:hover::after{width:100%}
+.cta{display:inline-flex;align-items:center;gap:.5em;font-weight:600;font-size:.86rem;padding:.7em 1.5em;border-radius:100px;background:var(--gold);color:var(--ink);border:1px solid var(--gold);cursor:pointer;transition:transform .3s var(--ease),background .3s var(--ease)}
+.cta:hover{transform:translateY(-2px);background:var(--gold-soft)}
+.cta-ghost{background:transparent;color:var(--cream);border-color:rgba(245,240,230,.35)}
+.cta-ghost:hover{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.cta-dark{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.cta-dark:hover{background:var(--bg3);border-color:var(--bg3);transform:translateY(-2px)}
+.burger{display:none;flex-direction:column;gap:5px;width:30px;justify-content:center;background:none;border:none;cursor:pointer;z-index:120}
+.burger span{display:block;height:1.6px;width:100%;background:var(--cream);transition:transform .35s var(--ease),opacity .25s var(--ease)}
+.burger.open span:nth-child(1){transform:translateY(6.6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6.6px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;background:var(--bg);z-index:110;display:flex;flex-direction:column;justify-content:center;padding:var(--gut);transform:translateY(-100%);transition:transform .5s var(--ease)}
+.mobile-menu.open{transform:translateY(0)}
+.mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:.1rem}
+.mobile-menu a{font-family:var(--serif);font-size:clamp(2.2rem,10vw,3.2rem);padding:.16em 0;border-bottom:1px solid var(--line);display:block}
+.mobile-menu .mm-foot{margin-top:2.5rem;font-family:var(--mono);font-size:.74rem;color:var(--muted);letter-spacing:.08em}
+
+/* ============ HERO ============ */
+.hero{min-height:100svh;position:relative;display:flex;align-items:flex-end;padding:120px 0 64px;overflow:hidden}
+.hero-parallax{position:absolute;inset:-15%;z-index:0;
+  background:
+    radial-gradient(70% 50% at 55% 30%, rgba(200,164,90,.18) 0%, transparent 60%),
+    repeating-linear-gradient(135deg, rgba(245,240,230,.03) 0 14px, transparent 14px 30px),
+    linear-gradient(170deg, #07100500 0%, #0c1109 40%, #1a2211 100%);
+  will-change:transform}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to top, #0c1109 0%, rgba(12,17,9,.5) 45%, rgba(12,17,9,.1) 100%)}
+.hero-photo-ph{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;
+  background:
+    repeating-linear-gradient(135deg, rgba(245,240,230,.04) 0 16px, transparent 16px 34px),
+    linear-gradient(160deg, #111a0d 0%, #1c2417 50%, #0f1a0b 100%)}
+.hero-photo-ph .ph-label{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--muted);border:1px dashed var(--line);padding:.8em 1.2em;border-radius:8px;text-align:center;line-height:1.8}
+/* floating particles */
+.particles{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.particles span{position:absolute;border-radius:50%;background:var(--gold);opacity:0;animation:float-up var(--dur,8s) var(--delay,0s) var(--ease) infinite}
+@keyframes float-up{0%{transform:translateY(0) scale(1);opacity:0}10%{opacity:.35}80%{opacity:.15}100%{transform:translateY(-100vh) scale(.3);opacity:0}}
+.hero-in{position:relative;z-index:2;width:100%}
+.hero-star{display:inline-flex;align-items:center;gap:.9em;margin-bottom:1.6rem}
+.hero-star .star-badge{display:inline-flex;align-items:center;gap:.5em;background:var(--gold);color:var(--ink);font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;padding:.5em 1em;border-radius:100px;font-weight:700}
+.hero-star .star-badge::before{content:"★";font-size:.9em}
+.hero-star .star-year{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.hero h1{font-size:clamp(3.8rem,13vw,10rem);line-height:.86;letter-spacing:-.025em}
+.hero h1 em{display:block;font-style:italic;color:var(--gold)}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-top:2.2rem}
+.hero p.lede{font-size:clamp(1.05rem,1.7vw,1.25rem);color:var(--muted);max-width:38ch;line-height:1.7}
+.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}
+.scroll-cue{position:absolute;right:var(--gut);bottom:28px;z-index:2;font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;display:flex;align-items:center;gap:.8em}
+.scroll-cue .line{width:1px;height:48px;background:var(--line);position:relative;overflow:hidden}
+.scroll-cue .line::after{content:"";position:absolute;left:0;top:-48px;width:1px;height:48px;background:var(--gold);animation:slide-v 2.6s var(--ease) infinite}
+@keyframes slide-v{0%{top:-48px}60%,100%{top:100%}}
+
+/* ============ MARQUEE ============ */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:var(--bg2)}
+.marquee{display:flex;gap:3rem;padding:1.15rem 0;white-space:nowrap;font-family:var(--serif);font-style:italic;font-size:1.5rem;color:var(--gold-soft);animation:scrollx 28s linear infinite}
+.marquee span{display:inline-flex;align-items:center;gap:3rem}
+.marquee span::after{content:"✦";font-style:normal;font-size:.65em;color:var(--sage)}
+@keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============ SECTION BASE ============ */
+section{position:relative}
+.sp{padding:clamp(80px,13vh,140px) 0}
+.sec-head{margin-bottom:clamp(44px,6vh,72px)}
+.sec-head h2{font-size:clamp(2.4rem,5.5vw,4rem);margin-top:.45em;line-height:1.04}
+.sec-head p{margin-top:1.1rem;color:var(--muted);font-size:1.08rem;max-width:52ch}
+.sec-head.dark p{color:var(--muted-ink)}
+
+/* ============ PHOTO PLACEHOLDER ============ */
+.ph{position:relative;overflow:hidden;background:
+  repeating-linear-gradient(135deg, rgba(245,240,230,.04) 0 14px, transparent 14px 28px),
+  linear-gradient(160deg,#182014,#2a3822)}
+.ph.light{background:
+  repeating-linear-gradient(135deg, rgba(12,17,9,.06) 0 14px, transparent 14px 28px),
+  linear-gradient(160deg,#ddd7ca,#c8c0ae)}
+.ph-tag{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--muted);border:1px dashed var(--line);padding:.7em 1em;border-radius:8px;text-align:center;line-height:1.8;white-space:nowrap}
+.ph.light .ph-tag{color:var(--muted-ink);border-color:rgba(12,17,9,.2)}
+
+/* ============ HISTOIRE (alternating story) ============ */
+.histoire-block{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+.histoire-block.reverse .hb-img{order:2}
+.histoire-block.reverse .hb-text{order:1}
+.hb-img{position:relative;min-height:420px}
+.hb-text{padding:clamp(56px,9vw,100px) clamp(32px,6vw,84px);display:flex;flex-direction:column;justify-content:center;background:var(--bg2)}
+.hb-text.light{background:var(--paper)}
+.hb-text h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-top:.5em;line-height:1.1}
+.hb-text h2 em{font-style:italic;color:var(--gold)}
+.hb-text h2.dark-txt{color:var(--ink)}
+.hb-text h2.dark-txt em{color:var(--sage)}
+.hb-text p{color:var(--muted);margin-top:1.2rem;font-size:1.05rem;max-width:44ch;line-height:1.72}
+.hb-text p.dark-txt{color:var(--muted-ink)}
+.hb-text .date-tag{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;margin-top:2rem;color:var(--gold);border-top:1px solid var(--line);padding-top:1.2rem}
+.hb-text .date-tag.dark-line{border-color:var(--line-ink);color:var(--sage)}
+
+/* ============ STATS ============ */
+.stats-band{background:var(--bg3);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stat-item{padding:clamp(32px,5vh,52px) clamp(20px,3vw,40px);border-right:1px solid var(--line);text-align:center}
+.stat-item:last-child{border-right:none}
+.stat-item .num{font-family:var(--serif);font-size:clamp(2.6rem,5.5vw,4rem);color:var(--gold);line-height:1;display:block}
+.stat-item .sup-small{font-size:.5em;vertical-align:super}
+.stat-item .lab{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:.6rem;display:block}
+
+/* ============ CHEF ============ */
+.chef-section{background:var(--bg)}
+.chef-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(40px,6vw,90px);align-items:center}
+.chef-collage{position:relative;height:560px}
+.chef-img-main{position:absolute;left:0;top:0;width:68%;height:85%;border-radius:16px;border:1px solid var(--line)}
+.chef-img-accent{position:absolute;right:0;bottom:0;width:44%;height:55%;border-radius:16px;border:1px solid var(--line)}
+.chef-img-float{position:absolute;right:10%;top:10%;width:90px;height:90px;border-radius:12px;border:2px solid var(--gold);background:var(--bg3);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--gold);z-index:3;box-shadow:0 20px 40px rgba(0,0,0,.4);animation:float-bob 4s ease-in-out infinite}
+@keyframes float-bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(1deg)}}
+.chef-body h3{font-size:clamp(2.2rem,4.5vw,3.4rem)}
+.chef-body .role{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:.9rem 0 1.6rem}
+.chef-body p{color:var(--muted);margin-bottom:1.1rem;font-size:1.05rem;line-height:1.72;max-width:46ch}
+.chef-body .blockquote{font-family:var(--serif);font-style:italic;font-size:1.55rem;color:var(--cream);border-left:2px solid var(--gold);padding-left:1.3rem;margin-top:2rem;line-height:1.35;max-width:34ch}
+.chef-timeline{margin-top:2.4rem;display:flex;flex-direction:column;gap:.5rem}
+.tl-item{display:flex;gap:1.2rem;align-items:baseline;font-size:.95rem}
+.tl-year{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--gold);min-width:3.5rem;flex-shrink:0}
+.tl-text{color:var(--muted)}
+
+/* ============ FEATURED DISHES ============ */
+.dishes-sec{background:var(--bg2);overflow:hidden}
+.dishes-track-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab;user-select:none}
+.dishes-track-wrap::-webkit-scrollbar{display:none}
+.dishes-track-wrap.dragging{cursor:grabbing}
+.dishes-track{display:flex;gap:20px;padding:0 var(--gut) 32px;width:max-content}
+.dish-card{flex-shrink:0;width:280px;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--bg3);position:relative;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.dish-card:hover{transform:translateY(-6px);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.dish-thumb{height:320px;position:relative}
+.dish-thumb .dish-num{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(12,17,9,.65);backdrop-filter:blur(8px);color:var(--gold);padding:.4em .8em;border-radius:100px;z-index:2}
+.dish-thumb .dish-tag{position:absolute;bottom:14px;right:14px;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:.35em .8em;border-radius:100px;z-index:2}
+.dish-body{padding:18px 20px 22px}
+.dish-body h4{font-family:var(--serif);font-size:1.45rem;color:var(--cream)}
+.dish-body p{font-size:.88rem;color:var(--muted);margin-top:.4rem;line-height:1.55}
+
+/* ============ MENU TABS ============ */
+.menu-sec{background:var(--paper);color:var(--ink)}
+.tab-nav{display:flex;gap:0;border-bottom:1px solid var(--line-ink);margin-bottom:clamp(32px,5vh,52px)}
+.tab-btn{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.9em 1.8em;border:none;background:none;cursor:pointer;color:var(--muted-ink);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .25s var(--ease),border-color .25s var(--ease)}
+.tab-btn.active{color:var(--sage);border-color:var(--sage)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:tab-fade .4s var(--ease)}
+@keyframes tab-fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.menu-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:clamp(28px,4vh,44px)}
+.menu-price .p{font-family:var(--serif);font-size:clamp(2.2rem,4.5vw,3.2rem);color:var(--sage);line-height:1}
+.menu-price .s{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-ink)}
+.courses{display:flex;flex-direction:column;gap:0}
+.course{display:grid;grid-template-columns:2.5rem 1fr auto;gap:1.4rem;align-items:baseline;padding:1.6rem 0;border-bottom:1px solid var(--line-ink);transition:padding-left .35s var(--ease)}
+.course:last-child{border-bottom:none}
+.course:hover{padding-left:.5rem}
+.c-num{font-family:var(--mono);font-size:.72rem;color:var(--sage)}
+.c-name{font-family:var(--serif);font-size:clamp(1.4rem,2.8vw,2rem)}
+.c-name span{display:block;font-family:var(--sans);font-size:.92rem;color:var(--muted-ink);margin-top:.25rem;max-width:52ch}
+.c-tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);white-space:nowrap}
+/* wine list in tab */
+.wine-rows{display:flex;flex-direction:column}
+.wine-row{display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line-ink);font-size:.98rem;align-items:center}
+.wine-row:last-child{border-bottom:none}
+.wine-row .wn{font-family:var(--serif);font-size:1.3rem;flex:1}
+.wine-row .wd{font-size:.9rem;color:var(--muted-ink);max-width:28ch;line-height:1.45}
+.wine-row .wp{font-family:var(--mono);font-size:.78rem;color:var(--sage);white-space:nowrap}
+
+/* ============ EXPERIENCE GRID ============ */
+.exp-sec{background:var(--bg)}
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.exp-card{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:default}
+.exp-card .ph{height:100%;transition:transform .6s var(--ease)}
+.exp-card:hover .ph{transform:scale(1.05)}
+.exp-overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(12,17,9,.92) 0%, rgba(12,17,9,.3) 60%, transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:26px}
+.exp-card .exp-num{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.exp-card h4{font-family:var(--serif);font-size:1.5rem;color:var(--cream)}
+.exp-card p{font-size:.88rem;color:var(--muted);margin-top:.35rem;max-width:28ch;line-height:1.5;transform:translateY(8px);opacity:0;transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.exp-card:hover p{opacity:1;transform:none}
+
+/* ============ PRODUCERS ============ */
+.prod-sec{background:var(--paper)}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.5vw,28px)}
+.prod-card{border:1px solid var(--line-ink);border-radius:18px;overflow:hidden;transition:box-shadow .4s var(--ease),transform .4s var(--ease);background:var(--paper2)}
+.prod-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(12,17,9,.12)}
+.prod-photo{aspect-ratio:1;position:relative}
+.prod-photo .ph.light{height:100%}
+.prod-info{padding:20px 22px 26px}
+.prod-info .prod-tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-bottom:.5rem;display:block}
+.prod-info h4{font-family:var(--serif);font-size:1.3rem;color:var(--ink)}
+.prod-info .loc{font-size:.85rem;color:var(--muted-ink);margin-top:.3rem;display:flex;align-items:center;gap:.4em}
+.prod-info .prod-desc{font-size:.88rem;color:var(--muted-ink);margin-top:.9rem;line-height:1.55;max-width:24ch}
+
+/* ============ GALLERY ============ */
+.gal-sec{background:var(--bg2)}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:10px}
+.gal-item{border-radius:12px;overflow:hidden;position:relative;border:1px solid var(--line);background:var(--bg3);transition:transform .5s var(--ease)}
+.gal-item:hover{transform:scale(1.02)}
+.gal-item.big{grid-column:span 2;grid-row:span 2}
+.gal-item.tall{grid-row:span 2}
+.gal-item.wide{grid-column:span 2}
+.gal-item .ph{height:100%;transition:transform .6s var(--ease)}
+.gal-item:hover .ph{transform:scale(1.06)}
+.gal-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,17,9,.7) 0%,transparent 60%);display:flex;align-items:flex-end;padding:14px;opacity:0;transition:opacity .35s var(--ease)}
+.gal-item:hover .gal-overlay{opacity:1}
+.gal-overlay span{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--cream)}
+
+/* ============ PRESSE ============ */
+.press-block{display:grid;grid-template-columns:1fr 1fr;min-height:520px;overflow:hidden}
+.press-block.reverse .pb-img{order:2}
+.press-block.reverse .pb-text{order:1}
+.pb-img{position:relative;min-height:380px}
+.pb-img .ph,.pb-img .ph.light{height:100%;width:100%}
+.pb-text{padding:clamp(56px,9vw,100px) clamp(32px,6vw,84px);display:flex;flex-direction:column;justify-content:center;background:var(--bg2)}
+.pb-text.light{background:var(--paper)}
+.pb-text .press-pub{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem;color:var(--gold)}
+.pb-text.light .press-pub{color:var(--sage)}
+.pb-text .press-date{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--muted);margin-bottom:1.6rem;display:block}
+.pb-text.light .press-date{color:var(--muted-ink)}
+.pb-text h3{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.6rem);line-height:1.12}
+.pb-text h3.dark-txt{color:var(--ink)}
+.pb-text blockquote{font-family:var(--serif);font-style:italic;font-size:1.18rem;color:var(--muted);margin-top:1.2rem;max-width:42ch;line-height:1.55;border-left:2px solid var(--gold);padding-left:1rem}
+.pb-text.light blockquote{color:var(--muted-ink);border-color:var(--sage)}
+.pb-text .press-cta{margin-top:1.8rem;display:inline-flex;align-items:center;gap:.6em;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);transition:gap .3s var(--ease)}
+.pb-text.light .press-cta{color:var(--sage)}
+.pb-text .press-cta:hover{gap:1em}
+
+/* ============ AVIS ============ */
+.avis-sec{background:var(--bg)}
+.avis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,24px)}
+.avis{border:1px solid var(--line);border-radius:18px;padding:clamp(26px,3vw,38px);display:flex;flex-direction:column;gap:1.2rem;background:rgba(245,240,230,.02);transition:border-color .3s var(--ease)}
+.avis:hover{border-color:rgba(200,164,90,.4)}
+.avis .stars{color:var(--gold);letter-spacing:.18em;font-size:.9rem}
+.avis p{font-family:var(--serif);font-size:1.4rem;line-height:1.32;color:var(--cream)}
+.avis .who{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-top:auto}
+.avis-star-banner{text-align:center;margin-bottom:clamp(36px,5vh,56px)}
+.avis-star-banner .big-star{font-family:var(--serif);font-size:clamp(3rem,7vw,5rem);color:var(--gold);display:block;line-height:1}
+.avis-star-banner p{color:var(--muted);margin-top:.6rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+
+/* ============ RESERVATION ============ */
+.res-sec{background:var(--paper);color:var(--ink)}
+.res-wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px);align-items:start}
+.res-left h2{font-size:clamp(2.4rem,5.5vw,4rem);color:var(--ink)}
+.res-left h2 em{font-style:italic;color:var(--sage)}
+.res-left p{color:var(--muted-ink);margin-top:1.2rem;font-size:1.05rem;max-width:40ch;line-height:1.72}
+.res-details{margin-top:2.6rem;display:flex;flex-direction:column;gap:1rem}
+.res-detail{display:flex;gap:.9em;align-items:center;font-size:.97rem;color:var(--ink)}
+.res-detail svg{color:var(--sage);flex-shrink:0}
+.res-detail strong{font-weight:600}
+.res-form{background:var(--paper2);border:1px solid var(--line-ink);border-radius:20px;padding:clamp(28px,4vw,44px);display:flex;flex-direction:column;gap:1.1rem;box-shadow:0 40px 80px -40px rgba(12,17,9,.15)}
+.field{display:flex;flex-direction:column;gap:.4rem}
+.field label{font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-ink)}
+.field input,.field select,.field textarea{font-family:var(--sans);font-size:1rem;padding:.85em 1em;border:1px solid var(--line-ink);border-radius:10px;background:var(--paper);color:var(--ink);transition:border-color .25s var(--ease);width:100%}
+.field textarea{resize:vertical;min-height:100px;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--sage)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.res-submit{margin-top:.4rem;width:100%;justify-content:center;background:var(--ink);color:var(--cream);border-color:var(--ink);padding:1em;font-size:.95rem}
+.res-submit:hover{background:var(--bg3);border-color:var(--bg3)}
+.form-note{font-size:.76rem;color:var(--muted-ink);text-align:center}
+.form-ok{display:none;text-align:center;padding:1em;border-radius:10px;background:rgba(124,138,94,.16);color:#3d4d27;font-weight:600;font-size:.95rem}
+.form-ok.show{display:block}
+
+/* ============ MAP ============ */
+.map-sec{background:var(--bg2)}
+.map-card{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--bg);box-shadow:0 40px 80px -40px rgba(0,0,0,.6)}
+.map-frame{aspect-ratio:16/7;overflow:hidden;position:relative}
+.map-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.map-bar{display:flex;justify-content:space-between;align-items:center;gap:1.2rem;padding:1.3rem clamp(20px,3vw,34px);border-top:1px solid var(--line);flex-wrap:wrap}
+.map-bar .addr{display:flex;align-items:center;gap:.9em}
+.map-bar .addr svg{color:var(--gold);flex-shrink:0}
+.map-bar .addr .lines{display:flex;flex-direction:column;gap:.2rem}
+.map-bar .addr b{font-family:var(--sans);font-weight:600;font-size:1rem;color:var(--cream)}
+.map-bar .addr .sub{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.map-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+
+/* ============ FOOTER ============ */
+footer{background:var(--bg);border-top:1px solid var(--line)}
+.foot-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2rem;padding:clamp(54px,7vh,88px) 0 clamp(40px,5vh,64px)}
+.foot-brand h4{font-family:var(--serif);font-size:2rem;margin-bottom:.8rem}
+.foot-brand p{color:var(--muted);font-size:.94rem;max-width:30ch;line-height:1.65;margin-bottom:1.4rem}
+.foot-star{display:inline-flex;align-items:center;gap:.6em;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,164,90,.35);border-radius:100px;padding:.45em 1em}
+.foot-star::before{content:"★"}
+.foot-col .t{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:block}
+.foot-col a,.foot-col p{color:var(--muted);font-size:.94rem;display:block;margin-bottom:.5rem;transition:color .25s var(--ease)}
+.foot-col a:hover{color:var(--cream)}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding:1.8rem 0;border-top:1px solid var(--line)}
+.foot-bot p{font-size:.78rem;color:var(--muted)}
+.made{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--muted)}
+.made a{color:var(--gold)}
+
+/* ============ REVEAL ============ */
+.reveal{will-change:opacity,transform}
+html.js .reveal{opacity:0;transform:translateY(28px)}
+html.js .reveal.from-left{transform:translateX(-36px)}
+html.js .reveal.from-right{transform:translateX(36px)}
+html.js .reveal.in{opacity:1;transform:none;transition:opacity .9s var(--ease),transform .9s var(--ease)}
+html.js .reveal.d1.in{transition-delay:.08s}
+html.js .reveal.d2.in{transition-delay:.18s}
+html.js .reveal.d3.in{transition-delay:.28s}
+html.js .reveal.d4.in{transition-delay:.38s}
+@media(prefers-reduced-motion:reduce){
+  html.js .reveal{opacity:1;transform:none}
+  html.js .reveal.in{transition:none}
+  .marquee,.scroll-cue .line::after,.particles span,.chef-img-float{animation:none}
+  html{scroll-behavior:auto}
+}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1040px){
+  .hist-block{grid-template-columns:1fr}
+  .chef-grid{grid-template-columns:1fr}
+  .chef-collage{height:400px;max-width:480px}
+  .prod-grid{grid-template-columns:repeat(2,1fr)}
+  .avis-grid{grid-template-columns:1fr;max-width:480px}
+  .press-block,.histoire-block{grid-template-columns:1fr}
+  .press-block .pb-img,.histoire-block .hb-img{min-height:300px;order:0 !important}
+  .press-block .pb-text,.histoire-block .hb-text{order:0 !important}
+  .exp-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-top{grid-template-columns:1fr 1fr}
+  .nav-links,.nav>.cta{display:none}
+  .burger{display:flex}
+}
+@media(max-width:720px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .stat-item:nth-child(2){border-right:none}
+  .stat-item{border-bottom:1px solid var(--line)}
+  .stat-item:nth-child(3),.stat-item:nth-child(4){border-bottom:none}
+  .res-wrap{grid-template-columns:1fr}
+  .gal-grid{grid-template-columns:repeat(2,1fr)}
+  .exp-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr;gap:2.6rem}
+  .map-frame{aspect-ratio:4/3}
+  .map-bar{justify-content:flex-start}
+}
+@media(max-width:560px){
+  .course{grid-template-columns:2rem 1fr;gap:.8rem}
+  .c-tag{display:none}
+  .field-row{grid-template-columns:1fr}
+  .hero h1{font-size:clamp(3rem,18vw,5rem)}
+  .tab-btn{padding:.7em 1em;font-size:.62rem}
+  .gal-grid{grid-template-columns:1fr;grid-auto-rows:220px}
+  .gal-item.big,.gal-item.tall,.gal-item.wide{grid-column:span 1;grid-row:span 1}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="topbar"><a class="back-pill" href="index.html">← Retour au portfolio</a></div>
+
+<!-- ============ NAV ============ -->
+<header id="header">
+  <div class="wrap nav">
+    <a href="#top" class="brand"><span class="mark">H</span> Maison Hortense</a>
+    <ul class="nav-links">
+      <li><a href="#maison">La maison</a></li>
+      <li><a href="#chef">Le chef</a></li>
+      <li><a href="#menu">Le menu</a></li>
+      <li><a href="#galerie">Galerie</a></li>
+      <li><a href="#presse">Presse</a></li>
+    </ul>
+    <a href="#reserver" class="cta">Réserver</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#maison">La maison</a></li>
+    <li><a href="#chef">Le chef</a></li>
+    <li><a href="#menu">Le menu</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#presse">Presse</a></li>
+    <li><a href="#reserver">Réserver</a></li>
+  </ul>
+  <div class="mm-foot">12 Rue de Bordeaux, Le Havre<br/>02 35 40 40 40</div>
+</nav>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-photo-ph" style="background-image:url('img/hortense/assiete-michelin-dark-warm.png');background-size:cover;background-position:center">
+    </div>
+    <div class="hero-parallax" id="heroPx"></div>
+    <div class="hero-overlay"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="wrap hero-in">
+      <div class="hero-star reveal">
+        <div class="star-badge">Michelin 2022</div>
+        <span class="star-year">Première étoile</span>
+      </div>
+      <h1 class="reveal d1">Maison<em>Hortense</em></h1>
+      <div class="hero-row">
+        <p class="lede reveal d2">Une table normande née en 1987, réinventée par Camille Beaumont. Sept services au fil de la saison, cent pour cent Normandie.</p>
+        <div class="hero-cta reveal d3">
+          <a href="#reserver" class="cta">Réserver une table</a>
+          <a href="#menu" class="cta cta-ghost">Voir le menu</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>Défiler</span><span class="line"></span></div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="strip">
+    <div class="marquee">
+      <span>Table gastronomique</span><span>Produits normands</span><span>Étoile Michelin 2022</span><span>Menu unique en 7 services</span><span>Depuis 1987</span><span>Cave choisie</span>
+      <span>Table gastronomique</span><span>Produits normands</span><span>Étoile Michelin 2022</span><span>Menu unique en 7 services</span><span>Depuis 1987</span><span>Cave choisie</span>
+    </div>
+  </div>
+
+  <!-- ============ STATS ============ -->
+  <div class="stats-band">
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <span class="num" data-count="1987" data-raw="true">1987</span>
+          <span class="lab">Fondation de la maison</span>
+        </div>
+        <div class="stat-item reveal d1">
+          <span class="num" data-count="7" data-raw="true">7</span>
+          <span class="lab">Services au menu</span>
+        </div>
+        <div class="stat-item reveal d2">
+          <span class="num" data-count="100" data-raw="true">100</span>
+          <span class="lab">% Produits normands</span>
+        </div>
+        <div class="stat-item reveal d3">
+          <span class="num" data-count="32" data-raw="true">32</span>
+          <span class="lab">Couverts en salle intime</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HISTOIRE 1 ============ -->
+  <section id="maison">
+    <div class="histoire-block">
+      <div class="hb-img reveal from-left">
+        <div class="ph" style="height:100%;min-height:480px;background-image:url('img/hortense/bistrot-vieux-warm.png');background-size:cover;background-position:center">
+        </div>
+      </div>
+      <div class="hb-text reveal from-right">
+        <span class="eyebrow">La naissance</span>
+        <h2>Une table née<br/>de la passion<em> normande.</em></h2>
+        <p style="color:var(--muted)">En 1987, Hortense Beaumont pousse pour la première fois la porte du 12, Rue de Bordeaux. Elle a 54 ans, une volonté de fer et un répertoire de recettes transmises de mère en fille dans la Normandie profonde.</p>
+        <p style="color:var(--muted)">Son « Chez Hortense » — vingt couverts serrés, nappes blanches impeccables, ardoise qui change chaque jour — devient en quelques mois la table de quartier incontournable du Havre.</p>
+        <p style="color:var(--muted)">Poulet vallée d'Auge, sole meunière, tarte fine aux pommes caramel : une cuisine sans chichis, juste, généreuse, profondément normande.</p>
+        <div class="date-tag">Fondation · Le Havre · 1987</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HISTOIRE 2 ============ -->
+  <section>
+    <div class="histoire-block reverse">
+      <div class="hb-img reveal from-right">
+        <div class="ph" style="height:100%;min-height:480px;background-image:url('img/hortense/chef-au-marche.png');background-size:cover;background-position:center">
+        </div>
+      </div>
+      <div class="hb-text light reveal from-left">
+        <span class="eyebrow dark">L'héritage</span>
+        <h2 class="dark-txt">Quand Camille<br/>reprend <em style="color:var(--sage)">le flambeau.</em></h2>
+        <p class="dark-txt">Camille avait seize ans quand elle a commencé à passer ses vacances en cuisine avec sa grand-mère. Elle a appris le geste avant les mots, la patience avant les recettes.</p>
+        <p class="dark-txt">Après Ferrandi Paris, des stages au Meurice, chez Septime, puis deux années au Danemark, elle rentre au Havre en 2014 à la suite du décès d'Hortense. Elle reprend la maison, l'agrandit, la renomme.</p>
+        <p class="dark-txt">Elle ne cherche pas à reproduire. Elle cherche à prolonger. Un héritage vivant, enraciné dans la terre normande mais tourné vers demain.</p>
+        <div class="date-tag dark-line">Reprise de la maison · 2014</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHEF ============ -->
+  <section class="chef-section sp" id="chef">
+    <div class="wrap chef-grid">
+      <div class="chef-collage">
+        <div class="chef-img-main ph reveal from-left" style="background-image:url('img/hortense/chef-portrait.png');background-size:cover;background-position:center top">
+        </div>
+        <div class="chef-img-accent ph reveal from-left d1" style="background-image:url('img/hortense/femme-chef-en-cuisine.png');background-size:cover;background-position:center top">
+        </div>
+        <div class="chef-img-float reveal d2">★ 2022</div>
+      </div>
+
+      <div class="chef-body">
+        <span class="eyebrow reveal">La cheffe</span>
+        <h3 class="reveal d1" style="margin-top:.8rem">Camille Beaumont</h3>
+        <div class="role reveal d1">Cheffe cuisinière &amp; fondatrice · Maison Hortense</div>
+        <p class="reveal d2">Née à Le Havre en 1987, la même année qu'ouvre « Chez Hortense », Camille n'a jamais eu le choix. La cuisine coulait dans ses veines avant qu'elle sache même ce que cuisine voulait dire.</p>
+        <p class="reveal d2">Elle a appris les techniques dans les grandes maisons — mais c'est ici, dans cette salle de trente-deux couverts, qu'elle a trouvé sa voix. Une cuisine de vérité, ancrée dans la Normandie qu'elle aime.</p>
+        <div class="blockquote reveal d3">« Je cuisine ce que la Normandie me donne. Ce qu'elle me refuse, je ne le mets pas à la carte. »</div>
+        <div class="chef-timeline reveal d3">
+          <div class="tl-item"><span class="tl-year">2007</span><span class="tl-text">École Ferrandi Paris · Diplôme de cuisine</span></div>
+          <div class="tl-item"><span class="tl-year">2009</span><span class="tl-text">Stage — Le Meurice, Paris (3 étoiles)</span></div>
+          <div class="tl-item"><span class="tl-year">2011</span><span class="tl-text">Stage — Septime, Paris · Cuisine naturelle</span></div>
+          <div class="tl-item"><span class="tl-year">2012</span><span class="tl-text">Copenhague — cuisine nordique, 2 ans</span></div>
+          <div class="tl-item"><span class="tl-year">2014</span><span class="tl-text">Retour au Havre · Ouverture de Maison Hortense</span></div>
+          <div class="tl-item"><span class="tl-year">2022</span><span class="tl-text"><strong style="color:var(--gold)">★ Première étoile Michelin</strong></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED DISHES ============ -->
+  <section class="dishes-sec sp">
+    <div class="wrap" style="margin-bottom:clamp(28px,4vh,44px)">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow reveal">Plats signatures</span>
+        <h2 class="reveal d1">Les assiettes<br/>qui racontent la saison.</h2>
+        <p class="reveal d2">Glissez pour découvrir les créations de Camille Beaumont — un menu en perpétuelle évolution, dicté par le marché et la saison.</p>
+      </div>
+    </div>
+    <div class="dishes-track-wrap" id="dishTrack">
+      <div class="dishes-track">
+        <div class="dish-card reveal">
+          <div class="dish-thumb ph" style="background-image:url('img/hortense/amuse-bouche.png');background-size:cover;background-position:center">
+            <div class="dish-num">Service I</div>
+            <div class="dish-tag">Iodé</div>
+          </div>
+          <div class="dish-body">
+            <h4>Huître &amp; Pomme Verte</h4>
+            <p>Tartare d'huître de Normandie, granité pomme, aneth, caviar d'Aquitaine</p>
+          </div>
+        </div>
+        <div class="dish-card reveal d1">
+          <div class="dish-thumb ph" style="background-image:url('img/hortense/assiete-class.png');background-size:cover;background-position:center">
+            <div class="dish-num">Service II</div>
+            <div class="dish-tag">Automne</div>
+          </div>
+          <div class="dish-body">
+            <h4>Velouté de Potimarron</h4>
+            <p>Crème fumée, noisette torréfiée du Piémont, huile de sauge du jardin</p>
+          </div>
+        </div>
+        <div class="dish-card reveal d2">
+          <div class="dish-thumb ph" style="background-image:url('img/hortense/assiete-michelin.png');background-size:cover;background-position:center">
+            <div class="dish-num">Service III</div>
+            <div class="dish-tag">Signature</div>
+          </div>
+          <div class="dish-body">
+            <h4>Saint-Jacques Snackée</h4>
+            <p>Cœur de céleri boule, beurre noisette Isigny, agrumes confits, encre</p>
+          </div>
+        </div>
+        <div class="dish-card reveal d2">
+          <div class="dish-thumb ph" style="background-image:url('img/hortense/fruits-saison-assiete.png');background-size:cover;background-position:center">
+            <div class="dish-num">Service IV</div>
+            <div class="dish-tag">Terre</div>
+          </div>
+          <div class="dish-body">
+            <h4>Ris de Veau Croustillant</h4>
+            <p>Topinambour fumé, jus corsé au Calvados, câpres à fleur, persil plat</p>
+          </div>
+        </div>
+        <div class="dish-card reveal d3">
+          <div class="dish-thumb ph" style="background-image:url('img/hortense/plats-choquant.png');background-size:cover;background-position:center">
+            <div class="dish-num">Service V</div>
+            <div class="dish-tag">Fraîcheur</div>
+          </div>
+          <div class="dish-body">
+            <h4>Canette de Pressard</h4>
+            <p>Canette de la ferme Lecoq, cerise Montmorency, jus de canard acidulé</p>
+          </div>
+        </div>
+        <div class="dish-card reveal d3">
+          <div class="dish-thumb ph" style="background-image:url('img/hortense/gateaux-au-chocolat.png');background-size:cover;background-position:center">
+            <div class="dish-num">Service VI–VII</div>
+            <div class="dish-tag">Final</div>
+          </div>
+          <div class="dish-body">
+            <h4>Chocolat Grand Cru</h4>
+            <p>Ganache 70 %, sarrasin soufflé, fleur de sel de Guérande, mignardises maison</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MENU TABS ============ -->
+  <section class="menu-sec sp" id="menu">
+    <div class="wrap">
+      <div class="sec-head dark reveal">
+        <span class="eyebrow dark">La table</span>
+        <h2 style="color:var(--ink)">Une semaine,<br/>un seul menu.</h2>
+        <p style="color:var(--muted-ink)">Sept services composés chaque lundi selon ce que la marée et les maraîchers normands livrent à Camille. Rien n'est figé. Tout est vivant.</p>
+      </div>
+
+      <nav class="tab-nav reveal">
+        <button class="tab-btn active" data-tab="degust">Menu Dégustation</button>
+        <button class="tab-btn" data-tab="midi">Carte du Midi</button>
+        <button class="tab-btn" data-tab="cave">La Cave</button>
+      </nav>
+
+      <!-- DEGUSTATION -->
+      <div class="tab-panel active" id="tab-degust">
+        <div class="menu-head reveal">
+          <div>
+            <div style="font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)">Menu « Hortense » · semaine en cours</div>
+          </div>
+          <div class="menu-price">
+            <div class="p">89 <span style="font-size:1.4rem">€</span></div>
+            <div class="s">par personne, accord vins +45 €</div>
+          </div>
+        </div>
+        <div class="courses reveal d1">
+          <div class="course"><span class="c-num">I</span><div class="c-name">Huître &amp; Pomme Verte<span>Tartare d'huître de Normandie, granité de pomme, aneth et caviar d'Aquitaine.</span></div><span class="c-tag">Iodé</span></div>
+          <div class="course"><span class="c-num">II</span><div class="c-name">Velouté de Potimarron<span>Crème fumée, noisette torréfiée, huile de sauge fraîche du potager.</span></div><span class="c-tag">Automne</span></div>
+          <div class="course"><span class="c-num">III</span><div class="c-name">Saint-Jacques Snackée<span>Cœur de céleri boule, beurre noisette Isigny AOP, agrumes confits, encre de seiche.</span></div><span class="c-tag">Signature</span></div>
+          <div class="course"><span class="c-num">IV</span><div class="c-name">Ris de Veau Croustillant<span>Topinambour fumé, jus corsé réduit au Calvados, câpres à fleur, persil.</span></div><span class="c-tag">Terre</span></div>
+          <div class="course"><span class="c-num">V</span><div class="c-name">Canette de Pressard<span>Élevage Lecoq, cuit basse température, cerise Montmorency, jus acidulé.</span></div><span class="c-tag">Volaille</span></div>
+          <div class="course"><span class="c-num">VI</span><div class="c-name">Poire &amp; Verveine<span>Sorbet poire Williams, infusion de verveine du jardin, tuile caramélisée.</span></div><span class="c-tag">Fraîcheur</span></div>
+          <div class="course"><span class="c-num">VII</span><div class="c-name">Chocolat Grand Cru &amp; Mignardises<span>Ganache 70 %, sarrasin soufflé, fleur de sel. Mignardises au gré du pâtissier.</span></div><span class="c-tag">Final</span></div>
+        </div>
+      </div>
+
+      <!-- MIDI -->
+      <div class="tab-panel" id="tab-midi">
+        <div class="menu-head reveal">
+          <div><div style="font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)">Menu Déjeuner, dimanche uniquement</div></div>
+          <div class="menu-price"><div class="p">52 <span style="font-size:1.4rem">€</span></div><div class="s">par personne, accord vins +28 €</div></div>
+        </div>
+        <div class="courses reveal d1">
+          <div class="course"><span class="c-num">I</span><div class="c-name">Amuse-bouche de saison<span>Petite mise en bouche composée par Camille selon l'arrivage du matin.</span></div><span class="c-tag">Surprise</span></div>
+          <div class="course"><span class="c-num">II</span><div class="c-name">Entrée du marché<span>Légumes de Ludovic Hébert, crème acidulée, pickles maison, herbes du jardin.</span></div><span class="c-tag">Végétal</span></div>
+          <div class="course"><span class="c-num">III</span><div class="c-name">Poisson de la criée<span>Filet du jour, beurre blanc normand, algues marines, purée de panais.</span></div><span class="c-tag">Mer</span></div>
+          <div class="course"><span class="c-num">IV</span><div class="c-name">Dessert du pâtissier<span>Création selon la saison, glace artisanale ou entremets.</span></div><span class="c-tag">Douceur</span></div>
+        </div>
+      </div>
+
+      <!-- CAVE -->
+      <div class="tab-panel" id="tab-cave">
+        <div class="menu-head reveal">
+          <div><div style="font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)">Sélection de la cave, 125 références</div></div>
+          <div class="menu-price"><div class="p">45 <span style="font-size:1.4rem">€</span></div><div class="s">l'accord complet, 7 verres</div></div>
+        </div>
+        <div class="wine-rows reveal d1">
+          <div class="wine-row"><div><div class="wn">Champagne extra-brut, Blanc de Blancs</div><div class="wd">Famille Bonnet-Gilmert, Côte des Blancs</div></div><span class="wp">à l'apéritif</span></div>
+          <div class="wine-row"><div><div class="wn">Muscadet Sèvre &amp; Maine, sur Lie</div><div class="wd">Domaine Luneau-Papin, Loire</div></div><span class="wp">services I et II</span></div>
+          <div class="wine-row"><div><div class="wn">Chablis 1er Cru « Montée de Tonnerre »</div><div class="wd">Domaine Raveneau, Bourgogne</div></div><span class="wp">service III</span></div>
+          <div class="wine-row"><div><div class="wn">Saint-Joseph Rouge, Granit 60</div><div class="wd">Pierre Gonon, Vallée du Rhône</div></div><span class="wp">services IV et V</span></div>
+          <div class="wine-row"><div><div class="wn">Poiré Domfront Tradition AOP</div><div class="wd">Cidrerie Éric Bordelet, Normandie</div></div><span class="wp">pré-dessert</span></div>
+          <div class="wine-row"><div><div class="wn">Maury Solera, doux naturel</div><div class="wd">Mas Amiel, Roussillon</div></div><span class="wp">dessert</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE GRID ============ -->
+  <section class="exp-sec sp">
+    <div class="wrap" style="margin-bottom:clamp(28px,4vh,44px)">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Vivre la maison</span>
+        <h2>L'expérience<br/>Hortense.</h2>
+        <p>Plus qu'un dîner — une immersion. Chaque détail de la maison est pensé pour que vous soyez pleinement là, le temps d'une soirée hors du temps.</p>
+      </div>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card reveal">
+        <div class="ph" style="height:100%;background-image:url('img/hortense/restaurant-warm.png');background-size:cover;background-position:center"></div>
+        <div class="exp-overlay">
+          <div class="exp-num">01</div>
+          <h4>La Salle</h4>
+          <p>Trente-deux couverts dans un décor épuré. Pierre de Caen, lin brut, lumières tamisées.</p>
+        </div>
+      </div>
+      <div class="exp-card reveal d1">
+        <div class="ph" style="height:100%;background-image:url('img/hortense/somelier-a-table.png');background-size:cover;background-position:center"></div>
+        <div class="exp-overlay">
+          <div class="exp-num">02</div>
+          <h4>Le Service</h4>
+          <p>Attentionné, présent, jamais intrusif. L'équipe connaît chaque producteur par son prénom.</p>
+        </div>
+      </div>
+      <div class="exp-card reveal d2">
+        <div class="ph" style="height:100%;background-image:url('img/hortense/cave-a-vin-luxe.png');background-size:cover;background-position:center"></div>
+        <div class="exp-overlay">
+          <div class="exp-num">03</div>
+          <h4>La Cave</h4>
+          <p>125 références choisies par notre sommelier. Vins nature, biodynamie, vignerons indépendants.</p>
+        </div>
+      </div>
+      <div class="exp-card reveal">
+        <div class="ph" style="height:100%;background-image:url('img/hortense/vue-de-la-salle-dans-la-cuisine.png');background-size:cover;background-position:center"></div>
+        <div class="exp-overlay">
+          <div class="exp-num">04</div>
+          <h4>La Cuisine Ouverte</h4>
+          <p>Depuis votre table, vous observez Camille et son équipe. Le geste fait partie du repas.</p>
+        </div>
+      </div>
+      <div class="exp-card reveal d1">
+        <div class="ph" style="height:100%;background-image:url('img/hortense/potager-de-cuisine.png');background-size:cover;background-position:center"></div>
+        <div class="exp-overlay">
+          <div class="exp-num">05</div>
+          <h4>Le Jardin</h4>
+          <p>L'apéritif se prend dehors, le soir venu, dans notre jardin potager clos. Herbes et fleurs de saison.</p>
+        </div>
+      </div>
+      <div class="exp-card reveal d2">
+        <div class="ph" style="height:100%;background-image:url('img/hortense/table-prive.png');background-size:cover;background-position:center"></div>
+        <div class="exp-overlay">
+          <div class="exp-num">06</div>
+          <h4>La Table Privée</h4>
+          <p>Un salon privatif de 8 couverts pour les occasions. Menu sur-mesure, accord personnalisé.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCTEURS ============ -->
+  <section class="prod-sec sp">
+    <div class="wrap">
+      <div class="sec-head dark reveal">
+        <span class="eyebrow dark">Nos producteurs</span>
+        <h2 style="color:var(--ink)">La Normandie dans l'assiette,<br/>les noms derrière les produits.</h2>
+        <p style="color:var(--muted-ink)">Chaque producteur qui fournit la maison est visité, choisi, respecté. Pas de grossiste, pas de plateforme. Une relation directe, une confiance mutuelle.</p>
+      </div>
+      <div class="prod-grid">
+        <div class="prod-card reveal">
+          <div class="prod-photo"><div class="ph light" style="height:100%;background-image:url('img/hortense/fermiers-de-pomiers-portraits.png');background-size:cover;background-position:center top"></div></div>
+          <div class="prod-info">
+            <span class="prod-tag">Maraîcher</span>
+            <h4>Ludovic Hébert</h4>
+            <div class="loc">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Heuqueville, Seine-Maritime
+            </div>
+            <p class="prod-desc">Légumes racines, herbes aromatiques et fleurs comestibles en agriculture raisonnée depuis 2001.</p>
+          </div>
+        </div>
+        <div class="prod-card reveal d1">
+          <div class="prod-photo"><div class="ph light" style="height:100%;background-image:url('img/hortense/culture-pomiers-calvados.png');background-size:cover;background-position:center"></div></div>
+          <div class="prod-info">
+            <span class="prod-tag">Éleveurs</span>
+            <h4>Famille Dupont</h4>
+            <div class="loc">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Pays de Caux, Seine-Maritime
+            </div>
+            <p class="prod-desc">Agneaux de pré-salé et volailles Label Rouge. La ferme existe depuis quatre générations.</p>
+          </div>
+        </div>
+        <div class="prod-card reveal d2">
+          <div class="prod-photo"><div class="ph light" style="height:100%;background-image:url('img/hortense/poisson-frais-peche-marche.png');background-size:cover;background-position:center"></div></div>
+          <div class="prod-info">
+            <span class="prod-tag">Pêcheurs</span>
+            <h4>La Criée du Havre</h4>
+            <div class="loc">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Port du Havre, Normandie
+            </div>
+            <p class="prod-desc">Marée quotidienne : sole, saint-pierre, homard bleu, coquilles Saint-Jacques selon la saison.</p>
+          </div>
+        </div>
+        <div class="prod-card reveal d3">
+          <div class="prod-photo"><div class="ph light" style="height:100%;background-image:url('img/hortense/fromagier-devant-son-fromage-portrait.png');background-size:cover;background-position:center top"></div></div>
+          <div class="prod-info">
+            <span class="prod-tag">Fromager &amp; affineur</span>
+            <h4>Fromagerie Leconte</h4>
+            <div class="loc">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Livarot, Calvados
+            </div>
+            <p class="prod-desc">Camembert AOP, Livarot, Neufchâtel — affinés à la ferme depuis 1963 dans les caves de craie.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALLERY ============ -->
+  <section class="gal-sec sp" id="galerie">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">En images</span>
+        <h2>L'atmosphère de la maison.</h2>
+        <p>La lumière du soir, le geste du cuisinier, la mise en place — des instants qui composent une soirée unique.</p>
+      </div>
+      <div class="gal-grid">
+        <div class="gal-item big reveal"><div class="ph" style="height:100%;background-image:url('img/hortense/resto-golden-hour-v2.png');background-size:cover;background-position:center"></div><div class="gal-overlay"><span>Salle &amp; lumière dorée</span></div></div>
+        <div class="gal-item reveal d1"><div class="ph" style="height:100%;background-image:url('img/hortense/tartare-assiete-noir.png');background-size:cover;background-position:center"></div><div class="gal-overlay"><span>Dressage signature</span></div></div>
+        <div class="gal-item tall reveal d1"><div class="ph" style="height:100%;background-image:url('img/hortense/vielle-cave-a-vin.png');background-size:cover;background-position:center"></div><div class="gal-overlay"><span>La cave</span></div></div>
+        <div class="gal-item reveal d2"><div class="ph" style="height:100%;background-image:url('img/hortense/chef-au-marche.png');background-size:cover;background-position:center"></div><div class="gal-overlay"><span>Produits du marché</span></div></div>
+        <div class="gal-item reveal d2"><div class="ph" style="height:100%;background-image:url('img/hortense/potager-frais.png');background-size:cover;background-position:center"></div><div class="gal-overlay"><span>Le jardin potager</span></div></div>
+        <div class="gal-item wide reveal d3"><div class="ph" style="height:100%;background-image:url('img/hortense/intense-cuisine-feux.png');background-size:cover;background-position:center"></div><div class="gal-overlay"><span>Camille en cuisine</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRESSE ============ -->
+  <section id="presse">
+
+    <!-- Block 1 : dark bg -->
+    <div class="press-block">
+      <div class="pb-img reveal from-left">
+        <div class="ph" style="height:100%;min-height:440px;background-image:url('img/hortense/bistrot-class.png');background-size:cover;background-position:center">
+        </div>
+      </div>
+      <div class="pb-text reveal from-right">
+        <div class="press-pub">Le Monde, Culture &amp; Gastronomie</div>
+        <span class="press-date">18 avril 2022</span>
+        <h3>« La table qui a<br/>électrisé Le Havre. »</h3>
+        <blockquote>« Camille Beaumont a le rare talent de faire croire à ses convives que chaque plat a été inventé ce soir-là, juste pour eux. L'émotion à l'assiette est totale. »</blockquote>
+        <a href="#" class="press-cta">Lire l'article <span>→</span></a>
+      </div>
+    </div>
+
+    <!-- Block 2 : cream bg -->
+    <div class="press-block reverse">
+      <div class="pb-img reveal from-right">
+        <div class="ph light" style="height:100%;min-height:440px;background-image:url('img/hortense/assiete-michelin-dark-warm.png');background-size:cover;background-position:center">
+        </div>
+      </div>
+      <div class="pb-text light reveal from-left">
+        <div class="press-pub">Guide Michelin, France 2022</div>
+        <span class="press-date">Révélations, mars 2022</span>
+        <h3 class="dark-txt">★ Première étoile<br/>Michelin décernée.</h3>
+        <blockquote>« Une cuisine d'auteur d'une sincérité désarmante. Chaque assiette est une lettre d'amour adressée à la Normandie. Maison Hortense rejoint les tables qui comptent. »</blockquote>
+        <a href="#" class="press-cta">Lire la fiche Michelin <span>→</span></a>
+      </div>
+    </div>
+
+    <!-- Block 3 : dark bg -->
+    <div class="press-block">
+      <div class="pb-img reveal from-left">
+        <div class="ph" style="height:100%;min-height:440px;background-image:url('img/hortense/photo-michelin.png');background-size:cover;background-position:center top">
+        </div>
+      </div>
+      <div class="pb-text reveal from-right">
+        <div class="press-pub">Gault &amp; Millau, Normandie</div>
+        <span class="press-date">Révélation de l'Année, édition 2023</span>
+        <h3>« Camille Beaumont,<br/>la révélation normande. »</h3>
+        <blockquote>« À 36 ans, elle incarne une nouvelle génération de chefs qui ont choisi leur terroir plutôt que la capitale. Un exemple rare de cohérence absolue entre une cheffe et sa maison. »</blockquote>
+        <a href="#" class="press-cta">Lire le palmarès <span>→</span></a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ AVIS ============ -->
+  <section class="avis-sec sp">
+    <div class="wrap">
+      <div class="avis-star-banner reveal">
+        <span class="big-star">★★★★★</span>
+        <p>Des soirées qu'on n'oublie pas</p>
+      </div>
+      <div class="avis-grid">
+        <div class="avis reveal">
+          <div class="stars">★★★★★</div>
+          <p>« Le meilleur repas de notre année. Chaque plat racontait quelque chose. On a compris pourquoi Camille cuisine ici, et pas ailleurs. »</p>
+          <div class="who">Camille D. &amp; Antoine M., Le Havre, octobre 2024</div>
+        </div>
+        <div class="avis reveal d1">
+          <div class="stars">★★★★★</div>
+          <p>« Un menu surprise, zéro fausse note. La saint-jacques était d'une justesse bouleversante. Le service est aux petits soins, sans jamais être pesant. »</p>
+          <div class="who">Marc &amp; Léa, Rouen, février 2025</div>
+        </div>
+        <div class="avis reveal d2">
+          <div class="stars">★★★★★</div>
+          <p>« On vient pour l'assiette, on revient pour l'âme du lieu. La cave est remarquable. L'accord poiré-dessert restera dans nos mémoires longtemps. »</p>
+          <div class="who">Sophie R., Étretat, décembre 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESERVATION ============ -->
+  <section class="res-sec sp" id="reserver">
+    <div class="wrap res-wrap">
+      <div class="res-left">
+        <span class="eyebrow dark reveal">Réservation</span>
+        <h2 class="reveal d1" style="margin-top:.8rem">Réservez<br/><em>votre table.</em></h2>
+        <p class="reveal d2">Le menu est composé chaque semaine — nous vous remercions de réserver à l'avance. Une allergie, une intolérance, une occasion particulière ? Précisez-le, nous nous adaptons.</p>
+        <div class="res-details reveal d2">
+          <div class="res-detail">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>12 Rue de Bordeaux, 76600 Le Havre</span>
+          </div>
+          <div class="res-detail">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 15a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 4h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 11.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 20.93z"/></svg>
+            <span><strong>02 35 40 40 40</strong></span>
+          </div>
+          <div class="res-detail">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>Du mercredi au samedi à 19h30<br/>Le dimanche à 12h30 (menu 4 services)</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="res-form reveal d1" id="resForm">
+        <div class="field">
+          <label for="rn">Nom complet</label>
+          <input type="text" id="rn" placeholder="Prénom et nom" required />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="rd">Date souhaitée</label>
+            <input type="date" id="rd" required />
+          </div>
+          <div class="field">
+            <label for="rh">Service</label>
+            <select id="rh">
+              <option>Dîner, 19h30</option>
+              <option>Déjeuner du dimanche, 12h30</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="rc">Nombre de couverts</label>
+          <select id="rc">
+            <option>1 personne</option>
+            <option selected>2 personnes</option>
+            <option>3 personnes</option>
+            <option>4 personnes</option>
+            <option>5 personnes</option>
+            <option>6 personnes et plus</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="re">Email ou téléphone</label>
+          <input type="text" id="re" placeholder="Pour confirmer la réservation" required />
+        </div>
+        <div class="field">
+          <label for="rm">Précisions (allergies, occasion…)</label>
+          <textarea id="rm" placeholder="Toute information utile pour préparer votre soirée…"></textarea>
+        </div>
+        <button type="submit" class="cta res-submit">Demander une réservation →</button>
+        <div class="form-note">Démonstration — la demande n'est pas envoyée.</div>
+        <div class="form-ok" id="formOk">Merci ! Nous reviendrons vers vous dans les 24 heures pour confirmer. (démo)</div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ MAP ============ -->
+  <section class="map-sec sp">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Nous trouver</span>
+        <h2>Au cœur du Havre.</h2>
+        <p>12 Rue de Bordeaux, Le Havre. Parking de l'Hôtel de Ville à 3 minutes à pied.</p>
+      </div>
+      <div class="map-card reveal d1">
+        <div class="map-frame">
+          <iframe src="https://maps.google.com/maps?q=49.4905,0.1130&z=16&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Maison Hortense — Le Havre"></iframe>
+        </div>
+        <div class="map-bar">
+          <span class="addr">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="lines"><b>12 Rue de Bordeaux, 76600 Le Havre</b><span class="sub">Table gastronomique étoilée</span></span>
+          </span>
+          <div class="map-actions">
+            <a class="cta cta-ghost" href="https://www.google.com/maps/search/?api=1&query=49.4905,0.1130" target="_blank" rel="noopener">Ouvrir dans Maps</a>
+            <a class="cta" href="https://www.google.com/maps/dir/?api=1&destination=49.4905,0.1130" target="_blank" rel="noopener">Itinéraire →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <h4>Maison Hortense</h4>
+        <p>Table gastronomique au Havre depuis 1987. Une cuisine de saison, enracinée en Normandie, portée par Camille Beaumont.</p>
+        <div class="foot-star">Étoile Michelin 2022</div>
+      </div>
+      <div class="foot-col">
+        <span class="t">La maison</span>
+        <a href="#maison">Notre histoire</a>
+        <a href="#chef">Camille Beaumont</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#presse">Presse</a>
+      </div>
+      <div class="foot-col">
+        <span class="t">Le restaurant</span>
+        <a href="#menu">Le menu</a>
+        <a href="#reserver">Réserver une table</a>
+        <p>Table privée sur demande</p>
+      </div>
+      <div class="foot-col">
+        <span class="t">Informations</span>
+        <p>12 Rue de Bordeaux<br/>76600 Le Havre</p>
+        <p>02 35 40 40 40</p>
+        <p>Mercredi au samedi, 19h30</p>
+        <p>Dimanche, 12h30</p>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <p>© Maison Hortense, Le Havre, 2026.</p>
+      <span class="made">Site démo · <a href="index.html">Simon Rioult</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---- progress + nav ---- */
+const progress = document.getElementById('progress');
+const hdr = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  progress.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  hdr.classList.toggle('scrolled', window.scrollY > 30);
+}, { passive: true });
+
+/* ---- parallax hero ---- */
+const heroPx = document.getElementById('heroPx');
+window.addEventListener('scroll', () => {
+  if (window.scrollY < window.innerHeight)
+    heroPx.style.transform = 'translateY(' + (window.scrollY * 0.35) + 'px)';
+}, { passive: true });
+
+/* ---- particles ---- */
+(function() {
+  const el = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('span');
+    const size = Math.random() * 4 + 2;
+    s.style.cssText = [
+      'width:' + size + 'px',
+      'height:' + size + 'px',
+      'left:' + Math.random() * 100 + '%',
+      'top:' + (50 + Math.random() * 50) + '%',
+      '--dur:' + (Math.random() * 8 + 6) + 's',
+      '--delay:' + (Math.random() * 6) + 's'
+    ].join(';');
+    el.appendChild(s);
+  }
+})();
+
+/* ---- burger ---- */
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+const toggleMenu = (f) => {
+  const open = f !== undefined ? f : !mobileMenu.classList.contains('open');
+  mobileMenu.classList.toggle('open', open);
+  burger.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+};
+burger.addEventListener('click', () => toggleMenu());
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+
+/* ---- tabs ---- */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ---- dish drag-scroll ---- */
+(function() {
+  const track = document.getElementById('dishTrack');
+  let isDragging = false, startX = 0, scrollLeft = 0;
+  track.addEventListener('pointerdown', e => {
+    isDragging = true; startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft; track.classList.add('dragging');
+    track.setPointerCapture(e.pointerId);
+  });
+  track.addEventListener('pointermove', e => {
+    if (!isDragging) return;
+    track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX);
+  });
+  const stop = () => { isDragging = false; track.classList.remove('dragging'); };
+  track.addEventListener('pointerup', stop);
+  track.addEventListener('pointercancel', stop);
+})();
+
+/* ---- scroll reveal ---- */
+const reveals = document.querySelectorAll('.reveal');
+const forceShow = el => { el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none'; };
+if (!('IntersectionObserver' in window)) {
+  reveals.forEach(forceShow);
+} else {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+  reveals.forEach(el => {
+    io.observe(el);
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
+  });
+  setTimeout(() => reveals.forEach(el => {
+    el.classList.add('in');
+    if (parseFloat(getComputedStyle(el).opacity) < 0.99) forceShow(el);
+  }), 1600);
+}
+
+/* ---- animated counters ---- */
+document.querySelectorAll('[data-count]').forEach(el => {
+  if (!('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    io.unobserve(e.target);
+    const target = parseInt(el.dataset.count, 10);
+    const dur = 1600; const start = performance.now();
+    const step = now => {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target).toLocaleString('fr-FR');
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }), { threshold: 0.5 });
+  io.observe(el);
+});
+
+/* ---- form ---- */
+document.getElementById('resForm').addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('formOk').classList.add('show');
+  e.target.querySelector('button').textContent = 'Demande envoyée ✓';
+});
+
+</script>
+</body>
+</html>
