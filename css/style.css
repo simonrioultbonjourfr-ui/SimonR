@@ -858,11 +858,11 @@ header.scrolled {
   backdrop-filter: blur(6px);
 }
 
-.rc-ecume     { background-color: #16455a; background-image: url('../img/salle-mer.png'); }
+.rc-ecume     { background-color: #16455a; background-image: url('../img/salle-mer.jpg'); }
 .rc-tigre     { background-color: #6e2418; background-image: url('../img/tigre/hero-naan.jpg'); }
-.rc-margaux   { background-color: #5b1d33; background-image: url('../img/salle-tamisee.png'); }
-.rc-hortense  { background-color: #2f3a22; background-image: url('../img/hortense/restaurant-warm.png'); }
-.rc-plomberie { background-color: #0d1b3e; background-image: url('../img/plomberie/p01.png'); }
+.rc-margaux   { background-color: #5b1d33; background-image: url('../img/salle-tamisee.jpg'); }
+.rc-hortense  { background-color: #2f3a22; background-image: url('../img/hortense/restaurant-warm.jpg'); }
+.rc-plomberie { background-color: #0d1b3e; background-image: url('../img/plomberie/p01.jpg'); }
 .rc-menuisier { background-color: #2a1c0a; background-image: url('../img/menuisier/hero.jpg'); }
 
 .rc-body {

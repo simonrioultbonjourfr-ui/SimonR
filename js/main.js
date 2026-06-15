@@ -469,6 +469,17 @@ if (!reducedMotion) {
     });
   }
 
+  /* ── Recalc pin/scroll positions once heavy images are in ──────
+     Without this, ScrollTrigger measures the page before the big
+     images load, so pinned sections end up with the wrong height
+     and leave blank gaps. Refresh on full load + after each image. */
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+  qsa('img').forEach(img => {
+    if (img.complete) return;
+    img.addEventListener('load',  () => ScrollTrigger.refresh(), { once: true });
+    img.addEventListener('error', () => ScrollTrigger.refresh(), { once: true });
+  });
+
 } /* end reducedMotion guard */
 
 /* ================================================================
