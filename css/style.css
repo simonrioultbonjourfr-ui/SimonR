@@ -1261,6 +1261,11 @@ footer { border-top: 1px solid rgba(250,246,239,0.07); }
   }
   .real-track-outer::-webkit-scrollbar { display: none; }
   .real-track { padding-bottom: 20px; }
+  /* Card height is auto on mobile, so the image (flex-basis 55%) collapses
+     to zero — give it a real height via aspect-ratio so the photo and its
+     Vitrine/Signature badge stay visible. */
+  .real-card { height: auto; }
+  .rc-img-wrap { flex: none; aspect-ratio: 16 / 11; }
 }
 
 /* ============================================================
