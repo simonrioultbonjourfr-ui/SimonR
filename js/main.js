@@ -21,11 +21,16 @@ const sceneBg = {
    ================================================================ */
 gsap.registerPlugin(ScrollTrigger);
 
-/* Lenis smooth scroll */
-const lenis = new Lenis({ lerp: 0.085, smoothWheel: true });
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add((t) => lenis.raf(t * 1000));
-gsap.ticker.lagSmoothing(0);
+/* Lenis smooth scroll — desktop only.
+   On touch devices (mobile/tablet) native scrolling is already smooth and
+   hardware-accelerated; running Lenis there just adds overhead and jank. */
+let lenis = null;
+if (!touch) {
+  lenis = new Lenis({ lerp: 0.085, smoothWheel: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((t) => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
 
 /* ================================================================
    LOADER — overlay split-panel wipe
@@ -540,7 +545,13 @@ qsa('a[href^="#"]').forEach(a => {
     const target = document.getElementById(id);
     if (!target) return;
     e.preventDefault();
-    lenis.scrollTo(target, { offset: -76, duration: 1.6, easing: (t) => 1 - Math.pow(1 - t, 5) });
+    if (lenis) {
+      lenis.scrollTo(target, { offset: -76, duration: 1.6, easing: (t) => 1 - Math.pow(1 - t, 5) });
+    } else {
+      /* Native smooth scroll fallback (touch devices, no Lenis) */
+      const y = target.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   });
 });
 
