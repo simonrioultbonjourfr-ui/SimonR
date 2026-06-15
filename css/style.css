@@ -1218,6 +1218,9 @@ footer { border-top: 1px solid rgba(250,246,239,0.07); }
    RESPONSIVE
    ============================================================ */
 @media (max-width: 900px) {
+  /* Hide inline nav links on mobile — the burger menu handles navigation */
+  .nav-links { display: none; }
+
   /* Stack the phase text + browser mockup vertically, both visible */
   .proc-inner {
     grid-template-columns: 1fr;
