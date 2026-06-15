@@ -1218,8 +1218,21 @@ footer { border-top: 1px solid rgba(250,246,239,0.07); }
    RESPONSIVE
    ============================================================ */
 @media (max-width: 900px) {
-  .proc-inner { grid-template-columns: 1fr; }
-  .proc-right { display: none; }
+  /* Stack the phase text + browser mockup vertically, both visible */
+  .proc-inner {
+    grid-template-columns: 1fr;
+    gap: clamp(24px,4vh,44px);
+    align-content: center;
+    justify-items: center;
+  }
+  .proc-left { padding: 0; width: 100%; max-width: 540px; }
+  .proc-phases { min-height: 240px; }
+  .proc-right {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .proc-browser { max-width: 400px; }
   .proc-pin-wrap { height: 350vh; }
   .tarifs-grid { grid-template-columns: 1fr; }
   .faq-layout { grid-template-columns: 1fr; gap: 2.5rem; }
