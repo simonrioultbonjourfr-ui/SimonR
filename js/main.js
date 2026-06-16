@@ -146,11 +146,14 @@ function runHeroAnim() {
    ================================================================ */
 const spb = qs('#spb');
 if (spb) {
+  /* Drive the bar with scaleX (compositor-only) instead of width (layout). */
   const updateSPB = () => {
     const total = document.documentElement.scrollHeight - window.innerHeight;
-    spb.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0).toFixed(2) + '%';
+    const ratio = total > 0 ? window.scrollY / total : 0;
+    spb.style.transform = `scaleX(${ratio.toFixed(4)})`;
   };
   window.addEventListener('scroll', updateSPB, { passive: true });
+  updateSPB();
 }
 
 /* ================================================================
@@ -186,15 +189,17 @@ if (!touch) {
   let mx = innerWidth / 2, my = innerHeight / 2;
   let rx = mx, ry = my;
 
+  /* Position via transform (translate3d) instead of left/top: keeps the
+     cursor on the compositor and avoids a layout+paint on every frame. */
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
-    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+    cur.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
   }, { passive: true });
 
   (function tick() {
     rx += (mx - rx) * 0.11;
     ry += (my - ry) * 0.11;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
     requestAnimationFrame(tick);
   })();
 
