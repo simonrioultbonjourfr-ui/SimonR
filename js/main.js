@@ -21,16 +21,13 @@ const sceneBg = {
    ================================================================ */
 gsap.registerPlugin(ScrollTrigger);
 
-/* Lenis smooth scroll — desktop only.
-   On touch devices (mobile/tablet) native scrolling is already smooth and
-   hardware-accelerated; running Lenis there just adds overhead and jank. */
-let lenis = null;
-if (!touch) {
-  lenis = new Lenis({ lerp: 0.085, smoothWheel: true });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((t) => lenis.raf(t * 1000));
-  gsap.ticker.lagSmoothing(0);
-}
+/* Smooth scroll (Lenis) DISABLED.
+   Lenis intercepted wheel/trackpad events and re-animated them with its own
+   lerp loop, which caused the scroll stutter. Dragging the scrollbar bypassed
+   Lenis entirely — that's why it always felt smooth. Native scrolling is smooth
+   and jank-free on every device, and GSAP ScrollTrigger works fine on it.
+   `lenis` stays null so the anchor-scroll code below uses the native fallback. */
+const lenis = null;
 
 /* ================================================================
    LOADER — overlay split-panel wipe
@@ -145,24 +142,39 @@ function runHeroAnim() {
    SCROLL PROGRESS BAR
    ================================================================ */
 const spb = qs('#spb');
-if (spb) {
-  /* Drive the bar with scaleX (compositor-only) instead of width (layout). */
-  const updateSPB = () => {
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    const ratio = total > 0 ? window.scrollY / total : 0;
-    spb.style.transform = `scaleX(${ratio.toFixed(4)})`;
-  };
-  window.addEventListener('scroll', updateSPB, { passive: true });
-  updateSPB();
-}
+/* Cache the scrollable height. Reading scrollHeight on every scroll event
+   forced a full synchronous reflow each frame — the main cause of desktop
+   scroll jank (made worse by GSAP pinned sections keeping layout "dirty").
+   We recompute it only on resize, page load, and ScrollTrigger refresh. */
+let docHeight = document.documentElement.scrollHeight - window.innerHeight;
+const recalcDocHeight = () => {
+  docHeight = document.documentElement.scrollHeight - window.innerHeight;
+};
+window.addEventListener('resize', recalcDocHeight, { passive: true });
+window.addEventListener('load', recalcDocHeight);
+if (window.ScrollTrigger) ScrollTrigger.addEventListener('refresh', recalcDocHeight);
 
 /* ================================================================
    NAV — sticky + color adaptation
    ================================================================ */
 const header = qs('#header');
-window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 24);
-}, { passive: true });
+
+/* One rAF-batched scroll listener for BOTH the progress bar and the sticky
+   nav. No layout reads (height is cached above), all DOM writes batched into
+   a single frame, and at most one update per animation frame. */
+let scrollTick = false;
+const onScroll = () => {
+  if (scrollTick) return;
+  scrollTick = true;
+  requestAnimationFrame(() => {
+    const y = window.scrollY;
+    if (spb) spb.style.transform = `scaleX(${(docHeight > 0 ? y / docHeight : 0).toFixed(4)})`;
+    if (header) header.classList.toggle('scrolled', y > 24);
+    scrollTick = false;
+  });
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
 /* ================================================================
    MOBILE BURGER MENU

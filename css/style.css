@@ -26,8 +26,8 @@
 
 /* ---- Reset ---- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-/* No native scroll-behavior: Lenis (desktop) and JS smooth-scroll (touch)
-   handle anchor jumps. Leaving it on caused double-smoothing / jank. */
+/* Native scroll only (Lenis removed). Anchor jumps use JS window.scrollTo with
+   behavior:'smooth', which works regardless of this value. */
 html { scroll-behavior: auto; }
 body {
   font-family: var(--sans);
