@@ -801,14 +801,23 @@ header.scrolled {
   flex-shrink: 0;
 }
 .real-track-outer {
-  flex: 1; overflow: hidden; position: relative;
+  flex: 1; position: relative;
+  /* Native horizontal scroll (replaces the old GSAP pin+scrub). */
+  overflow-x: auto; overflow-y: hidden;
+  scrollbar-width: none;
 }
+.real-track-outer::-webkit-scrollbar { display: none; }
 .real-track {
   display: flex; gap: clamp(20px,2vw,32px);
   padding: 0 var(--gut);
   height: 100%;
-  will-change: transform;
 }
+/* Click-and-drag affordance (pointer devices only). */
+@media (hover: hover) {
+  .real-track-outer { cursor: grab; }
+  .real-track-outer.dragging { cursor: grabbing; user-select: none; }
+}
+.real-track img { -webkit-user-drag: none; }
 
 /* Gallery cards */
 .real-card {

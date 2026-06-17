@@ -381,36 +381,41 @@ if (!reducedMotion) {
     });
   }
 
-  /* ── 6. Horizontal gallery (desktop only) ───────────────────── */
-  const realWrap   = qs('.real-pin-wrap');
-  const realSticky = qs('.real-sticky');
-  const realTrack  = qs('.real-track');
-  const rpFill     = qs('.rp-fill');
+  /* ── 6. Horizontal gallery — NATIVE scroll (was GSAP pin + scrub) ──
+     The pinned/scrubbed version turned vertical scroll into a horizontal
+     tween every frame — the heaviest desktop-only effect and the remaining
+     cause of scroll jank (it was already disabled on mobile, which is why
+     mobile always felt smooth). Now it's a natively scrollable strip:
+     trackpad swipe + click-and-drag, with no work tied to page scroll. */
+  const realOuter = qs('.real-track-outer');
+  const rpFill    = qs('.rp-fill');
 
-  if (realTrack && window.innerWidth > 768) {
-    /* Calculate how far to scroll */
-    const getScrollDist = () =>
-      realTrack.scrollWidth - realTrack.parentElement.offsetWidth + parseFloat(getComputedStyle(realTrack).paddingLeft);
+  if (realOuter) {
+    /* Progress bar follows the gallery's own horizontal scroll (cheap —
+       only fires while the gallery is scrolled, never on page scroll). */
+    if (rpFill) {
+      realOuter.addEventListener('scroll', () => {
+        const max = realOuter.scrollWidth - realOuter.clientWidth;
+        rpFill.style.width = (max > 0 ? (realOuter.scrollLeft / max) * 100 : 0).toFixed(1) + '%';
+      }, { passive: true });
+    }
 
-    const scrollAnim = gsap.to(realTrack, {
-      x: () => -getScrollDist(),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: realWrap,
-        pin: realSticky,
-        start: 'top top',
-        end: () => `+=${getScrollDist() + 80}`,
-        scrub: 1.2,
-        invalidateOnRefresh: true,
-        onUpdate(self) {
-          if (rpFill) rpFill.style.width = (self.progress * 100).toFixed(1) + '%';
-        }
-      }
+    /* Click-and-drag to scroll (mouse users; trackpads swipe natively). */
+    let down = false, moved = false, startX = 0, startScroll = 0;
+    realOuter.addEventListener('pointerdown', e => {
+      down = true; moved = false; startX = e.clientX; startScroll = realOuter.scrollLeft;
     });
-  } else if (realSticky) {
-    /* Mobile: remove pin */
-    realSticky.style.position = 'static';
-    realSticky.style.height   = 'auto';
+    realOuter.addEventListener('pointermove', e => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 6) moved = true;
+      if (moved) { realOuter.scrollLeft = startScroll - dx; realOuter.classList.add('dragging'); }
+    });
+    window.addEventListener('pointerup', () => { down = false; realOuter.classList.remove('dragging'); });
+    /* If the pointer was dragged, swallow the click so card links don't fire. */
+    realOuter.addEventListener('click', e => {
+      if (moved) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
   }
 
   /* ── 7. Tarifs cards stagger ────────────────────────────────── */
@@ -477,19 +482,10 @@ if (!reducedMotion) {
     }
   });
 
-  /* ── 10. Hero headline parallax on scroll ───────────────────── */
-  if (!touch) {
-    gsap.to('.hero-h1', {
-      y: 70,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.s-hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      }
-    });
-  }
+  /* ── 10. Hero headline parallax — REMOVED ────────────────────────
+     This was a scrub animation (recomputed every scroll frame, desktop
+     only). Removed to keep scrolling perfectly smooth; the headline now
+     stays put. No other section depends on it. */
 
   /* ── Recalc pin/scroll positions once heavy images are in ──────
      Without this, ScrollTrigger measures the page before the big
