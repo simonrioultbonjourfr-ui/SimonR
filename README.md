@@ -10,11 +10,12 @@ Personal portfolio website for Simon Rioult, a freelance web designer based in L
 
 ## Project overview
 
-A cinematic, scroll-driven experience. Zero dependencies, zero frameworks — pure HTML/CSS/JS with **GSAP + ScrollTrigger + Lenis** loaded via CDN.
+A cinematic, scroll-driven experience. Zero dependencies, zero frameworks — pure HTML/CSS/JS with **GSAP + ScrollTrigger** loaded via CDN. Scrolling is **fully native** (no smooth-scroll library).
 
 **Libraries (CDN only, no npm/bundler):**
-- [Lenis v1.1.14](https://github.com/darkroomengineering/lenis) — smooth scroll (**desktop only**, see JS section)
-- [GSAP 3.12.5 + ScrollTrigger](https://gsap.com) — all scroll animations
+- [GSAP 3.12.5 + ScrollTrigger](https://gsap.com) — scroll-triggered reveal animations
+
+> **Lenis (smooth scroll) removed 2026-06-18** — it intercepted wheel/trackpad input and caused desktop scroll jank. Scrolling is now 100% native. See [Performance](#performance--scroll-2026-06-18).
 
 **Live email:** simonrioultbonjour.fr@gmail.com
 
@@ -60,6 +61,21 @@ All photos were originally PNG (~127 MB total, some single files 4–5 MB). They
 
 ---
 
+## Performance — scroll (2026-06-18)
+
+A round of scroll-performance fixes after persistent desktop jank (mobile was always smooth). Diagnosed by elimination: the demo pages — which use **no GSAP** — scroll perfectly, so the cause was the index's scroll-driven JS.
+
+- **Lenis removed.** The smooth-scroll library re-animated wheel/trackpad input on its own loop — that's what stuttered (dragging the scrollbar bypassed Lenis and was always smooth, the key clue). ScrollTrigger works fine on native scroll; anchor links use `window.scrollTo({ behavior: 'smooth' })`.
+- **Horizontal gallery → native scroll.** Was a GSAP `pin` + `scrub` that turned vertical scroll into a horizontal tween every frame (the heaviest desktop-only effect). Now a native `overflow-x` strip with click-and-drag (mouse) + swipe (trackpad).
+- **Hero headline parallax removed** (it was a per-frame `scrub` animation).
+- **Custom cursor** uses `transform: translate3d` instead of `left/top` (no per-frame layout).
+- **Scroll progress bar + sticky nav**: one rAF-batched scroll listener, with the page height **cached** (no `scrollHeight` reflow on every wheel tick); the bar is driven by `transform: scaleX`.
+- **Also removed:** `scroll-behavior: smooth` (fought Lenis), the `body` `background-color` CSS transition (GSAP drives it), and the header `backdrop-filter` blur lowered 20px → 10px.
+
+The only scroll-driven JS left is the **Process/Showstopper pin** (cheap — toggles classes at phase boundaries, no per-frame tween) plus one-shot reveal animations.
+
+---
+
 ## Design system
 
 ### Palette — Cinematic bright theme
@@ -84,7 +100,7 @@ All photos were originally PNG (~127 MB total, some single files 4–5 MB). They
 ### Layout
 - Max width: `1240px`
 - Gutters: `clamp(22px, 5.5vw, 72px)` (fluid)
-- Breakpoints: `900px` (burger + nav-links hidden, gallery stack, process stack), `768px` (gallery pin → native scroll), `640px` (mobile)
+- Breakpoints: `900px` (burger + nav-links hidden, gallery stack, process stack), `768px` (gallery card sizing + mobile layout tweaks), `640px` (mobile)
 
 ---
 
@@ -120,9 +136,9 @@ Full viewport word reveal: foreground panel wipes away (GSAP `scaleX`), word cli
 ### 07 — Giant word "LE HAVRE" (coral)
 
 ### 08 — Réalisations — Horizontal gallery (cream)
-Section pins via GSAP ScrollTrigger while project cards (`real-track`) translate horizontally. Progress bar fills as you scroll. Hover = image `scale(1.07)` + card `translateY(-8px)` + coral border. Each card has a `.rc-tier` badge: gold **"★ Signature"** or translucent **"Vitrine"**.
+**Native horizontal scroll** strip (`.real-track-outer` `overflow-x`). Navigate by **click-and-drag** (mouse) or **swipe** (trackpad); the progress bar follows the gallery's own scroll position. Hover = image `scale(1.07)` + card `translateY(-8px)` + coral border. Each card has a `.rc-tier` badge: gold **"★ Signature"** or translucent **"Vitrine"**.
 Cards: L'Écume · Le Tigre Doré · Le Margaux · Maison Hortense.
-**Mobile (≤768px):** GSAP pin disabled, native horizontal overflow scroll. The card image is given a fixed `aspect-ratio` so the photo **and its Vitrine/Signature badge stay visible** (otherwise the image collapsed to zero height).
+> Previously a GSAP `pin` + `scrub` (vertical scroll drove horizontal movement) — replaced with native scroll on **all** viewports for smoothness (see [Performance](#performance--scroll-2026-06-18)). On mobile the card image keeps a fixed `aspect-ratio` so the photo and its Vitrine/Signature badge stay visible.
 
 ### 09 — Giant word "SUR-MESURE" (forest)
 
@@ -130,6 +146,12 @@ Cards: L'Écume · Le Tigre Doré · Le Margaux · Maison Hortense.
 Two pricing cards stagger in. Prices count up on entry. Coral checkmark list. Featured card has coral border glow.
 - Site vitrine — from 359 €
 - Site signature — from 749 €
+
+Below the cards: an optional **monthly maintenance** block (`.suivi`, added 2026-06-17) — two plans, rendered static (no scroll-reveal):
+- **Sérénité — 24,99 €/mois** (2 modifications/month, managed hosting, 48h reply)
+- **Sérénité + — 49,99 €/mois** (5 modifications/month + seasonal updates + 24h priority)
+
+The section sub-title was reworded from "Pas d'abonnement" to reflect the optional monthly suivi.
 
 ### 11 — Giant word "QUALITÉ" (cream)
 
@@ -146,26 +168,26 @@ Giant headline (`clamp(3rem → 7rem)`): "Votre commerce mérite mieux qu'une ab
 
 ## JavaScript features (js/main.js)
 
-Uses **GSAP + ScrollTrigger** (CDN) and **Lenis** (CDN) for scroll animations. Vanilla JS for everything else.
+Uses **GSAP + ScrollTrigger** (CDN) for scroll-triggered animations. Scrolling itself is native (Lenis removed). Vanilla JS for everything else.
 
 | Feature | Description |
 |---|---|
-| **Lenis smooth scroll** | `lerp: 0.085`, drives GSAP ticker via `lenis.raf()`. **Desktop only** — on touch devices (`!(hover: hover)`) Lenis is not initialized, so mobile/tablet use native hardware-accelerated scroll (fixed mobile scroll jank). `lenis` is `null` on touch; all uses are guarded. |
+| **Native scroll** (Lenis removed) | Lenis (smooth scroll) was **removed 2026-06-18** — it caused desktop scroll jank. `lenis` is now permanently `null`; all references fall back to native behaviour. |
 | **ScrollTrigger refresh on load** | `ScrollTrigger.refresh()` runs on `window.load` and after each `<img>` finishes — so pin/scroll positions are recalculated once heavy images are in (fixes pinned sections leaving blank gaps). |
 | **Loader split-wipe** | "Simon." scrambles letter by letter → progress bar fills → top/bottom panels GSAP `yPercent` split apart. Once per session via `sessionStorage` key `sr-v4-intro`. |
 | **Hero stagger timeline** | GSAP timeline: kicker fades up, `.mask-inner` lines slide from `translateY(110%)`, sub/actions/badge/scroll-ind cascade. Fires via `runHeroAnim()` after loader exits. |
 | **BG colour morph** | Each `[data-scene]` element triggers `gsap.to('body', { backgroundColor })` on enter/back. 0.85s ease-out. |
 | **Giant word reveals** | Per `.s-word`: foreground `.word-panel` `scaleX: 1→0` + `.word-text` `clip-path: inset(0 100%→0%)`. Triggered once at `top 65%`. |
-| **Horizontal gallery pin** | GSAP `scrollTrigger.pin` on `.real-sticky`. `.real-track` translates `x` via `scrub: 1.2`. Disabled on ≤768px (native scroll). |
+| **Horizontal gallery (native)** | Native `overflow-x` scroll on `.real-track-outer` + pointer **click-and-drag** (6px move threshold so card links still click). Progress bar follows `scrollLeft`. (Was GSAP `pin` + `scrub` — removed for performance.) |
 | **Process pinned scroll** | ScrollTrigger pins `.proc-sticky` for the `400vh` section. `onUpdate` fires `setPhase()` — swaps `.active` phase, `.visible` browser layer, dot indicators. |
 | **Count-up animations** | `[data-count]` and `.tc-big[data-count]`: GSAP object tween `{ val: 0 → target }` on ScrollTrigger `onEnter`. |
-| **Parallax headline** | `.hero-h1` drifts `y: 0→70px` as hero scrolls out. `scrub: true`. Desktop only. |
-| **Scroll progress bar** | `#spb` — coral line, updated on `scroll` event. |
+| **Parallax headline (removed)** | **Removed 2026-06-18** — was a per-frame `scrub` animation contributing to scroll jank. |
+| **Scroll progress bar + nav** | `#spb` coral line driven by `transform: scaleX`. One **rAF-batched** scroll listener handles both the bar and the sticky nav; page height is **cached** (recomputed on resize / load / ScrollTrigger refresh) to avoid a `scrollHeight` reflow every scroll tick. |
 | **Sticky nav** | Adds `.scrolled` (cream frosted glass) after 24px. |
 | **Burger menu** | Toggles `.open` on `#mobMenu`, locks body scroll. Primary navigation on mobile. |
-| **Custom cursor** | `#cur` coral dot + `#cur-ring` lagging ring (0.11 lerp). Desktop only. |
+| **Custom cursor** | `#cur` coral dot + `#cur-ring` lagging ring (0.11 lerp), positioned via `transform: translate3d` (GPU, no per-frame layout). Desktop only. |
 | **Magnetic buttons** | `.btn` elements drift toward cursor, spring back on leave. Desktop + non-reduced-motion only. |
-| **Smooth anchor scroll** | `href="#…"` links use `lenis.scrollTo()` on desktop, with a **native `window.scrollTo({behavior:'smooth'})` fallback** when Lenis is off (touch). `offset: -76`. |
+| **Smooth anchor scroll** | `href="#…"` links use native `window.scrollTo({ behavior: 'smooth' })`, `offset: -76`. (The old `lenis.scrollTo()` branch is dead code now that `lenis` is always `null`.) |
 | **Page exit curtain** | Internal links trigger `#page-curtain.closing` split-panels, then navigate after 620ms. |
 | **FAQ accordion** | One item open at a time. Height via `scrollHeight`. `aria-expanded` toggled. |
 
@@ -186,7 +208,7 @@ All interactive JS features guard on `(hover: hover)` (touch) and `prefers-reduc
 | **Gallery card hover** | `.rc-img` `scale(1.07)` + card `translateY(-8px)` + coral `box-shadow`. |
 | **Tier badges** | `.rc-tier--sig` gold gradient + glow; `.rc-tier--vit` translucent white pill. |
 | **Nav / FAQ sweep lines** | `a::after` / `.faq-item::after` `width: 0→100%`. |
-| **Scene backgrounds** | `[data-scene]` set `background-color`; `body` transitions `0.9s`. |
+| **Scene backgrounds** | `[data-scene]` set `background-color`; the `body` colour is morphed by **GSAP** on scene enter (the CSS `body` transition was removed so it doesn't fight GSAP frame-by-frame). |
 | **Page curtain** | `#page-curtain` split panels `scaleY: 0→1` on `.closing`. |
 
 All systems respect `prefers-reduced-motion: reduce` — durations collapse to `0.01ms`.
@@ -233,7 +255,7 @@ Standalone page, self-contained styles. Required by French LCEN law.
 - Téléphone: +33 7 49 88 86 10
 - Email: simonrioultbonjour.fr@gmail.com
 - SIRET: *en cours d'immatriculation* (fill on registration — 2026-07-05)
-- Hébergeur listed in the file: **Netlify** — ⚠️ now outdated, the site is hosted on **GitHub Pages (Cloudflare in front)**. Update this when convenient.
+- Hébergeur: **GitHub, Inc. (GitHub Pages)** + **Cloudflare** (CDN/DNS) — corrected 2026-06-17 (the file previously listed Netlify, which was wrong).
 
 **No cookie banner needed** — zero tracking scripts, no analytics, no third-party cookies.
 
@@ -289,7 +311,7 @@ New GitHub repo → push static files → enable Pages (main/root) → in Cloudf
 ## To-do / known placeholders
 
 - **Le Margaux:** `img/margaux/hero.jpg` missing — hero falls back to a CSS gradient (pre-existing).
-- **Mentions légales:** update the "Hébergeur" from Netlify to GitHub Pages / Cloudflare.
+- **Mentions légales — Hébergeur:** ✅ done 2026-06-17 (corrected to GitHub Pages + Cloudflare).
 - **SIRET:** fill in `mentions-legales.html` once registered (2026-07-05).
 - Map coordinates in demo pages point to Le Havre city centre — update to real addresses once known.
 - Phone numbers and addresses in demo pages are fictional.
