@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<script>document.documentElement.className += ' js';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>La Môme Corse · Restaurant & épicerie corse · Le Havre</title>
+<meta name="description" content="La Môme Corse, cuisine corse et épicerie fine au Havre depuis 15 ans. Charcuterie de l'île, brocciu, veau aux olives et produits à emporter. Une table chaleureuse, l'Île de Beauté à deux pas du port." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0f2a26;
+    --bg2: #143a32;
+    --paper: #f6efe1;
+    --ink: #16201c;
+    --ochre: #e0a33e;
+    --terra: #c2562f;
+    --foam: #f6efe1;
+    --muted: rgba(246,239,225,0.62);
+    --line: rgba(246,239,225,0.16);
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "Manrope", sans-serif;
+    --mono: "Space Mono", monospace;
+    --gut: clamp(20px, 5vw, 64px);
+    --maxw: 1180px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--foam); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: var(--ochre); color: var(--ink); }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  h1,h2,h3 { font-family: var(--serif); font-weight: 500; line-height: 1.03; letter-spacing: -0.01em; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gut); }
+  .eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ochre); display: inline-flex; align-items: center; gap: 0.7em; }
+  .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--ochre); opacity: 0.7; }
+
+  /* Badge maquette discret */
+  .mq-badge { position: fixed; top: 14px; left: 14px; z-index: 70; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); background: rgba(15,42,38,0.7); backdrop-filter: blur(10px); border: 1px solid var(--line); border-radius: 100px; padding: 0.5em 0.95em; }
+
+  nav.site { position: absolute; top: 0; left: 0; right: 0; z-index: 50; }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 90px; padding-top: 30px; }
+  .brand { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; }
+  .brand b { color: var(--ochre); font-weight: 600; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--muted); transition: color 0.25s var(--ease); }
+  .nav-links a:hover { color: var(--foam); }
+  .cta { display: inline-flex; align-items: center; gap: 0.5em; font-weight: 600; font-size: 0.9rem; padding: 0.7em 1.5em; border-radius: 100px; background: var(--ochre); color: var(--ink); border: 1px solid var(--ochre); transition: transform 0.3s var(--ease), background 0.3s var(--ease); }
+  .cta:hover { transform: translateY(-2px); background: var(--foam); border-color: var(--foam); }
+  .cta-ghost { background: transparent; color: var(--foam); border-color: var(--line); }
+  .cta-ghost:hover { background: var(--foam); color: var(--ink); border-color: var(--foam); }
+
+  .hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 130px 0 80px; background:
+      radial-gradient(120% 80% at 82% -10%, rgba(194,86,47,0.5), transparent 60%),
+      radial-gradient(90% 60% at 0% 110%, rgba(224,163,62,0.22), transparent 60%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); }
+  .hero-in { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(36px,5vw,72px); align-items: center; width: 100%; }
+  .hero h1 { font-size: clamp(3.2rem, 9.5vw, 7.4rem); line-height: 0.9; margin: 0.3em 0 0.35em; }
+  .hero h1 em { font-style: italic; color: var(--ochre); }
+  .hero p.lede { font-size: clamp(1.1rem, 1.8vw, 1.35rem); color: var(--muted); max-width: 40ch; }
+  .hero-cta { display: flex; gap: 0.9rem; margin-top: 2.2rem; flex-wrap: wrap; }
+  .hero-rating { margin-top: 1.8rem; display: inline-flex; align-items: center; gap: 0.7em; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--muted); }
+  .hero-rating .stars { color: var(--ochre); letter-spacing: 0.1em; }
+
+  .hero-figure { aspect-ratio: 3/4; border-radius: 18px; border: 1px solid var(--line); position: relative; overflow: hidden; background:
+      repeating-linear-gradient(135deg, rgba(246,239,225,0.05) 0 14px, transparent 14px 28px),
+      radial-gradient(80% 50% at 30% 18%, rgba(224,163,62,0.5), transparent 60%),
+      linear-gradient(165deg, #0c2723 0%, #16443a 55%, #c2562f 130%); }
+  .hero-figure .corner { position: absolute; bottom: 18px; left: 18px; font-family: var(--serif); font-style: italic; font-size: 1.3rem; color: var(--foam); }
+  .hero-figure .tag { position: absolute; top: 18px; right: 18px; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 100px; padding: 0.45em 0.85em; }
+
+  .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .strip-in { display: flex; flex-wrap: wrap; gap: 2rem 3rem; padding: 1.4rem 0; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .strip-in span { display: inline-flex; align-items: center; gap: 0.6em; }
+  .strip-in span::before { content: "◆"; color: var(--ochre); font-size: 0.6em; }
+
+  section { padding: clamp(80px,12vh,140px) 0; }
+  .sec-head { max-width: 60ch; margin-bottom: clamp(40px,6vh,64px); }
+  .sec-head h2 { font-size: clamp(2.4rem,6vw,4rem); margin-top: 0.4em; }
+  .sec-head p { margin-top: 1rem; color: var(--muted); font-size: 1.06rem; max-width: 52ch; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr 0.8fr; gap: clamp(36px,6vw,80px); align-items: center; }
+  .about-lead { font-family: var(--serif); font-size: clamp(1.7rem,3.4vw,2.6rem); line-height: 1.2; }
+  .about-lead em { font-style: italic; color: var(--ochre); }
+  .about-body p { color: var(--muted); margin-top: 1rem; font-size: 1.04rem; }
+  .ph { position: relative; overflow: hidden; border-radius: 14px; }
+  .ph .cap { position: absolute; bottom: 14px; left: 16px; font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--foam); text-shadow: 0 1px 12px rgba(0,0,0,0.4); }
+  .about-img { aspect-ratio: 2/3; min-height: 240px; background:
+      radial-gradient(70% 50% at 70% 20%, rgba(224,163,62,0.4), transparent 60%),
+      linear-gradient(160deg, #123a32, #0d2722 60%, #7a3320); }
+
+  .photo-band { height: clamp(220px,32vw,380px); position: relative; background:
+      radial-gradient(60% 120% at 20% 0%, rgba(224,163,62,0.3), transparent 55%),
+      radial-gradient(60% 120% at 85% 100%, rgba(194,86,47,0.45), transparent 55%),
+      linear-gradient(90deg, #0d2722, #16443a 50%, #0d2722); }
+
+  .menu { background: var(--paper); color: var(--ink); }
+  .menu .eyebrow { color: var(--terra); } .menu .eyebrow::before { background: var(--terra); }
+  .menu .sec-head h2 { color: var(--ink); } .menu .sec-head p { color: rgba(22,32,28,0.62); }
+  .menu-strip { height: clamp(160px,22vw,260px); border-radius: 14px; margin-bottom: clamp(32px,5vw,56px); background:
+      radial-gradient(50% 120% at 25% 0%, rgba(224,163,62,0.35), transparent 60%),
+      linear-gradient(120deg, #14443a, #c2562f 130%); }
+  .menu-list { display: grid; gap: 0; }
+  .dish { display: grid; grid-template-columns: auto 1fr auto; gap: 1.2rem; align-items: baseline; padding: 1.5rem 0; border-bottom: 1px solid rgba(22,32,28,0.12); }
+  .dish:last-child { border-bottom: none; }
+  .dish .d-name { font-family: var(--serif); font-size: clamp(1.5rem,3vw,2rem); }
+  .dish .d-desc { color: rgba(22,32,28,0.6); font-size: 0.96rem; }
+  .dish .d-price { font-family: var(--serif); font-size: 1.5rem; color: var(--terra); white-space: nowrap; }
+  .dish .d-num { font-family: var(--mono); font-size: 0.74rem; color: var(--terra); }
+  .menu-note { margin-top: 2rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: rgba(22,32,28,0.5); }
+
+  .epicerie-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px,2.4vw,28px); }
+  .ep-card { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; transition: transform 0.4s var(--ease), border-color 0.4s var(--ease); }
+  .ep-card:hover { transform: translateY(-6px); border-color: var(--ochre); }
+  .ep-img { height: 180px; }
+  .ep-1 { background: linear-gradient(150deg, #7a3320, #c2562f); }
+  .ep-2 { background: linear-gradient(150deg, #14443a, #2c7a5e); }
+  .ep-3 { background: linear-gradient(150deg, #b07d1e, #e0a33e); }
+  .ep-4 { background: linear-gradient(150deg, #5a2a1c, #a34326); }
+  .ep-5 { background: linear-gradient(150deg, #0f3a32, #1f6b50); }
+  .ep-6 { background: linear-gradient(150deg, #8a5a14, #d49a36); }
+  .ep-body { padding: 1.2rem 1.3rem 1.5rem; }
+  .ep-body h3 { font-size: 1.4rem; }
+  .ep-body p { margin-top: 0.45rem; color: var(--muted); font-size: 0.92rem; }
+
+  .quote { text-align: center; background:
+      radial-gradient(70% 120% at 50% 0%, rgba(224,163,62,0.18), transparent 60%), var(--bg2); }
+  .quote .stars { color: var(--ochre); font-size: 1.3rem; letter-spacing: 0.18em; }
+  .quote blockquote { font-family: var(--serif); font-style: italic; font-size: clamp(1.8rem,4.4vw,3.1rem); line-height: 1.18; max-width: 22ch; margin: 1.4rem auto 0; }
+  .quote .src { margin-top: 1.6rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+  .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,4vw,48px); }
+  .info-card { border: 1px solid var(--line); border-radius: 16px; padding: clamp(28px,3.5vw,40px); }
+  .info-card h3 { font-size: 1.7rem; margin-bottom: 1rem; }
+  .info-card .row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--line); font-size: 0.98rem; }
+  .info-card .row:last-child { border-bottom: none; }
+  .info-card .row span:first-child { color: var(--muted); }
+  .info-card .addr { color: var(--muted); font-size: 1rem; line-height: 1.7; }
+  .map-link { display: inline-flex; align-items: center; gap: 0.55em; margin-top: 1.4rem; font-family: var(--mono); font-size: 0.69rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 100px; padding: 0.65em 1.1em; transition: color 0.25s var(--ease), border-color 0.25s var(--ease); }
+  .map-link:hover { color: var(--foam); border-color: var(--ochre); }
+
+  .reserve { text-align: center; background:
+      radial-gradient(80% 120% at 50% 0%, rgba(194,86,47,0.42), transparent 60%), var(--bg2); }
+  .reserve h2 { font-size: clamp(2.6rem,7vw,5rem); }
+  .reserve h2 em { font-style: italic; color: var(--ochre); }
+  .reserve p { color: var(--muted); max-width: 46ch; margin: 1.4rem auto 0; font-size: 1.08rem; }
+  .reserve .hero-cta { justify-content: center; }
+  .phone { display: inline-flex; align-items: center; gap: 0.6em; margin-top: 2.4rem; font-family: var(--serif); font-size: clamp(1.6rem,4vw,2.4rem); border-bottom: 1.5px solid var(--line); padding-bottom: 0.1em; }
+
+  footer { border-top: 1px solid var(--line); }
+  .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; padding: 2.4rem 0; }
+  .foot .brand { font-size: 1.4rem; }
+  .foot p { font-size: 0.82rem; color: var(--muted); }
+  .made { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--muted); text-align: right; }
+  .made a { color: var(--ochre); }
+
+  html.js .reveal { opacity: 0; transform: translateY(26px); }
+  html.js .reveal.in { opacity: 1; transform: none; transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+  html.js .d1.in { transition-delay: 0.08s; } html.js .d2.in { transition-delay: 0.16s; } html.js .d3.in { transition-delay: 0.24s; }
+  @media (prefers-reduced-motion: reduce) { html.js .reveal { opacity: 1; transform: none; } html.js .reveal.in { transition: none; } html { scroll-behavior: auto; } }
+
+  @media (max-width: 880px) {
+    .hero-in, .about-grid, .visit-grid { grid-template-columns: 1fr; }
+    .epicerie-grid { grid-template-columns: 1fr 1fr; }
+    .hero-figure { max-width: 380px; order: -1; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 560px) {
+    .dish { grid-template-columns: 1fr auto; }
+    .dish .d-num { display: none; }
+    .epicerie-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="mq-badge">Aperçu · maquette</div>
+
+<nav class="site">
+  <div class="wrap nav-in">
+    <a href="#" class="brand">La Môme <b>Corse</b></a>
+    <ul class="nav-links">
+      <li><a href="#maison">La maison</a></li>
+      <li><a href="#carte">La carte</a></li>
+      <li><a href="#epicerie">L'épicerie</a></li>
+      <li><a href="#visite">Nous trouver</a></li>
+    </ul>
+    <a href="#reserver" class="cta">Réserver</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <span class="eyebrow reveal">Cuisine corse &amp; épicerie fine · Le Havre</span>
+      <h1 class="reveal d1">L'Île de Beauté,<br/><em>à votre table</em>.</h1>
+      <p class="lede reveal d2">Depuis 15 ans, Sophie &amp; Michel vous reçoivent comme à la maison. Charcuterie de l'île, brocciu, vins corses : la Méditerranée à deux pas du port.</p>
+      <div class="hero-cta reveal d3">
+        <a href="#reserver" class="cta">Réserver une table</a>
+        <a href="#carte" class="cta cta-ghost">Voir la carte</a>
+      </div>
+      <div class="hero-rating reveal d3"><span class="stars">★★★★★</span> 4,8 / 5 · 244 avis Google</div>
+    </div>
+    <div class="hero-figure reveal d2">
+      <span class="tag">Saveurs de l'île</span>
+      <div class="corner">Charcuterie &amp; brocciu maison</div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap strip-in">
+    <span>Charcuterie corse</span><span>Brocciu</span><span>Vins de l'île</span><span>Épicerie à emporter</span><span>Accueil chaleureux</span>
+  </div>
+</div>
+
+<div class="photo-band"></div>
+
+<section id="maison">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <span class="eyebrow">La maison</span>
+      <p class="about-lead" style="margin-top:1em">Une table où l'on se sent <em>tout de suite en Corse</em>.</p>
+    </div>
+    <div class="about-body reveal d1">
+      <p>Depuis quinze ans, Sophie et Michel font vivre un coin d'Île de Beauté au cœur du Havre. Une cuisine de famille, généreuse et sincère, portée par des produits qui viennent directement de l'île.</p>
+      <p>On y vient pour la charcuterie affinée, le brocciu, un verre de patrimonio, et surtout pour l'accueil : celui qui vous donne l'impression d'être attendu.</p>
+    </div>
+    <div class="about-img ph reveal d2"><span class="cap">Sophie &amp; Michel</span></div>
+  </div>
+</section>
+
+<section class="menu" id="carte">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">La carte</span>
+      <h2>Un avant-goût de l'île</h2>
+      <p>Quelques plats signatures. La carte évolue au fil des saisons et des arrivages de Corse.</p>
+    </div>
+    <div class="menu-strip reveal"></div>
+    <div class="menu-list">
+      <div class="dish reveal"><span class="d-num">01</span><div><div class="d-name">Assiette de charcuterie corse</div><div class="d-desc">Coppa, lonzu, figatellu et saucisson, affinés sur l'île.</div></div><span class="d-price">17 €</span></div>
+      <div class="dish reveal"><span class="d-num">02</span><div><div class="d-name">Sauté de veau aux olives</div><div class="d-desc">Veau corse mijoté, olives, tomate et herbes du maquis.</div></div><span class="d-price">21 €</span></div>
+      <div class="dish reveal d1"><span class="d-num">03</span><div><div class="d-name">Cannellonis au brocciu</div><div class="d-desc">Brocciu frais et blettes, gratinés au four. Végétarien.</div></div><span class="d-price">18 €</span></div>
+      <div class="dish reveal d1"><span class="d-num">04</span><div><div class="d-name">Fiadone &amp; canistrelli</div><div class="d-desc">Gâteau au brocciu et citron, petits biscuits corses.</div></div><span class="d-price">9 €</span></div>
+    </div>
+    <p class="menu-note">Aperçu de carte — plats &amp; tarifs donnés à titre d'exemple.</p>
+  </div>
+</section>
+
+<section id="epicerie">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">L'épicerie</span>
+      <h2>L'île à emporter</h2>
+      <p>Une épicerie fine où retrouver le meilleur de la Corse, à offrir ou à savourer chez vous.</p>
+    </div>
+    <div class="epicerie-grid">
+      <div class="ep-card reveal"><div class="ep-img ph ep-1"></div><div class="ep-body"><h3>Charcuterie</h3><p>Coppa, lonzu, figatellu, prisuttu affinés à l'île.</p></div></div>
+      <div class="ep-card reveal d1"><div class="ep-img ph ep-2"></div><div class="ep-body"><h3>Fromages</h3><p>Brocciu, tomme corse et fromages de brebis fermiers.</p></div></div>
+      <div class="ep-card reveal d2"><div class="ep-img ph ep-3"></div><div class="ep-body"><h3>Vins &amp; spiritueux</h3><p>Patrimonio, rosés de l'île, myrte et liqueurs.</p></div></div>
+      <div class="ep-card reveal"><div class="ep-img ph ep-4"></div><div class="ep-body"><h3>Confitures &amp; miels</h3><p>Miel AOP, confitures de clémentine et de figue.</p></div></div>
+      <div class="ep-card reveal d1"><div class="ep-img ph ep-5"></div><div class="ep-body"><h3>Épicerie salée</h3><p>Sauces, pâtes, farine de châtaigne et conserves.</p></div></div>
+      <div class="ep-card reveal d2"><div class="ep-img ph ep-6"></div><div class="ep-body"><h3>Douceurs</h3><p>Canistrelli, nougats et biscuits à la châtaigne.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap">
+    <div class="stars reveal">★★★★★</div>
+    <blockquote class="reveal d1">« On se croirait vraiment en Corse, accueil adorable de Sophie et Michel. »</blockquote>
+    <div class="src reveal d2">Avis Google · 4,8 / 5 sur 244 avis</div>
+  </div>
+</section>
+
+<section id="visite">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Nous trouver</span><h2>Passez nous voir</h2></div>
+    <div class="visit-grid">
+      <div class="info-card reveal">
+        <h3>Horaires</h3>
+        <div class="row"><span>Mardi – Samedi</span><span>12h – 14h · 19h – 22h</span></div>
+        <div class="row"><span>Épicerie</span><span>Ouverte aux heures de service</span></div>
+        <div class="row"><span>Dimanche – Lundi</span><span>Fermé</span></div>
+        <div class="row"><span>Réservation</span><span>Conseillée</span></div>
+      </div>
+      <div class="info-card reveal d1">
+        <h3>Adresse</h3>
+        <p class="addr">26 rue Georges Braque<br/>76600 Le Havre</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=La+M%C3%B4me+Corse+26+Rue+Georges+Braque+Le+Havre" target="_blank" rel="noopener" class="map-link">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Voir l'itinéraire →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reserve" id="reserver">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="justify-content:center">Réservation</span>
+    <h2 class="reveal d1" style="margin-top:0.5em">Une table<br/><em>à l'accent corse</em>.</h2>
+    <p class="reveal d2">Réservez votre table ou passez à l'épicerie. Un anniversaire, un grand groupe, un plat préféré ? Dites-le-nous, on s'adapte.</p>
+    <div class="hero-cta reveal d3">
+      <a href="#" class="cta">Réserver une table</a>
+      <a href="#" class="cta cta-ghost">Voir l'épicerie</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <a href="#" class="brand">La Môme <b style="color:var(--ochre)">Corse</b></a>
+    <p>Restaurant &amp; épicerie corse · 26 rue Georges Braque, Le Havre.</p>
+    <span class="made">Aperçu de site réalisé par <a href="https://simonr.fr" target="_blank" rel="noopener">Simon Rioult</a><br/>Création de sites web · simonr.fr</span>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const forceShow = (el) => { el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none'; };
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(forceShow);
+  } else {
+    const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => {
+      io.observe(el);
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
+    });
+    setTimeout(() => {
+      reveals.forEach(el => {
+        el.classList.add('in');
+        if (parseFloat(getComputedStyle(el).opacity) < 0.99) forceShow(el);
+      });
+    }, 1600);
+  }
+</script>
+</body>
+</html>
