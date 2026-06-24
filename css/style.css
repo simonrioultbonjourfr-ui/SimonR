@@ -380,6 +380,8 @@ header.scrolled {
   display: flex; flex-direction: column; justify-content: flex-end;
   overflow: hidden;
   padding-bottom: clamp(60px,8vh,100px);
+  /* Isole le reflow/repaint du hero du reste de la page */
+  contain: layout paint;
 }
 
 .hero-glow {
@@ -389,6 +391,9 @@ header.scrolled {
   top: 10%; left: -8%;
   pointer-events: none; z-index: 0;
   animation: glowPulse 8s ease-in-out infinite;
+  /* Couche animée lourde : promue sur sa propre couche GPU + paint isolé */
+  will-change: transform, opacity;
+  contain: layout paint;
 }
 @keyframes glowPulse {
   0%,100% { transform: scale(1) translate(0,0); opacity: 1; }
