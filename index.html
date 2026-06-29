@@ -7,11 +7,26 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  // Consent Mode v2 — refus par defaut tant que l'utilisateur n'a pas accepte (RGPD/CNIL)
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied',
+    'wait_for_update': 500
+  });
+  try { if (localStorage.getItem('sr-consent') === 'granted') {
+    gtag('consent', 'update', { 'analytics_storage': 'granted' });
+  } } catch(e){}
   gtag('js', new Date());
   gtag('config', 'G-DS1HVCTGMS');
 </script>
   <script>document.documentElement.className += ' js';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Favicon — logo SR -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon-96.png" sizes="96x96" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <title>Création de sites web au Havre · Simon Rioult</title>
   <meta name="description" content="Création de sites web sur-mesure au Havre pour restaurants, bars et artisans. Maquette offerte, sans engagement. Par Simon Rioult, web designer au Havre." />
   <link rel="canonical" href="https://simonr.fr/" />
@@ -671,5 +686,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="js/main.js"></script>
+  <script src="js/consent.js" defer></script>
 </body>
 </html>

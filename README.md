@@ -14,6 +14,7 @@ A cinematic, scroll-driven experience. Zero dependencies, zero frameworks — pu
 
 **Libraries (CDN only, no npm/bundler):**
 - [GSAP 3.12.5 + ScrollTrigger](https://gsap.com) — scroll-triggered reveal animations
+- **Google Analytics 4** (`gtag.js`, id `G-DS1HVCTGMS`) — on every page, injected right after `<meta charset>` (added 2026-06-25). See [Analytics & SEO](#analytics--seo-2026-06-25--2026-06-27).
 
 > **Lenis (smooth scroll) removed 2026-06-18** — it intercepted wheel/trackpad input and caused desktop scroll jank. Scrolling is now 100% native. See [Performance](#performance--scroll-2026-06-18).
 
@@ -31,7 +32,8 @@ portfolio V3 vs code/
 ├── css/
 │   └── style.css                   ← All styles — cinematic agency theme
 ├── js/
-│   └── main.js                     ← All JS behaviours
+│   ├── main.js                     ← All JS behaviours
+│   └── consent.js                  ← Bandeau cookies RGPD (Consent Mode v2) — 2026-06-29
 ├── img/                            ← All photos: JPEG, ~26 MB total (see Images note)
 │   ├── hortense/                   ← 33 photos for Maison Hortense (kebab-case filenames)
 │   ├── plomberie/                  ← 21 photos for Atlantique Plomberie (p01–p21.jpg)
@@ -45,7 +47,12 @@ portfolio V3 vs code/
 ├── voltaique-bar-demo.html         ← Signature demo: Atlantique Plomberie (home)
 ├── plomberie-services.html         ← Atlantique Plomberie — Services page
 ├── plomberie-galerie.html          ← Atlantique Plomberie — Gallery page
-└── plomberie-contact.html          ← Atlantique Plomberie — Contact & devis page
+├── plomberie-contact.html          ← Atlantique Plomberie — Contact & devis page
+├── robots.txt                      ← SEO — allow all + sitemap pointer (2026-06-27)
+├── sitemap.xml                     ← SEO — homepage + mentions-legales only (2026-06-27)
+├── favicon.svg                     ← Favicon SR (fond crème, S ink + R corail) — 2026-06-29
+├── apple-touch-icon.png            ← Icône iOS 180×180 (écran d'accueil) — 2026-06-29
+└── favicon-96.png                  ← Fallback PNG 96×96 — 2026-06-29
 ```
 
 > **Note:** the trailing space in the folder name `portfolio V3 vs code ` is real — keep it when `cd`-ing.
@@ -73,6 +80,26 @@ A round of scroll-performance fixes after persistent desktop jank (mobile was al
 - **Also removed:** `scroll-behavior: smooth` (fought Lenis), the `body` `background-color` CSS transition (GSAP drives it), and the header `backdrop-filter` blur lowered 20px → 10px.
 
 The only scroll-driven JS left is the **Process/Showstopper pin** (cheap — toggles classes at phase boundaries, no per-frame tween) plus one-shot reveal animations.
+
+---
+
+## Analytics & SEO (2026-06-25 → 2026-06-27)
+
+**Google Analytics 4** — `gtag.js` (measurement id `G-DS1HVCTGMS`) injected **right after `<meta charset>` on every deployed HTML page** (12 pages, incl. demos), now gated behind a consent banner (see [cookie banner](#analytics--seo-2026-06-25--2026-06-27) note below). Check hits in GA **Realtime**, not the home banner (which lags 24-48h). Note: Cloudflare's bot protection returns **403 to Google's Tag Assistant crawler**, so "tag not detected" there is a **false negative** — real browsers load it fine (verified: a browser-UA fetch of `simonr.fr` returns 200 with the tag present).
+
+**On-page SEO (index.html):**
+- `<title>` → *"Création de sites web au Havre · Simon Rioult"*; meta description reworked with local keywords.
+- `<link rel="canonical">`, `geo.*` meta, **Open Graph** tags (link preview when sharing).
+- **JSON-LD** `ProfessionalService` — `areaServed` Le Havre, no street address (service-area business).
+- Single `<h1>` (the hero headline) — kept as-is for branding.
+
+**Crawl control:**
+- `robots.txt` (allow all) + `sitemap.xml` (homepage + mentions-legales only).
+- **All demo pages carry `<meta name="robots" content="noindex, nofollow">`** (2026-06-27) so the fictional demo businesses never rank — they stay reachable via the gallery.
+
+**Off-site (TODO, by Simon):** Google Search Console (submit `sitemap.xml`) + Google Business Profile (service-area, address hidden).
+
+> ✅ **Cookie consent banner — done 2026-06-29.** GA4 runs in **Consent Mode v2** (`analytics_storage: denied` by default on every page); `js/consent.js` self-injects an Accepter/Refuser bar (brand palette, ink + coral). Choice stored in `localStorage` (`sr-consent`); a returning visitor who accepted re-grants before `gtag('config')` so their pageview is counted. No cookie is set before consent.
 
 ---
 
@@ -116,7 +143,7 @@ Full viewport. Giant Playfair Display headline (`clamp(4rem → 12rem)`) in 3 ma
 - Line 2: "qu'on retient"
 - Line 3: coral "nous font vivre une expérience."
 - Sub-text: "Ils créent une impression durable dès la première visite en ligne. *Restaurants, bars et artisans du Havre.*"
-- Kicker, CTA pair, badge (6+ Sites), scroll indicator, animated coral glow radial.
+- Kicker, CTA pair, badge (**6+ Démos sur-mesure** — reworded 2026-06-25, was "6+ Sites livrés"), scroll indicator, animated coral glow radial (`.hero-glow`/`.s-hero` isolated with `contain` + `will-change` for perf).
 
 ### 02 — Marquee (coral `#E84C1A`)
 Bold full-colour strip: "Site Vitrine • Menu en ligne • Réservation • Design sur-mesure • Maquette offerte • Le Havre •" — infinite CSS scroll, pauses on hover.
@@ -125,7 +152,7 @@ Bold full-colour strip: "Site Vitrine • Menu en ligne • Réservation • Des
 Full viewport word reveal: foreground panel wipes away (GSAP `scaleX`), word clips in (`clip-path`).
 
 ### 04 — Impact / Stats (forest `#1B3528`)
-2×2 grid on dark green. Each card staggers in on scroll. Animated count-up: `100%`, `8 jours`, `0 €`, `6+`.
+2×2 grid on dark green. Each card staggers in on scroll. Animated count-up: `100%`, `8 jours`, `0 €`, `6+`. The `6+` card now reads **"Démos sur-mesure"** (honest framing — was "Commerces transformés", reworded 2026-06-25).
 
 ### 05 — Giant word "BARS & CAFÉS" (cream)
 
@@ -145,7 +172,7 @@ Cards: L'Écume · Le Tigre Doré · Le Margaux · Maison Hortense.
 ### 10 — Tarifs (ink `#18140E`)
 Two pricing cards stagger in. Prices count up on entry. Coral checkmark list. Featured card has coral border glow.
 - Site vitrine — from 359 €
-- Site signature — from 749 €
+- Site signature — from 749 € — first checkmark now reads **« Inclus tout ce que contient le pack Vitrine »** (added 2026-06-25)
 
 Below the cards: an optional **monthly maintenance** block (`.suivi`, added 2026-06-17) — two plans, rendered static (no scroll-reveal):
 - **Sérénité — 24,99 €/mois** (2 modifications/month, managed hosting, 48h reply)
@@ -185,7 +212,7 @@ Uses **GSAP + ScrollTrigger** (CDN) for scroll-triggered animations. Scrolling i
 | **Scroll progress bar + nav** | `#spb` coral line driven by `transform: scaleX`. One **rAF-batched** scroll listener handles both the bar and the sticky nav; page height is **cached** (recomputed on resize / load / ScrollTrigger refresh) to avoid a `scrollHeight` reflow every scroll tick. |
 | **Sticky nav** | Adds `.scrolled` (cream frosted glass) after 24px. |
 | **Burger menu** | Toggles `.open` on `#mobMenu`, locks body scroll. Primary navigation on mobile. |
-| **Custom cursor** | `#cur` coral dot + `#cur-ring` lagging ring (0.11 lerp), positioned via `transform: translate3d` (GPU, no per-frame layout). Desktop only. |
+| **Custom cursor** | `#cur` sharp coral dot (with glow) + `#cur-ring` **luminous coral halo** that trails (0.11 lerp; blurred radial gradient), positioned via `transform: translate3d` (GPU). Halo swells on hover. Desktop only. (Was an outlined ring until 2026-06-27.) |
 | **Magnetic buttons** | `.btn` elements drift toward cursor, spring back on leave. Desktop + non-reduced-motion only. |
 | **Smooth anchor scroll** | `href="#…"` links use native `window.scrollTo({ behavior: 'smooth' })`, `offset: -76`. (The old `lenis.scrollTo()` branch is dead code now that `lenis` is always `null`.) |
 | **Page exit curtain** | Internal links trigger `#page-curtain.closing` split-panels, then navigate after 620ms. |
@@ -200,7 +227,7 @@ All interactive JS features guard on `(hover: hover)` (touch) and `prefers-reduc
 | System | Description |
 |---|---|
 | **Hero mask reveal** | `.mask-line { overflow: hidden }` clips `.mask-inner`. GSAP drives `y: 110%→0%` on load. |
-| **Hero glow** | Coral radial gradient div behind headline — `glowPulse` keyframe (8s loop). |
+| **Hero glow** | Coral radial gradient div behind headline — `glowPulse` keyframe (8s loop). `.hero-glow` + `.s-hero` carry `contain: layout paint` + `will-change: transform` to isolate repaints (2026-06-27). |
 | **Scroll indicator** | `.scroll-line` draws/retracts via `scrollDrop` keyframe. |
 | **Marquee** | `translateX(-50%)` roll at 22s. Pauses on hover. |
 | **Word panel wipe / clip reveal** | `.word-panel` `scaleX: 1→0` + `.word-text` `clip-path` reveal. |
@@ -217,7 +244,7 @@ All systems respect `prefers-reduced-motion: reduce` — durations collapse to `
 
 ## Demo pages
 
-Each demo is a self-contained single-file site with a "← Retour au portfolio" pill linking back to `index.html`.
+Each demo is a self-contained single-file site with a "← Retour au portfolio" pill linking back to **`index.html#realisations`** (lands on the gallery, not the top — changed 2026-06-27). Next to the pill sits a fixed **tier badge** (gold *"✦ Démo Signature"* or translucent *"Démo Vitrine"*, added 2026-06-20). Every demo page is **`noindex, nofollow`** so only the portfolio itself ranks (see [Analytics & SEO](#analytics--seo-2026-06-25--2026-06-27)).
 
 | File | Establishment | Theme | Type |
 |---|---|---|---|
@@ -257,13 +284,13 @@ Standalone page, self-contained styles. Required by French LCEN law.
 - SIRET: *en cours d'immatriculation* (fill on registration — 2026-07-05)
 - Hébergeur: **GitHub, Inc. (GitHub Pages)** + **Cloudflare** (CDN/DNS) — corrected 2026-06-17 (the file previously listed Netlify, which was wrong).
 
-**No cookie banner needed** — zero tracking scripts, no analytics, no third-party cookies.
+> ✅ **Cookie banner — done 2026-06-29.** GA4 (added 2026-06-25) is now gated behind a CNIL/RGPD consent bar via **Consent Mode v2** + `js/consent.js`. See [Analytics & SEO](#analytics--seo-2026-06-25--2026-06-27).
 
 ---
 
 ## Global rules for demo sites
 
-- "← Retour au portfolio" pill is `position: fixed; bottom: 28px` — never at top.
+- "← Retour au portfolio" pill links to `index.html#realisations`; a tier badge (Signature/Vitrine) sits beside it. Position varies per demo (top-centre or bottom-centre), never over the main visual.
 - Scroll reveal hidden state gated behind `html.js` class, 1800ms safety timeout.
 - All JS effects disabled on touch devices (`(hover: hover)` check).
 
@@ -315,3 +342,7 @@ New GitHub repo → push static files → enable Pages (main/root) → in Cloudf
 - **SIRET:** fill in `mentions-legales.html` once registered (2026-07-05).
 - Map coordinates in demo pages point to Le Havre city centre — update to real addresses once known.
 - Phone numbers and addresses in demo pages are fictional.
+- **Cookie consent banner (CNIL/RGPD)** — ✅ done 2026-06-29 (Consent Mode v2 + `js/consent.js`).
+- **Favicon missing** — no `<link rel="icon">`, so `/favicon.ico` 404s on every page (offered, not done).
+- **Off-site SEO** — set up Google Search Console (submit `sitemap.xml`) + Google Business Profile (service-area, no public address).
+- **Prospecting** — pattern for free prospect maquettes: build at `simonr.fr/<client>`, set `noindex`, send the link, take it down if ghosted.
