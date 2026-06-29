@@ -175,8 +175,8 @@ Two pricing cards stagger in. Prices count up on entry. Coral checkmark list. Fe
 - Site signature — from 749 € — first checkmark now reads **« Inclus tout ce que contient le pack Vitrine »** (added 2026-06-25)
 
 Below the cards: an optional **monthly maintenance** block (`.suivi`, added 2026-06-17) — two plans, rendered static (no scroll-reveal):
-- **Sérénité — 24,99 €/mois** (2 modifications/month, managed hosting, 48h reply)
-- **Sérénité + — 49,99 €/mois** (5 modifications/month + seasonal updates + 24h priority)
+- **Sérénité — 24,99 €/mois** (2 modifications/month, managed hosting, monitored)
+- **Sérénité + — 49,99 €/mois** (5 modifications/month + seasonal updates + "réponse prioritaire et très rapide" — no fixed SLA hours, reworded 2026-06-29)
 
 The section sub-title was reworded from "Pas d'abonnement" to reflect the optional monthly suivi.
 
