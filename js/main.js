@@ -388,16 +388,51 @@ if (!reducedMotion) {
      mobile always felt smooth). Now it's a natively scrollable strip:
      trackpad swipe + click-and-drag, with no work tied to page scroll. */
   const realOuter = qs('.real-track-outer');
+  const rpBar     = qs('.real-progress');
   const rpFill    = qs('.rp-fill');
 
   if (realOuter) {
-    /* Progress bar follows the gallery's own horizontal scroll (cheap —
-       only fires while the gallery is scrolled, never on page scroll). */
-    if (rpFill) {
-      realOuter.addEventListener('scroll', () => {
-        const max = realOuter.scrollWidth - realOuter.clientWidth;
-        rpFill.style.width = (max > 0 ? (realOuter.scrollLeft / max) * 100 : 0).toFixed(1) + '%';
-      }, { passive: true });
+    /* Scrollbar = un "thumb" dont la largeur = portion visible et la position
+       = scrollLeft. Suit le scroll de la galerie (trackpad / drag / molette). */
+    if (rpBar && rpFill) {
+      const clamp01 = v => (v < 0 ? 0 : v > 1 ? 1 : v);
+
+      const syncBar = () => {
+        const max    = realOuter.scrollWidth - realOuter.clientWidth;
+        const trackW = rpBar.clientWidth;
+        const ratio  = realOuter.clientWidth / realOuter.scrollWidth;
+        const thumbW = Math.max(ratio * trackW, 44);
+        const travel = trackW - thumbW;
+        const frac   = max > 0 ? realOuter.scrollLeft / max : 0;
+        rpFill.style.width = thumbW + 'px';
+        rpFill.style.transform = 'translateX(' + (frac * travel) + 'px)';
+      };
+
+      realOuter.addEventListener('scroll', syncBar, { passive: true });
+      window.addEventListener('resize', syncBar);
+      window.addEventListener('load', syncBar);
+      if (window.ScrollTrigger) ScrollTrigger.addEventListener('refresh', syncBar);
+      syncBar();
+
+      /* On peut attraper et glisser la barre elle-même (souris sans swipe). */
+      let barDrag = false;
+      const barScrollTo = clientX => {
+        const rect   = rpBar.getBoundingClientRect();
+        const thumbW = rpFill.offsetWidth;
+        const travel = rect.width - thumbW;
+        const x      = clientX - rect.left - thumbW / 2;   /* centre le thumb sous le curseur */
+        const frac   = travel > 0 ? clamp01(x / travel) : 0;
+        realOuter.scrollLeft = frac * (realOuter.scrollWidth - realOuter.clientWidth);
+      };
+      rpBar.addEventListener('pointerdown', e => {
+        barDrag = true; rpBar.classList.add('rp-dragging');
+        try { rpBar.setPointerCapture(e.pointerId); } catch (_) {}
+        barScrollTo(e.clientX); e.preventDefault();
+      });
+      rpBar.addEventListener('pointermove', e => { if (barDrag) barScrollTo(e.clientX); });
+      const endBarDrag = () => { barDrag = false; rpBar.classList.remove('rp-dragging'); };
+      rpBar.addEventListener('pointerup', endBarDrag);
+      rpBar.addEventListener('pointercancel', endBarDrag);
     }
 
     /* Click-and-drag to scroll (mouse users; trackpads swipe natively). */

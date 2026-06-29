@@ -51,8 +51,8 @@ portfolio V3 vs code/
 ├── robots.txt                      ← SEO — allow all + sitemap pointer (2026-06-27)
 ├── sitemap.xml                     ← SEO — homepage + mentions-legales only (2026-06-27)
 ├── favicon.svg                     ← Favicon SR (fond crème, S ink + R corail) — 2026-06-29
-├── apple-touch-icon.png            ← Icône iOS 180×180 (écran d'accueil) — 2026-06-29
-└── favicon-96.png                  ← Fallback PNG 96×96 — 2026-06-29
+├── favicon-16/32/96.png            ← Fallbacks PNG (Safari/Windows préfèrent le PNG au SVG) — 2026-06-29
+└── apple-touch-icon.png            ← Icône iOS 180×180 (écran d'accueil) — 2026-06-29
 ```
 
 > **Note:** the trailing space in the folder name `portfolio V3 vs code ` is real — keep it when `cd`-ing.
@@ -163,7 +163,7 @@ Full viewport word reveal: foreground panel wipes away (GSAP `scaleX`), word cli
 ### 07 — Giant word "LE HAVRE" (coral)
 
 ### 08 — Réalisations — Horizontal gallery (cream)
-**Native horizontal scroll** strip (`.real-track-outer` `overflow-x`). Navigate by **click-and-drag** (mouse) or **swipe** (trackpad); the progress bar follows the gallery's own scroll position. Hover = image `scale(1.07)` + card `translateY(-8px)` + coral border. Each card has a `.rc-tier` badge: gold **"★ Signature"** or translucent **"Vitrine"**.
+**Native horizontal scroll** strip (`.real-track-outer` `overflow-x`). Navigate by **click-and-drag** (mouse), **swipe** (trackpad), or by **dragging the scrollbar** under the gallery (`.real-progress` is now a draggable thumb — key for Windows/mouse users with no trackpad swipe, added 2026-06-29). The thumb's width = visible portion, position = `scrollLeft`. Hover = image `scale(1.07)` + card `translateY(-8px)` + coral border. Each card has a `.rc-tier` badge: gold **"★ Signature"** or translucent **"Vitrine"**.
 Cards: L'Écume · Le Tigre Doré · Le Margaux · Maison Hortense.
 > Previously a GSAP `pin` + `scrub` (vertical scroll drove horizontal movement) — replaced with native scroll on **all** viewports for smoothness (see [Performance](#performance--scroll-2026-06-18)). On mobile the card image keeps a fixed `aspect-ratio` so the photo and its Vitrine/Signature badge stay visible.
 
@@ -205,7 +205,7 @@ Uses **GSAP + ScrollTrigger** (CDN) for scroll-triggered animations. Scrolling i
 | **Hero stagger timeline** | GSAP timeline: kicker fades up, `.mask-inner` lines slide from `translateY(110%)`, sub/actions/badge/scroll-ind cascade. Fires via `runHeroAnim()` after loader exits. |
 | **BG colour morph** | Each `[data-scene]` element triggers `gsap.to('body', { backgroundColor })` on enter/back. 0.85s ease-out. |
 | **Giant word reveals** | Per `.s-word`: foreground `.word-panel` `scaleX: 1→0` + `.word-text` `clip-path: inset(0 100%→0%)`. Triggered once at `top 65%`. |
-| **Horizontal gallery (native)** | Native `overflow-x` scroll on `.real-track-outer` + pointer **click-and-drag** (6px move threshold so card links still click). Progress bar follows `scrollLeft`. (Was GSAP `pin` + `scrub` — removed for performance.) |
+| **Horizontal gallery (native)** | Native `overflow-x` scroll on `.real-track-outer` + pointer **click-and-drag** (6px move threshold so card links still click). The `.real-progress` bar is a **draggable scrollbar** (`syncBar()` sizes/positions the `.rp-fill` thumb; `barScrollTo()` maps a pointer drag back to `scrollLeft`). (Was GSAP `pin` + `scrub` — removed for performance.) |
 | **Process pinned scroll** | ScrollTrigger pins `.proc-sticky` for the `400vh` section. `onUpdate` fires `setPhase()` — swaps `.active` phase, `.visible` browser layer, dot indicators. |
 | **Count-up animations** | `[data-count]` and `.tc-big[data-count]`: GSAP object tween `{ val: 0 → target }` on ScrollTrigger `onEnter`. |
 | **Parallax headline (removed)** | **Removed 2026-06-18** — was a per-frame `scrub` animation contributing to scroll jank. |

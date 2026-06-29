@@ -935,22 +935,28 @@ header.scrolled {
 .rc-cta .arr { transition: transform 0.3s var(--ease); }
 .real-card:hover .rc-cta .arr { transform: translateX(4px); }
 
-/* Progress bar */
+/* Scrollbar draggable de la galerie (clé pour Windows/souris : pas de swipe trackpad) */
 .real-progress {
   flex-shrink: 0;
-  height: 2px;
+  position: relative;
+  height: 8px;
   background: var(--cream-3);
   margin: 0 var(--gut) clamp(12px,2vh,20px);
-  border-radius: 2px;
-  overflow: hidden;
+  border-radius: 100px;
+  touch-action: none;            /* permet de glisser la barre sans scroller la page */
 }
 .rp-fill {
+  position: absolute;
+  top: 0; left: 0;
   height: 100%;
-  width: 0%;
+  width: 44px;                   /* largeur réelle posée par le JS (= portion visible) */
   background: var(--coral);
-  border-radius: 2px;
-  transition: width 0.1s linear;
+  border-radius: 100px;
+  transition: transform 0.08s linear, background 0.2s var(--ease);
 }
+.real-progress:hover .rp-fill,
+.real-progress.rp-dragging .rp-fill { background: var(--coral-2); }
+.real-progress.rp-dragging .rp-fill { transition: background 0.2s var(--ease); }
 
 /* ============================================================
    S10 — TARIFS

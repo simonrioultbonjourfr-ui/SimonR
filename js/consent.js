@@ -26,7 +26,8 @@
     '#sr-cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:99999;max-width:560px;margin:0 auto;' +
     'background:#18140E;color:#FAF6EF;border:1px solid rgba(250,246,239,.14);border-radius:16px;' +
     'padding:20px 22px;box-shadow:0 18px 50px rgba(0,0,0,.35);font-family:"DM Sans",system-ui,sans-serif;' +
-    'opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .4s ease}' +
+    'cursor:auto;opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .4s ease}' +
+    '#sr-cookie a{cursor:pointer}' +
     '#sr-cookie.in{opacity:1;transform:translateY(0)}' +
     '#sr-cookie p{margin:0 0 14px;font-size:14px;line-height:1.55;color:rgba(250,246,239,.82)}' +
     '#sr-cookie a{color:#FF6633;text-decoration:underline}' +
