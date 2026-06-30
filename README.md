@@ -175,8 +175,8 @@ Two pricing cards stagger in. Prices count up on entry. Coral checkmark list. Fe
 - Site signature — from 550 € (was 749 € until 2026-06-30) — first checkmark now reads **« Inclus tout ce que contient le pack Vitrine »** (added 2026-06-25)
 
 Below the cards: an optional **monthly maintenance** block (`.suivi`, added 2026-06-17) — two plans, rendered static (no scroll-reveal):
-- **Sérénité — 24,99 €/mois** (2 modifications/month, managed hosting, monitored)
-- **Sérénité + — 49,99 €/mois** (5 modifications/month + seasonal updates + "réponse prioritaire et très rapide" — no fixed SLA hours, reworded 2026-06-29)
+- **Sérénité — 24,89 €/mois** (2 modifications/month, managed hosting, monitored)
+- **Sérénité + — 39 €/mois** (5 modifications/month + seasonal updates + "réponse prioritaire et très rapide" — no fixed SLA hours, reworded 2026-06-29; prices 24,99/49,99 → 24,89/39 on 2026-06-30)
 
 The section sub-title was reworded from "Pas d'abonnement" to reflect the optional monthly suivi.
 
@@ -212,7 +212,7 @@ Uses **GSAP + ScrollTrigger** (CDN) for scroll-triggered animations. Scrolling i
 | **Scroll progress bar + nav** | `#spb` coral line driven by `transform: scaleX`. One **rAF-batched** scroll listener handles both the bar and the sticky nav; page height is **cached** (recomputed on resize / load / ScrollTrigger refresh) to avoid a `scrollHeight` reflow every scroll tick. |
 | **Sticky nav** | Adds `.scrolled` (cream frosted glass) after 24px. |
 | **Burger menu** | Toggles `.open` on `#mobMenu`, locks body scroll. Primary navigation on mobile. |
-| **Custom cursor** | `#cur` sharp **ink/black dot** (with soft glow) + `#cur-ring` **soft black halo** that trails (0.11 lerp; blurred radial gradient), positioned via `transform: translate3d` (GPU). Halo swells on hover. Desktop only. (Coral until 2026-06-30, outlined ring until 2026-06-27.) |
+| **Custom cursor** | `#cur` sharp **ink/black dot** (with soft glow) + `#cur-ring` **soft black halo** that trails (0.11 lerp; blurred radial gradient), positioned via `transform: translate3d` (GPU). Halo swells on hover. **Adaptive (2026-06-30):** on dark scenes (`data-scene="ink"`/`"forest"`) an IntersectionObserver (thin centre band, runs even in reduced-motion) adds `body.cursor-on-dark` → dot + halo turn **coral** so it stays visible. Desktop only. (Coral until 2026-06-30, outlined ring until 2026-06-27.) |
 | **Magnetic buttons** | `.btn` elements drift toward cursor, spring back on leave. Desktop + non-reduced-motion only. |
 | **Smooth anchor scroll** | `href="#…"` links use native `window.scrollTo({ behavior: 'smooth' })`, `offset: -76`. (The old `lenis.scrollTo()` branch is dead code now that `lenis` is always `null`.) |
 | **Page exit curtain** | Internal links trigger `#page-curtain.closing` split-panels, then navigate after 620ms. |

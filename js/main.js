@@ -219,6 +219,19 @@ if (!touch) {
     el.addEventListener('mouseenter', () => { cur.classList.add('hover'); ring.classList.add('hover'); });
     el.addEventListener('mouseleave', () => { cur.classList.remove('hover'); ring.classList.remove('hover'); });
   });
+
+  /* Curseur adaptatif : sur les scènes sombres (ink/forest) le point noir
+     disparaîtrait → on le passe en corail + aura corail. Détecté via une fine
+     bande au centre du viewport (≈ le fond visible derrière le curseur).
+     Indépendant de GSAP, donc actif même en reduced-motion. */
+  const darkEls = qsa('[data-scene="ink"], [data-scene="forest"]');
+  if (darkEls.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => e.target.toggleAttribute('data-dark-active', e.isIntersecting));
+      document.body.classList.toggle('cursor-on-dark', !!qs('[data-dark-active]'));
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    darkEls.forEach(el => io.observe(el));
+  }
 }
 
 /* ================================================================
