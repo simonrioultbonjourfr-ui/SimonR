@@ -619,7 +619,7 @@ header.scrolled {
    S06 — PROCESS / SHOWSTOPPER
    ============================================================ */
 .s-process { position: relative; }
-.proc-pin-wrap { position: relative; height: 400vh; }
+.proc-pin-wrap { position: relative; height: 260vh; }
 .proc-sticky {
   position: sticky; top: 0; height: 100vh;
   display: flex; align-items: stretch;
@@ -1320,7 +1320,7 @@ footer { border-top: 1px solid rgba(250,246,239,0.07); }
     width: 100%;
   }
   .proc-browser { max-width: 400px; }
-  .proc-pin-wrap { height: 350vh; }
+  .proc-pin-wrap { height: 230vh; }
   .tarifs-grid { grid-template-columns: 1fr; }
   .suivi-grid { grid-template-columns: 1fr; }
   .faq-layout { grid-template-columns: 1fr; gap: 2.5rem; }

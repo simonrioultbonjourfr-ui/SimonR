@@ -157,8 +157,8 @@ Full viewport word reveal: foreground panel wipes away (GSAP `scaleX`), word cli
 ### 05 — Giant word "BARS & CAFÉS" (cream)
 
 ### 06 — Process / Showstopper (ink `#18140E`)
-`400vh` pinned section. 4 phases driven by GSAP ScrollTrigger scroll progress. Left: phase text + dot nav. Right: browser mockup with 4 cross-fading layers (empty state → skeleton → emerging brand → Maison Hortense). The mockup is pure CSS/SVG (no images).
-**Mobile (≤900px):** the browser mockup is **stacked below the phase text** (both visible, centered); section reduced to `350vh`.
+`260vh` pinned section (was `400vh` until 2026-06-30 — shortened because the scroll-through felt too long; phase boundaries are proportional to `progress*4` so less height = faster phase changes). 4 phases driven by GSAP ScrollTrigger scroll progress. Left: phase text + dot nav. Right: browser mockup with 4 cross-fading layers (empty state → skeleton → emerging brand → Maison Hortense). The mockup is pure CSS/SVG (no images).
+**Mobile (≤900px):** the browser mockup is **stacked below the phase text** (both visible, centered); section reduced to `230vh`.
 
 ### 07 — Giant word "LE HAVRE" (coral)
 
@@ -206,7 +206,7 @@ Uses **GSAP + ScrollTrigger** (CDN) for scroll-triggered animations. Scrolling i
 | **BG colour morph** | Each `[data-scene]` element triggers `gsap.to('body', { backgroundColor })` on enter/back. 0.85s ease-out. |
 | **Giant word reveals** | Per `.s-word`: foreground `.word-panel` `scaleX: 1→0` + `.word-text` `clip-path: inset(0 100%→0%)`. Triggered once at `top 65%`. |
 | **Horizontal gallery (native)** | Native `overflow-x` scroll on `.real-track-outer` + pointer **click-and-drag** (6px move threshold so card links still click). The `.real-progress` bar is a **draggable scrollbar** (`syncBar()` sizes/positions the `.rp-fill` thumb; `barScrollTo()` maps a pointer drag back to `scrollLeft`). (Was GSAP `pin` + `scrub` — removed for performance.) |
-| **Process pinned scroll** | ScrollTrigger pins `.proc-sticky` for the `400vh` section. `onUpdate` fires `setPhase()` — swaps `.active` phase, `.visible` browser layer, dot indicators. |
+| **Process pinned scroll** | ScrollTrigger pins `.proc-sticky` for the `260vh` section. `onUpdate` fires `setPhase()` — swaps `.active` phase, `.visible` browser layer, dot indicators. |
 | **Count-up animations** | `[data-count]` and `.tc-big[data-count]`: GSAP object tween `{ val: 0 → target }` on ScrollTrigger `onEnter`. |
 | **Parallax headline (removed)** | **Removed 2026-06-18** — was a per-frame `scrub` animation contributing to scroll jank. |
 | **Scroll progress bar + nav** | `#spb` coral line driven by `transform: scaleX`. One **rAF-batched** scroll listener handles both the bar and the sticky nav; page height is **cached** (recomputed on resize / load / ScrollTrigger refresh) to avoid a `scrollHeight` reflow every scroll tick. |
