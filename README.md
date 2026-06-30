@@ -212,7 +212,7 @@ Uses **GSAP + ScrollTrigger** (CDN) for scroll-triggered animations. Scrolling i
 | **Scroll progress bar + nav** | `#spb` coral line driven by `transform: scaleX`. One **rAF-batched** scroll listener handles both the bar and the sticky nav; page height is **cached** (recomputed on resize / load / ScrollTrigger refresh) to avoid a `scrollHeight` reflow every scroll tick. |
 | **Sticky nav** | Adds `.scrolled` (cream frosted glass) after 24px. |
 | **Burger menu** | Toggles `.open` on `#mobMenu`, locks body scroll. Primary navigation on mobile. |
-| **Custom cursor** | `#cur` sharp coral dot (with glow) + `#cur-ring` **luminous coral halo** that trails (0.11 lerp; blurred radial gradient), positioned via `transform: translate3d` (GPU). Halo swells on hover. Desktop only. (Was an outlined ring until 2026-06-27.) |
+| **Custom cursor** | `#cur` sharp **ink/black dot** (with soft glow) + `#cur-ring` **soft black halo** that trails (0.11 lerp; blurred radial gradient), positioned via `transform: translate3d` (GPU). Halo swells on hover. Desktop only. (Coral until 2026-06-30, outlined ring until 2026-06-27.) |
 | **Magnetic buttons** | `.btn` elements drift toward cursor, spring back on leave. Desktop + non-reduced-motion only. |
 | **Smooth anchor scroll** | `href="#…"` links use native `window.scrollTo({ behavior: 'smooth' })`, `offset: -76`. (The old `lenis.scrollTo()` branch is dead code now that `lenis` is always `null`.) |
 | **Page exit curtain** | Internal links trigger `#page-curtain.closing` split-panels, then navigate after 620ms. |

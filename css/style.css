@@ -145,24 +145,24 @@ h1,h2,h3,h4 {
 }
 
 /* ---- Custom cursor ---- */
-/* Point net corail (colle au pointeur) avec un léger glow */
+/* Point net noir (colle au pointeur) avec un léger glow */
 #cur {
   position: fixed; top: 0; left: 0;
   width: 8px; height: 8px;
-  background: var(--coral);
+  background: var(--ink);
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
-  box-shadow: 0 0 8px rgba(232,76,26,0.65);
+  box-shadow: 0 0 8px rgba(24,20,14,0.55);
   /* Positioned via transform in JS — compositor-only, no per-frame layout */
   will-change: transform;
   transition: width 0.22s var(--ease), height 0.22s var(--ease), opacity 0.3s;
 }
-/* Halo lumineux corail qui traîne derrière le point */
+/* Halo noir adouci qui traîne derrière le point */
 #cur-ring {
   position: fixed; top: 0; left: 0;
   width: 54px; height: 54px;
-  background: radial-gradient(circle, rgba(232,76,26,0.5) 0%, rgba(232,76,26,0.16) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(24,20,14,0.42) 0%, rgba(24,20,14,0.14) 45%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
