@@ -171,12 +171,12 @@ Cards: L'Écume · Le Tigre Doré · Le Margaux · Maison Hortense.
 
 ### 10 — Tarifs (ink `#18140E`)
 Two pricing cards stagger in. Prices count up on entry. Coral checkmark list. Featured card has coral border glow.
-- Site vitrine — from 250 € (was 359 € until 2026-06-30)
-- Site signature — from 550 € (was 749 € until 2026-06-30) — first checkmark now reads **« Inclus tout ce que contient le pack Vitrine »** (added 2026-06-25)
+- Site vitrine — from 249 € (359 € → 250 € → 249 €)
+- Site signature — from 549 € (749 € → 550 € → 549 €) — first checkmark now reads **« Inclus tout ce que contient le pack Vitrine »** (added 2026-06-25)
 
 Below the cards: an optional **monthly maintenance** block (`.suivi`, added 2026-06-17) — two plans, rendered static (no scroll-reveal):
 - **Sérénité — 24,89 €/mois** (2 modifications/month, managed hosting, monitored)
-- **Sérénité + — 39 €/mois** (5 modifications/month + seasonal updates + "réponse prioritaire et très rapide" — no fixed SLA hours, reworded 2026-06-29; prices 24,99/49,99 → 24,89/39 on 2026-06-30)
+- **Sérénité + — 39,89 €/mois** (5 modifications/month + seasonal updates + "réponse prioritaire et très rapide" — no fixed SLA hours, reworded 2026-06-29; prices 24,99/49,99 → 24,89/39,89)
 
 The section sub-title was reworded from "Pas d'abonnement" to reflect the optional monthly suivi.
 
