@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23f5ede0'/%3E%3Ctext x='50' y='71' font-family='Georgia,serif' font-size='50' font-weight='700' text-anchor='middle' fill='%23b23a2b'%3ELF%3C/text%3E%3C/svg%3E" />
+<title>Le Funiculaire · Brasserie · Le Havre</title>
+<meta name="description" content="Le Funiculaire, brasserie au Havre. Cuisine faite maison, esprit brasserie parisienne, belle terrasse. Repas sur place ou à emporter." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #2b0a10;
+    --bg2: #3a0f16;
+    --paper: #f5ede0;
+    --ink: #2b0a10;
+    --gold: #c9a24a;
+    --red: #b23a2b;
+    --foam: #f5ede0;
+    --muted: rgba(245,237,224,0.62);
+    --line: rgba(245,237,224,0.16);
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "Manrope", sans-serif;
+    --mono: "Space Mono", monospace;
+    --gut: clamp(20px, 5vw, 64px);
+    --maxw: 1180px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--foam); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: var(--gold); color: var(--ink); }
+  a { color: inherit; text-decoration: none; }
+  h1,h2,h3 { font-family: var(--serif); font-weight: 500; line-height: 1.03; letter-spacing: -0.01em; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gut); }
+  .eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); display: inline-flex; align-items: center; gap: 0.7em; }
+  .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--gold); opacity: 0.7; }
+
+  /* Bandeau discret "aperçu / maquette" */
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 60; display: flex; justify-content: center; padding: 12px; pointer-events: none; }
+  .apercu { pointer-events: auto; background: rgba(43,10,16,0.6); backdrop-filter: blur(12px); border: 1px solid var(--line); color: var(--foam); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.6em 1.1em; border-radius: 100px; }
+
+  nav.site { position: absolute; top: 0; left: 0; right: 0; z-index: 50; }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 90px; padding-top: 30px; }
+  .brand { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; letter-spacing: 0.01em; }
+  .brand b { color: var(--gold); font-weight: 600; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--muted); transition: color 0.25s var(--ease); }
+  .nav-links a:hover { color: var(--foam); }
+  .cta { display: inline-flex; align-items: center; gap: 0.5em; font-weight: 600; font-size: 0.9rem; padding: 0.7em 1.5em; border-radius: 100px; background: var(--gold); color: var(--ink); border: 1px solid var(--gold); transition: transform 0.3s var(--ease), background 0.3s var(--ease); }
+  .cta:hover { transform: translateY(-2px); background: var(--foam); border-color: var(--foam); }
+  .cta-ghost { background: transparent; color: var(--foam); border-color: var(--line); }
+  .cta-ghost:hover { background: var(--foam); color: var(--ink); border-color: var(--foam); }
+
+  .hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 130px 0 80px; background:
+      radial-gradient(120% 80% at 80% -10%, rgba(178,58,43,0.55), transparent 60%),
+      radial-gradient(90% 60% at 0% 110%, rgba(201,162,74,0.2), transparent 60%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); }
+  .hero-in { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(36px,5vw,72px); align-items: center; width: 100%; }
+  .hero h1 { font-size: clamp(3.2rem, 9vw, 7rem); line-height: 0.92; margin: 0.3em 0 0.35em; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero p.lede { font-size: clamp(1.1rem, 1.8vw, 1.35rem); color: var(--muted); max-width: 40ch; }
+  .hero-cta { display: flex; gap: 0.9rem; margin-top: 2.2rem; flex-wrap: wrap; }
+
+  /* Zone photo (remplacer background par la vraie photo une fois reçue) */
+  .ph { position: relative; overflow: hidden; border: 1px solid var(--line); background:
+      repeating-linear-gradient(135deg, rgba(245,237,224,0.05) 0 14px, transparent 14px 28px),
+      linear-gradient(160deg, #4a121a, #7a2018 70%, #b23a2b); }
+  .ph .cap { position: absolute; bottom: 16px; left: 18px; font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: var(--foam); text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
+  .hero-figure { aspect-ratio: 3/4; border-radius: 18px; }
+
+  .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .strip-in { display: flex; flex-wrap: wrap; gap: 1.4rem 3rem; padding: 1.4rem 0; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .strip-in span { display: inline-flex; align-items: center; gap: 0.6em; }
+  .strip-in span::before { content: "◆"; color: var(--gold); font-size: 0.6em; }
+
+  .photo-band { height: clamp(220px,32vw,380px); }
+
+  section { padding: clamp(80px,12vh,140px) 0; }
+  .sec-head { max-width: 60ch; margin-bottom: clamp(40px,6vh,64px); }
+  .sec-head h2 { font-size: clamp(2.4rem,6vw,4rem); margin-top: 0.4em; }
+  .sec-head p { margin-top: 1rem; color: var(--muted); font-size: 1.06rem; max-width: 50ch; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr 0.75fr; gap: clamp(36px,6vw,80px); align-items: center; }
+  .about-img { aspect-ratio: 2/3; border-radius: 14px; min-height: 240px; }
+  .about-lead { font-family: var(--serif); font-size: clamp(1.7rem,3.4vw,2.6rem); line-height: 1.2; }
+  .about-lead em { font-style: italic; color: var(--gold); }
+  .about-body p { color: var(--muted); margin-top: 1rem; font-size: 1.04rem; }
+
+  .menu { background: var(--paper); color: var(--ink); }
+  .menu .eyebrow { color: var(--red); } .menu .eyebrow::before { background: var(--red); }
+  .menu .sec-head h2 { color: var(--ink); } .menu .sec-head p { color: rgba(43,10,16,0.62); }
+  .menu-strip { height: clamp(160px,22vw,260px); border-radius: 14px; margin-bottom: clamp(32px,5vw,56px); }
+  .course + .course { margin-top: clamp(36px,5vw,56px); }
+  .course-title { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); border-bottom: 1px solid rgba(43,10,16,0.18); padding-bottom: 0.8rem; }
+  .dish { display: grid; grid-template-columns: 1fr auto; gap: 1.2rem; align-items: baseline; padding: 1.3rem 0; border-bottom: 1px solid rgba(43,10,16,0.12); }
+  .dish .d-name { font-family: var(--serif); font-size: clamp(1.35rem,2.6vw,1.8rem); }
+  .dish .d-desc { color: rgba(43,10,16,0.6); font-size: 0.94rem; margin-top: 0.15rem; }
+  .dish .d-price { font-family: var(--serif); font-size: 1.4rem; color: var(--red); white-space: nowrap; }
+  .menu-note { margin-top: clamp(28px,4vw,40px); font-size: 0.92rem; color: rgba(43,10,16,0.55); font-style: italic; }
+
+  /* Avis */
+  .avis { text-align: center; background: radial-gradient(80% 120% at 50% 0%, rgba(178,58,43,0.35), transparent 60%), var(--bg2); }
+  .avis .rating { font-family: var(--serif); font-size: clamp(4rem,12vw,7rem); line-height: 1; color: var(--gold); }
+  .avis .stars { font-size: 1.4rem; letter-spacing: 0.2em; color: var(--gold); margin-top: 0.3rem; }
+  .avis .count { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 0.9rem; }
+  .avis blockquote { font-family: var(--serif); font-style: italic; font-size: clamp(1.5rem,3.4vw,2.4rem); line-height: 1.32; max-width: 22ch; margin: clamp(36px,6vh,64px) auto 0; }
+  .avis .who { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 1.6rem; }
+
+  .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,4vw,48px); }
+  .info-card { border: 1px solid var(--line); border-radius: 16px; padding: clamp(28px,3.5vw,40px); }
+  .info-card h3 { font-size: 1.7rem; margin-bottom: 1rem; }
+  .info-card .row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid var(--line); font-size: 0.98rem; }
+  .info-card .row:last-child { border-bottom: none; }
+  .info-card .row span:first-child { color: var(--muted); }
+  .info-card .addr { color: var(--muted); font-size: 1rem; line-height: 1.7; }
+  .map-link { display: inline-flex; align-items: center; gap: 0.55em; margin-top: 1.4rem; font-family: var(--mono); font-size: 0.69rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 100px; padding: 0.65em 1.1em; transition: color 0.25s var(--ease), border-color 0.25s var(--ease); }
+  .map-link:hover { color: var(--foam); border-color: var(--gold); }
+
+  .reserve { text-align: center; background: radial-gradient(80% 120% at 50% 0%, rgba(178,58,43,0.45), transparent 60%), var(--bg2); }
+  .reserve h2 { font-size: clamp(2.6rem,7vw,5rem); }
+  .reserve h2 em { font-style: italic; color: var(--gold); }
+  .reserve p { color: var(--muted); max-width: 44ch; margin: 1.4rem auto 0; font-size: 1.08rem; }
+  .reserve .hero-cta { justify-content: center; }
+  .phone { display: inline-flex; align-items: center; gap: 0.6em; margin-top: 2.4rem; font-family: var(--serif); font-size: clamp(1.6rem,4vw,2.4rem); border-bottom: 1.5px solid var(--line); padding-bottom: 0.1em; }
+
+  footer { border-top: 1px solid var(--line); }
+  .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; padding: 2.4rem 0; }
+  .foot .brand { font-size: 1.4rem; }
+  .foot p { font-size: 0.82rem; color: var(--muted); }
+  .made { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); }
+  .made a { color: var(--gold); }
+
+  html.js .reveal { opacity: 0; transform: translateY(26px); }
+  html.js .reveal.in { opacity: 1; transform: none; transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+  html.js .d1.in { transition-delay: 0.08s; } html.js .d2.in { transition-delay: 0.16s; } html.js .d3.in { transition-delay: 0.24s; }
+  @media (prefers-reduced-motion: reduce) { html.js .reveal { opacity: 1; transform: none; } html.js .reveal.in { transition: none; } html { scroll-behavior: auto; } }
+
+  @media (max-width: 880px) {
+    .hero-in, .about-grid, .visit-grid { grid-template-columns: 1fr; }
+    .about-img { aspect-ratio: 16/9; min-height: 0; }
+    .hero-figure { max-width: 380px; order: -1; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+<script>document.documentElement.className += ' js';</script>
+
+<div class="topbar"><span class="apercu">Aperçu · maquette</span></div>
+
+<nav class="site">
+  <div class="wrap nav-in">
+    <a href="#" class="brand">Le <b>Funiculaire</b></a>
+    <ul class="nav-links">
+      <li><a href="#maison">La maison</a></li>
+      <li><a href="#carte">La carte</a></li>
+      <li><a href="#avis">Avis</a></li>
+      <li><a href="#visite">Nous trouver</a></li>
+    </ul>
+    <a href="#reserver" class="cta">Réserver</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <span class="eyebrow reveal">Brasserie · Le Havre</span>
+      <h1 class="reveal d1">L'esprit brasserie,<br/><em>fait maison</em>.</h1>
+      <p class="lede reveal d2">Une vraie brasserie parisienne au cœur du Havre. Cuisine maison, belle terrasse et cet accueil convivial qu'on retient. Midi et soir.</p>
+      <div class="hero-cta reveal d3">
+        <a href="#reserver" class="cta">Réserver une table</a>
+        <a href="#carte" class="cta cta-ghost">Voir la carte</a>
+      </div>
+    </div>
+    <!-- PHOTO : remplacer le fond de .ph par la vraie photo de la terrasse / façade -->
+    <div class="ph hero-figure reveal d2">
+      <span class="cap">La terrasse</span>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap strip-in">
+    <span>Fait maison</span><span>Frites à la graisse de bœuf</span><span>Belle terrasse</span><span>Repas sur place</span><span>À emporter</span>
+  </div>
+</div>
+
+<!-- PHOTO : bandeau ambiance (salle / façade au néon) -->
+<div class="ph photo-band"><span class="cap">La salle & la façade</span></div>
+
+<section id="maison">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <span class="eyebrow">La maison</span>
+      <p class="about-lead" style="margin-top:1em">Une brasserie où <em>tout est fait maison</em>, du matin jusqu'au soir.</p>
+    </div>
+    <div class="about-body reveal d1">
+      <p>Terrine du chef, frites maison à la graisse de bœuf, viandes d'origine France, poissons du jour et desserts maison : ici, on cuisine vrai, comme dans les belles brasseries parisiennes.</p>
+      <p>Une salle chaleureuse à l'esprit bistrot, une terrasse pour les beaux jours, et un accueil qui donne envie de revenir.</p>
+    </div>
+    <!-- PHOTO : un plat signature / la salle -->
+    <div class="ph about-img reveal d2"><span class="cap">Nos plats</span></div>
+  </div>
+</section>
+
+<section class="menu" id="carte">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">La carte</span>
+      <h2>Quelques classiques</h2>
+      <p>Un aperçu de notre carte, qui évolue avec les saisons et le marché.</p>
+    </div>
+    <!-- PHOTO : joli plat en gros plan -->
+    <div class="ph menu-strip reveal"><span class="cap">Fait maison</span></div>
+
+    <div class="course reveal">
+      <div class="course-title">Entrées</div>
+      <div class="dish"><div><div class="d-name">Œufs mayonnaise</div><div class="d-desc">Le grand classique de la brasserie.</div></div><span class="d-price">5,90 €</span></div>
+      <div class="dish"><div><div class="d-name">Terrine de cochon du chef</div><div class="d-desc">Faite maison, cornichons et pain grillé.</div></div><span class="d-price">8,50 €</span></div>
+      <div class="dish"><div><div class="d-name">Gravelax de saumon de Norvège</div><div class="d-desc">Crème fouettée légèrement citronnée.</div></div><span class="d-price">11 €</span></div>
+    </div>
+
+    <div class="course reveal">
+      <div class="course-title">Plats</div>
+      <div class="dish"><div><div class="d-name">Tripes à la mode de Caen</div><div class="d-desc">Frites maison cuites à la graisse de bœuf.</div></div><span class="d-price">15,90 €</span></div>
+      <div class="dish"><div><div class="d-name">Carpaccio de bœuf maison</div><div class="d-desc">Origine France, parmesan, roquette, pesto maison, frites.</div></div><span class="d-price">16,90 €</span></div>
+      <div class="dish"><div><div class="d-name">Onglet de bœuf Angus</div><div class="d-desc">Frites maison, ratatouille, sauce maison au choix.</div></div><span class="d-price">17,90 €</span></div>
+      <div class="dish"><div><div class="d-name">Dos de cabillaud sauce Armoricaine</div><div class="d-desc">Riz et légumes du moment.</div></div><span class="d-price">18,90 €</span></div>
+    </div>
+
+    <div class="course reveal">
+      <div class="course-title">Desserts maison</div>
+      <div class="dish"><div><div class="d-name">Riz au lait onctueux</div></div><span class="d-price">7 €</span></div>
+      <div class="dish"><div><div class="d-name">Sabayon aux fraises</div></div><span class="d-price">8 €</span></div>
+      <div class="dish"><div><div class="d-name">Café gourmand</div><div class="d-desc">Mini mousse, financier, meringue, crème brûlée.</div></div><span class="d-price">6 €</span></div>
+    </div>
+
+    <p class="menu-note reveal">Comptez environ 20 à 30 € par personne. Allergènes indiqués sur la carte complète en salle.</p>
+  </div>
+</section>
+
+<section class="avis" id="avis">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="justify-content:center">Ce qu'on dit de nous</span>
+    <div class="rating reveal d1">4,4</div>
+    <div class="stars reveal d1">★★★★★</div>
+    <div class="count reveal d1">551 avis sur Google</div>
+    <blockquote class="reveal d2">« Un esprit brasserie parisienne, et des plats faits maison. »</blockquote>
+    <div class="who reveal d2">— Sébastien, Local Guide Google</div>
+  </div>
+</section>
+
+<section id="visite">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Nous trouver</span><h2>Passez nous voir</h2></div>
+    <div class="visit-grid">
+      <div class="info-card reveal">
+        <h3>Horaires</h3>
+        <div class="row"><span>Lundi – Samedi</span><span>Service continu</span></div>
+        <div class="row"><span>Fermeture</span><span>21h00</span></div>
+        <div class="row"><span>Dimanche</span><span>Nous consulter</span></div>
+      </div>
+      <div class="info-card reveal d1">
+        <h3>Adresse</h3>
+        <p class="addr">80 Rue Maréchal Gallieni<br/>76600 Le Havre<br/>02 35 42 26 69</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Le+Funiculaire+80+Rue+Mar%C3%A9chal+Gallieni+Le+Havre" target="_blank" rel="noopener" class="map-link">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Voir l'itinéraire →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reserve" id="reserver">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="justify-content:center">Réservation</span>
+    <h2 class="reveal d1" style="margin-top:0.5em">Une table<br/><em>vous attend</em>.</h2>
+    <p class="reveal d2">Réservez par téléphone, sur place ou commandez à emporter. À midi comme le soir.</p>
+    <div class="hero-cta reveal d3">
+      <a href="tel:0235422669" class="cta">Appeler la brasserie</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Le+Funiculaire+Le+Havre" target="_blank" rel="noopener" class="cta cta-ghost">Voir sur la carte</a>
+    </div>
+    <div class="reveal d3"><span class="phone">02 35 42 26 69</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <a href="#" class="brand">Le <b style="color:var(--gold)">Funiculaire</b></a>
+    <p>Brasserie · 80 rue Maréchal Gallieni, Le Havre.</p>
+    <span class="made">Maquette réalisée par <a href="https://simonr.fr" target="_blank" rel="noopener">Simon Rioult</a> · simonr.fr</span>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const forceShow = (el) => { el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none'; };
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(forceShow);
+  } else {
+    const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => {
+      io.observe(el);
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
+    });
+    setTimeout(() => {
+      reveals.forEach(el => {
+        el.classList.add('in');
+        if (parseFloat(getComputedStyle(el).opacity) < 0.99) forceShow(el);
+      });
+    }, 1600);
+  }
+</script>
+</body>
+</html>
